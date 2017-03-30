@@ -46,6 +46,11 @@ angular
                   name: 'ngAnimate',
                   files: ['bower_components/angular-animate/angular-animate.js']
                 })
+                $ocLazyLoad.load(
+                {
+                  name: 'data-table',
+                  files: ['bower_components/angular-data-table/angular-animate.js']
+                })
             $ocLazyLoad.load(
               {
                 name: 'ngCookies',
@@ -184,9 +189,41 @@ angular
           }
         }
       })
+      .state('dashboard.programe', {
+        templateUrl: 'views/programe.html',
+        url: '/programe',
+        controller: 'programeController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/programeController.js',
+                'scripts/services/FactoryService/programeFactory.js',
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.intake', {
+        templateUrl: 'views/intake.html',
+        url: '/intake',
+        controller: 'intakeController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/intakeController.js',
+                'scripts/services/FactoryService/intakeFactory.js',
+              ]
+            })
+          }
+        }
+      })
       .state('dashboard.catalog', {
         templateUrl: 'views/catalog.html',
-        url: '/course',
+        url: '/catalog',
         controller: 'catalogController',
         resolve: {
           loadMyFile: function ($ocLazyLoad) {
