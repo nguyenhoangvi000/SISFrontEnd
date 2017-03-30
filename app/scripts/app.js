@@ -182,6 +182,38 @@ angular
           }
         }
       })
+      .state('dashboard.programe', {
+        templateUrl: 'views/programe.html',
+        url: '/programe',
+        controller: 'programeController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/programeController.js',
+                'scripts/services/FactoryService/programeFactory.js',
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.intake', {
+        templateUrl: 'views/intake.html',
+        url: '/intake',
+        controller: 'intakeController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/intakeController.js',
+                'scripts/services/FactoryService/intakeFactory.js',
+              ]
+            })
+          }
+        }
+      })
       .state('dashboard.catalog', {
         templateUrl: 'views/catalog.html',
         url: '/catalog',
