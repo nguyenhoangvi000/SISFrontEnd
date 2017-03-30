@@ -1,0 +1,218 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Sản phẩm
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="index.html">Tổng quan</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-bar-chart-o"></i> Sản phẩm
+                </li>
+            </ol>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <button data-toggle="modal" data-target="#myModal" class="btn btn-info btn-lg" type="button">
+                        <span><i class="glyphicon glyphicon-plus"></i>Thêm sản phẩm</span>
+                        </button>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group ">
+                    <input ng-model="searchText" type="text" class="form-control input-lg" placeholder="Tìm kiếm" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div class="row" ng-controller="productController">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Mô tả</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in products|filter:searchText">
+                            <td>{{products.indexOf(product)+1}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.description}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.price}}</td>
+                            <td><button data-toggle="modal" data-target="#myModalEdit" ng-click="editProduct()" class="btn btn-primary btn-lg"
+                                    type="button">
+                            <i class="glyphicon glyphicon-edit"></i>
+                                </button>
+                                <button data-toggle="modal" data-target="#myModalDelete" ng-click="deletePizza(product.id)" class="btn btn-danger btn-lg"
+                                    type="button">
+                            <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm sản phẩm</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label text-left" for="inputName">Tên sản phẩm:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="productName" id="inputName" placeholder="Tên sản phẩm" />
+                                </div>
+                            </div>
+                            <div class="form-group" ng-controller="categoryController">
+                                <label class="col-sm-3 control-label text-left" for="inputCategory">Phân loại:</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control">
+                                        <option ng-repeat="category in categories" ng-model="category" value="{{category.id}}">{{category.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group" ng-controller="productController">
+                                <label class="col-sm-3 control-label text-left" for="inputName">Thành phần:</label>
+                                <div class="col-sm-8">
+                                    <tags-input ng-model="tags">
+                                        <auto-complete source="loadTags($query)"></auto-complete>
+                                        <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label text-left">Mô tả</label>
+                                <div class="col-sm-8">
+                                    <input type="richtext" class="form-control" ng-model="description" placeholder="Mô tả" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label text-left" for="inputQuantity">Số lượng:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="quantity" id="inputQuantity" placeholder="Số lượng" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label text-left" for="inputPrice">Giá:</label>
+                                <div class="col-sm-8">
+                                    <input type="number" ng-model="price" class="form-control" id="inputPrice" placeholder="Giá" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="insertPizza()" type="button" class="btn btn-primary" data-dismiss="modal">Thêm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/ng-template" id="modalEdit.html">
+        <div class="modal fade" id="myModalEdit" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Thêm sản phẩm</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left" for="inputName">Tên sản phẩm</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Tên sản phẩm" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left">Mô tả</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="description" placeholder="Mô tả" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left" for="inputQuantity">Số lượng</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="quantity" placeholder="Số lượng" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left" for="inputPrice">Giá</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" ng-model="price" id="inputPrice" placeholder="Giá" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="editProduct()" type="button" class="btn btn-primary" data-dismiss="modal">Thêm</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="modalDelete.html">
+        <div class="modal fade" id="myModalDelete" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Xóa Sản Phẩm</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label text-left" for="inputName">Bạn chắc xóa hông?</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="deletePizza()" type="button" class="btn btn-primary" data-dismiss="modal">Xóa đi</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Hủy nha</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </script>
+</div>

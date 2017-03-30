@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Danh mục
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i> <a href="index.html">Tổng quan</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-bar-chart-o"></i> Danh mục
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <button data-toggle="modal" data-target="#myModal" class="btn btn-info btn-lg" type="button">
+                        <span><i class="glyphicon glyphicon-plus"></i>Thêm danh mục</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group ">
+                    <input ng-model="searchText" type="text" class="form-control input-lg" placeholder="Tìm kiếm" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <!-- Flot Charts -->
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên thể loại</th>
+                            <th>Tác vụ</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-controller="CategoryController">
+                        <tr ng-repeat="category in categories|filter:searchText">
+                            <td>{{categories.indexOf(category)+1}}</td>
+                            <td>{{category.name}}</td>
+                            <td><button class="btn btn-primary btn-lg" type="button">
+                            <i class="glyphicon glyphicon-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-lg" type="button">
+                            <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
