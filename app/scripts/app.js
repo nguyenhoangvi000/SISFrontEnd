@@ -7,8 +7,12 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'ngAnimate',
-    'ngTagsInput'
+    'ngTagsInput',
+    'datatables',
   ])
+  .run(function (DTDefaultOptions) {
+    DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
+  })
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
     $ocLazyLoadProvider.config({
@@ -20,30 +24,19 @@ angular
 
 
     $urlRouterProvider.otherwise('/dashboard/home');
-
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
         templateUrl: 'views/dashboard/main.html',
         resolve: {
           loadMyDirectives: function ($ocLazyLoad) {
-            return $ocLazyLoad.load(
+            $ocLazyLoad.load(
               {
-                name: 'sbAdminApp',
-                files: [
-                  'scripts/directives/header/header.js',
-                  'scripts/directives/header/header-notification/header-notification.js',
-                  'scripts/directives/sidebar/sidebar.js',
-                  'scripts/directives/sidebar/sidebar-search/sidebar-search.js'
+                name: 'toggle-switch',
+                files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
+                  "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                 ]
               }),
-              $ocLazyLoad.load(
-                {
-                  name: 'toggle-switch',
-                  files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                    "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                  ]
-                }),
               $ocLazyLoad.load(
                 {
                   name: 'ngAnimate',
@@ -69,6 +62,19 @@ angular
                 name: 'ngTouch',
                 files: ['bower_components/angular-touch/angular-touch.js']
               })
+
+            return $ocLazyLoad.load(
+              {
+                name: 'sbAdminApp',
+                files: [
+                  'scripts/directives/header/header.js',
+                  'scripts/directives/header/header-notification/header-notification.js',
+                  'scripts/directives/sidebar/sidebar.js',
+                  'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
+
+                ]
+              })
+
           }
         }
       })
@@ -163,7 +169,7 @@ angular
 
       .state('dashboard.student', {
         templateUrl: 'views/student.html',
-        url: '/course',
+        url: '/student',
         controller: 'studentController',
         resolve: {
           loadMyFile: function ($ocLazyLoad) {

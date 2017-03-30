@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test",
+    "start": "grunt serve",
+    "dist": "grunt serve:dist",
+    "postinstall": "bower install"
   },
   "author": "",
   "license": "ISC",
@@ -40,11 +43,5 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "grunt test",
-    "start": "grunt serve",
-    "dist": "grunt serve:dist",
-    "postinstall": "bower install"
   }
 }
