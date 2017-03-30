@@ -7,8 +7,7 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'ngAnimate',
-    'ngTagsInput',
-    'datatables'
+    'ngTagsInput'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -169,7 +168,7 @@ angular
 
       .state('dashboard.student', {
         templateUrl: 'views/student.html',
-        url: '/course',
+        url: '/student',
         controller: 'studentController',
         resolve: {
           loadMyFile: function ($ocLazyLoad) {
@@ -185,7 +184,7 @@ angular
       })
       .state('dashboard.catalog', {
         templateUrl: 'views/catalog.html',
-        url: '/course',
+        url: '/catalog',
         controller: 'catalogController',
         resolve: {
           loadMyFile: function ($ocLazyLoad) {
