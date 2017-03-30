@@ -8,13 +8,16 @@ angular
     'angular-loading-bar',
     'ngAnimate',
     'ngTagsInput',
+    'ngResource',
     'datatables',
   ])
   .run(function (DTDefaultOptions) {
     DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
   })
-  .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider','$locationProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider,$locationProvider) {
 
+
+    
     $ocLazyLoadProvider.config({
       debug: false,
       events: true,
@@ -23,11 +26,12 @@ angular
 
 
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('dashboard');
     $stateProvider
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'views/dashboard/main.html',
+        templateUrl: 'views/dashboard/home.html',
+        controller: 'homeCtrl',
         resolve: {
           loadMyDirectives: function ($ocLazyLoad) {
             $ocLazyLoad.load(
@@ -62,7 +66,6 @@ angular
                 name: 'ngTouch',
                 files: ['bower_components/angular-touch/angular-touch.js']
               })
-
             return $ocLazyLoad.load(
               {
                 name: 'sbAdminApp',
@@ -78,25 +81,25 @@ angular
           }
         }
       })
-      .state('dashboard.home', {
-        url: '/home',
-        controller: 'MainCtrl',
-        templateUrl: 'views/dashboard/home.html',
-        resolve: {
-          loadMyFiles: function ($ocLazyLoad) {
-            return $ocLazyLoad.load({
-              name: 'sbAdminApp',
-              files: [
-                'scripts/controllers/main.js',
-                'scripts/directives/timeline/timeline.js',
-                'scripts/directives/notifications/notifications.js',
-                'scripts/directives/chat/chat.js',
-                'scripts/directives/dashboard/stats/stats.js'
-              ]
-            })
-          }
-        }
-      })
+      // .state('dashboard.home', {
+      //   url: '/home',
+      //   controller: 'MainCtrl',
+      //   templateUrl: 'views/dashboard/home.html',
+      //   resolve: {
+      //     loadMyFiles: function ($ocLazyLoad) {
+      //       return $ocLazyLoad.load({
+      //         name: 'sbAdminApp',
+      //         files: [
+      //           'scripts/controllers/main.js',
+      //           'scripts/directives/timeline/timeline.js',
+      //           'scripts/directives/notifications/notifications.js',
+      //           'scripts/directives/chat/chat.js',
+      //           'scripts/directives/dashboard/stats/stats.js'
+      //         ]
+      //       })
+      //     }
+      //   }
+      // })
       .state('dashboard.category', {
         templateUrl: 'views/category.html',
         resolve: {
@@ -149,7 +152,6 @@ angular
           }
         }
       })
-
       .state('dashboard.course', {
         templateUrl: 'views/course.html',
         url: '/course',
@@ -166,8 +168,7 @@ angular
           }
         }
       })
-
-      .state('dashboard.student', {
+      .state('student', {
         templateUrl: 'views/student.html',
         url: '/student',
         controller: 'studentController',
@@ -204,6 +205,9 @@ angular
         url: '/table'
       })
 
-  }]);
+  }])
+  .controller('homeCtrl', function () {
+    console.log('in homecontrolller');
+  });
 
 

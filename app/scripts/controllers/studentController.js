@@ -44,7 +44,7 @@
                         DTColumnDefBuilder.newColumnDef(4).withTitle('action'),
                     ];
                     function actionsHtml(data, type, full, meta) {
-                        return '<div style="width:100px"><button class="btn" ng-click="editpost(' + full._id + ')">' +
+                        return '<div ><button class="btn" ng-click="editpost(' + full._id + ')">' +
                             '   <i class="fa fa-edit"></i>' +
                             '</button>&nbsp;' +
                             '<button class="btn " ng-click="deletepost(' + full._id + ')">' +
@@ -114,11 +114,112 @@
                         "id": 590,
                         "firstName": "Toto",
                         "lastName": "Titi"
-                    }, {
+                    }
+                    , {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    },
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
+                    , {
+                        "id": 803,
+                        "firstName": "Luke",
+                        "lastName": "Kyle"
+                    }
                     ]
                         ;
                     // var url = adminService.baseUrl + '/posts';
@@ -129,7 +230,6 @@
                     //     console.log(posts);
                     // })
                 }
-
             }]);
     /** @ngInject */
 }());
