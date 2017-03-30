@@ -7,7 +7,8 @@ angular
     'ui.bootstrap',
     'angular-loading-bar',
     'ngAnimate',
-    'ngTagsInput'
+    'ngTagsInput',
+    'datatables'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 
@@ -48,6 +49,11 @@ angular
                 {
                   name: 'ngAnimate',
                   files: ['bower_components/angular-animate/angular-animate.js']
+                })
+                $ocLazyLoad.load(
+                {
+                  name: 'data-table',
+                  files: ['bower_components/angular-data-table/angular-animate.js']
                 })
             $ocLazyLoad.load(
               {
