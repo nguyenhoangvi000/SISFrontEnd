@@ -6,7 +6,7 @@ angular
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
-    'ngAnimate', 
+    'ngAnimate',
     'ngTagsInput'
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
@@ -17,7 +17,7 @@ angular
     });
 
 
-    
+
 
     $urlRouterProvider.otherwise('/dashboard/home');
 
@@ -138,6 +138,56 @@ angular
                 'scripts/controllers/categoryController.js',
                 'scripts/services/FactoryService/pizzaFactory.js',
                 'scripts/services/FactoryService/categoryFactory.js'
+              ]
+            })
+          }
+        }
+      })
+
+      .state('dashboard.course', {
+        templateUrl: 'views/course.html',
+        url: '/course',
+        controller: 'courseController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/courseController.js',
+                'scripts/services/FactoryService/courseFactory.js',
+              ]
+            })
+          }
+        }
+      })
+
+      .state('dashboard.student', {
+        templateUrl: 'views/student.html',
+        url: '/course',
+        controller: 'studentController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/studentController.js',
+                'scripts/services/FactoryService/studentFactory.js',
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.catalog', {
+        templateUrl: 'views/catalog.html',
+        url: '/course',
+        controller: 'catalogController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+                'scripts/controllers/catalogController.js',
+                'scripts/services/FactoryService/catalogFactory.js',
               ]
             })
           }
