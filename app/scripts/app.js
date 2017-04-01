@@ -158,7 +158,7 @@ angular
           }
         }
       })
-      .state('dashboard.course', {
+      .state('course', {
         templateUrl: 'views/course.html',
         url: '/course',
         controller: 'courseController',
@@ -191,7 +191,7 @@ angular
           }
         }
       })
-      .state('dashboard.programe', {
+      .state('programe', {
         templateUrl: 'views/programe.html',
         url: '/programe',
         controller: 'programeController',
@@ -207,7 +207,7 @@ angular
           }
         }
       })
-      .state('dashboard.intake', {
+      .state('intake', {
         templateUrl: 'views/intake.html',
         url: '/intake',
         controller: 'intakeController',
@@ -223,7 +223,7 @@ angular
           }
         }
       })
-      .state('dashboard.catalog', {
+      .state('catalog', {
         templateUrl: 'views/catalog.html',
         url: '/catalog',
         controller: 'catalogController',
