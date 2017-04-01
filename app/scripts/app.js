@@ -10,6 +10,7 @@ angular
     'ngTagsInput',
     'ngResource',
     'datatables',
+     'datatables.scroller'
   ])
   .run(function (DTDefaultOptions) {
     DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
@@ -184,6 +185,7 @@ angular
               files: [
                 'scripts/controllers/studentController.js',
                 'scripts/services/FactoryService/studentFactory.js',
+                'styles/scroller.dataTables.min.css'
               ]
             })
           }

@@ -34,9 +34,10 @@
                     $scope.dtOptions = DTOptionsBuilder.newOptions()
                         .withPaginationType('full_numbers')
                         .withOption('createdRow', $scope.createdRow)
-                        .withDisplayLength(5)
                         .withOption('rowCallback', rowCallback)
-                        ;
+                        .withScroller()
+                        .withOption('scrollY', 500);
+                        
                     $scope.dtColumnDefs = [
                         DTColumnDefBuilder.newColumnDef(0),
                         DTColumnDefBuilder.newColumnDef(1),
