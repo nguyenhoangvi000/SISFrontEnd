@@ -45,7 +45,7 @@
                         DTColumnDefBuilder.newColumnDef(4).withTitle('action'),
                     ];
                     function actionsHtml(data, type, full, meta) {
-                        return '<div ><button class="btn" ng-click="editpost(' + full._id + ')">' +
+                        return '<div ><button style="" class="btn" ng-click="editpost(' + full._id + ')">' +
                             '   <i class="fa fa-edit"></i>' +
                             '</button>&nbsp;' +
                             '<button class="btn " ng-click="deletepost(' + full._id + ')">' +

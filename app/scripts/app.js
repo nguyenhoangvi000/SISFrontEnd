@@ -191,6 +191,20 @@ angular
           }
         }
       })
+      .state('addstudent', {
+        templateUrl: 'views/addstudent.html',
+        url: '/addstudent',
+        controller: 'studentController',
+        resolve: {
+          loadMyFile: function ($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name: 'sbAdminApp',
+              files: [
+              ]
+            })
+          }
+        }
+      })
       .state('programe', {
         templateUrl: 'views/programe.html',
         url: '/programe',
