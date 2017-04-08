@@ -1,9 +1,8 @@
-(function(){
+(function() {
     'use strict';
-
     angular
         .module('sbAdminApp')
-        .controller('addstudentController',function (){
+        .controller('addstudentController', function() {
             console.log('in addstudentController');
         })
 }());

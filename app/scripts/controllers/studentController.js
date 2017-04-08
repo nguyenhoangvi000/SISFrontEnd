@@ -1,23 +1,26 @@
-(function () {
+(function() {
     'use strict';
     angular
         .module('sbAdminApp')
         .controller('studentController', ['$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
-            function ($scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+            function($scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
                 init();
+
                 function init() {
                     console.log('studentController');
                     getAllPosts();
                 }
                 $scope.someClickHandler = someClickHandler;
+
                 function someClickHandler(info) {
                     var message = info._id + ' - ' + info.title;
                 }
+
                 function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
                     $('td', nRow).unbind('click');
-                    $('td', nRow).bind('click', function () {
-                        $scope.$apply(function () {
+                    $('td', nRow).bind('click', function() {
+                        $scope.$apply(function() {
                             $scope.someClickHandler(aData);
                         });
                     });
@@ -27,7 +30,7 @@
                 // function
 
                 function getAllPosts() {
-                    $scope.createdRow = function (row, data, dataIndex) {
+                    $scope.createdRow = function(row, data, dataIndex) {
                         $compile(angular.element(row).contents())($scope);
                     }
                     $scope.posts = [];
@@ -37,13 +40,14 @@
                         .withOption('rowCallback', rowCallback)
                         .withScroller()
                         .withOption('scrollY', 500);
-                        
+
                     $scope.dtColumnDefs = [
                         DTColumnDefBuilder.newColumnDef(0),
                         DTColumnDefBuilder.newColumnDef(1),
                         DTColumnDefBuilder.newColumnDef(2),
-                        DTColumnDefBuilder.newColumnDef(4).withTitle('action'),
+                        DTColumnDefBuilder.newColumnDef(3).withTitle('action'),
                     ];
+
                     function actionsHtml(data, type, full, meta) {
                         return '<div ><button style="" class="btn" ng-click="editpost(' + full._id + ')">' +
                             '   <i class="fa fa-edit"></i>' +
@@ -52,10 +56,10 @@
                             '   <i class="fa fa-trash-o"></i>' +
                             '</button> </div>';
                     }
-                    $scope.editpost = function (post) {
+                    $scope.editpost = function(post) {
                         $state.go('postedit', { "id": post });
                     }
-                    $scope.deletepost = function (post) {
+                    $scope.deletepost = function(post) {
                         console.log(post);
                         $scope.name = 'Sia: cheap thrills';
                         // $ngConfirm({
@@ -82,7 +86,6 @@
                         //                 return true; // not prevent close; / close box
                         //             }
                         //         },
-
                         //         close: {
                         //             text: 'Hoy',
                         //             action: function (scope, button) {
@@ -93,13 +96,12 @@
                         //     }
                         // });
                     }
-
                     $scope.dtColumns = [
                         DTColumnBuilder.newColumn('id').withTitle('Mã'),
                         DTColumnBuilder.newColumn('firstName').withTitle('Tiêu đề'),
                         DTColumnBuilder.newColumn('lastName').withTitle('Nội dung'),
                         DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
-                            .renderWith(actionsHtml),
+                        .renderWith(actionsHtml),
                     ];
 
 
@@ -115,114 +117,91 @@
                         "id": 590,
                         "firstName": "Toto",
                         "lastName": "Titi"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    , {
+                    }, {
                         "id": 803,
                         "firstName": "Luke",
                         "lastName": "Kyle"
-                    }
-                    ]
-                        ;
+                    }];
                     // var url = adminService.baseUrl + '/posts';
                     // postsFactory.query().$promise.then(function(posts){
                     //     $scope.posts = posts;
@@ -231,6 +210,7 @@
                     //     console.log(posts);
                     // })
                 }
-            }]);
+            }
+        ]);
     /** @ngInject */
 }());
