@@ -1,1 +1,30 @@
-<h1>This is catalog page</h1>
+<div>
+    <div class="row">
+        <h1>CATALOG CONTENTS</h1>
+        <br>
+        <div>
+            <div>
+                <a class="btn btn-primary">Add Catalog</a>
+                <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="row-border hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Catalog</th>
+                            <th>Note</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="post in posts">
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.firstName}}</td>
+                            <td>{{ post.lastName}}</td>
+                            <td>#</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

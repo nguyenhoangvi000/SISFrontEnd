@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html ng-app="sbAdminApp">
+<html ng-app="studentinfo">
 
 <head>
-    <title>Augment an Admin Panel Category Flat Bootstrap Responsive Web Template | Home :: w3layouts</title>
+    <title>Student Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -22,20 +22,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--datatables-->
     <link rel="stylesheet" href='styles/angular-datatables.min.css'></link>
     <link rel="stylesheet" href='styles/datatables.bootstrap.min.css'></link>
+    <link rel="stylesheet" href='bower_components/angular-confirm/dist/angular-confirm.min.css'></link>
     <!--<link rel="stylesheet" href='styles/jquery.dataTables.min.css'></link>-->
     <!--end datatable-->
     <script src="js/jquery.min.js"></script>
-    <script src="js/amcharts.js"></script>
-    <script src="js/serial.js"></script>
-    <script src="js/light.js"></script>
-    <script src="js/radar.js"></script>
-    <link href="styles/fabochart.css" rel='stylesheet' type='text/css' />
-    <!--clock init-->
-    <script src="js/css3clock.js"></script>
-    <!--Easy Pie Chart-->
-    <!--skycons-icons-->
-    <script src="js/skycons.js"></script>
 
+    <link href="styles/fabochart.css" rel='stylesheet' type='text/css' />
 
     <!--//skycons-icons-->
 </head>
@@ -293,9 +285,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- //header-ends -->
                 <div ui-view class="pl-50"></div>
                 <!--footer section start-->
-                <footer>
-                    <p>&copy 2016 Augment . All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">W3layouts.</a></p>
-                </footer>
+
                 <!--footer section end-->
             </div>
         </div>
@@ -311,7 +301,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
             <!--/down-->
             <div class="down">
-                <a href="index.html"><img src="images/admin.jpg"></a>
+                <a href="index.html"><img src="images/avatar.jpg"></a>
                 <a href="index.html"><span class=" name-caret">Jasmin Leo</span></a>
                 <p>System Administrator in Company</p>
                 <ul>
@@ -333,7 +323,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         </ul>
                     </li>
-                    <li id="menu-academico"><a href="#" ui-sref="catalog"><i class="fa fa-file-text-o"></i> <span>Catalog</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                    <li ui-sref-active="active" id="menu-academico"><a href="#" ui-sref="catalog"><i class="fa fa-file-text-o"></i> <span>Catalog</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <!--<ul id="menu-academico-sub">
 							<li id="menu-academico-avaliacoes"><a href="forms.html">Forms</a></li>
 							<li id="menu-academico-boletim"><a href="validation.html">Validation Forms</a></li>
@@ -415,6 +405,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
     <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
     <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -423,15 +414,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <script src="bower_components/Chart.js/Chart.min.js"></script>
     <!-- endbower -->
 
 
     <!--js -->
     <link rel="stylesheet" href="styles/vroom.css">
-    <script type="text/javascript" src="js/vroom.js"></script>
+    <!--<script type="text/javascript" src="js/vroom.js"></script>
     <script type="text/javascript" src="js/TweenLite.min.js"></script>
-    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>
+    <script type="text/javascript" src="js/CSSPlugin.min.js"></script>-->
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
 

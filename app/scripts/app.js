@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('sbAdminApp', [
+    .module('studentinfo', [
         'oc.lazyLoad',
         'ui.router',
         'ui.bootstrap',
@@ -10,7 +10,8 @@ angular
         'ngTagsInput',
         'ngResource',
         'datatables',
-        'datatables.scroller'
+        'datatables.scroller',
+        'cp.ngConfirm',
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
@@ -20,10 +21,6 @@ angular
             debug: false,
             events: true,
         });
-
-
-
-
         $urlRouterProvider.otherwise('dashboard');
         $stateProvider
             .state('dashboard', {
@@ -32,116 +29,28 @@ angular
                 controller: 'homeCtrl',
                 resolve: {
                     loadMyDirectives: function($ocLazyLoad) {
-                        $ocLazyLoad.load({
-                                name: 'toggle-switch',
-                                files: ["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
-                                    "bower_components/angular-toggle-switch/angular-toggle-switch.css"
-                                ]
-                            }),
-                            $ocLazyLoad.load({
-                                name: 'ngAnimate',
-                                files: ['bower_components/angular-animate/angular-animate.js']
-                            })
-                        $ocLazyLoad.load({
-                            name: 'data-table',
-                            files: ['bower_components/angular-data-table/angular-animate.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngCookies',
-                            files: ['bower_components/angular-cookies/angular-cookies.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngResource',
-                            files: ['bower_components/angular-resource/angular-resource.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngSanitize',
-                            files: ['bower_components/angular-sanitize/angular-sanitize.js']
-                        })
-                        $ocLazyLoad.load({
-                            name: 'ngTouch',
-                            files: ['bower_components/angular-touch/angular-touch.js']
-                        })
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/directives/header/header.js',
-                                'scripts/directives/header/header-notification/header-notification.js',
-                                'scripts/directives/sidebar/sidebar.js',
-                                'scripts/directives/sidebar/sidebar-search/sidebar-search.js',
 
                             ]
                         })
 
                     }
                 }
-            })
-            // .state('dashboard.home', {
-            //   url: '/home',
-            //   controller: 'MainCtrl',
-            //   templateUrl: 'views/dashboard/home.html',
-            //   resolve: {
-            //     loadMyFiles: function ($ocLazyLoad) {
-            //       return $ocLazyLoad.load({
-            //         name: 'sbAdminApp',
-            //         files: [
-            //           'scripts/controllers/main.js',
-            //           'scripts/directives/timeline/timeline.js',
-            //           'scripts/directives/notifications/notifications.js',
-            //           'scripts/directives/chat/chat.js',
-            //           'scripts/directives/dashboard/stats/stats.js'
-            //         ]
-            //       })
-            //     }
-            //   }
-            // })
-            .state('dashboard.category', {
-                templateUrl: 'views/category.html',
-                resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
-                            files: [
-                                'scripts/controllers/main.js',
-                                'scripts/controllers/categoryController.js',
-                            ]
-                        })
-                    }
-                },
-                url: '/category'
-            })
-            .state('dashboard.order', {
-                templateUrl: 'views/order.html',
-                url: '/order',
-                resolve: {
-                    loadMyFiles: function($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
-                            files: [
-                                'scripts/controllers/main.js',
-                                'scripts/controllers/orderController.js',
-                            ]
-                        })
-                    }
-                }
-            })
-            .state('login', {
-                templateUrl: 'views/pages/login.html',
-                url: '/login'
             })
             .state('dashboard.product', {
                 templateUrl: 'views/product.html',
                 url: '/product',
-                controller: 'productController',
+                controller: 'productCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/productController.js',
-                                'scripts/controllers/categoryController.js',
-                                'scripts/services/FactoryService/pizzaFactory.js',
-                                'scripts/services/FactoryService/categoryFactory.js'
+                                'scripts/controllers/productCtrl.js',
+                                'scripts/controllers/categoryCtrl.js',
+
                             ]
                         })
                     }
@@ -150,14 +59,13 @@ angular
             .state('course', {
                 templateUrl: 'views/course.html',
                 url: '/course',
-                controller: 'courseController',
+                controller: 'courseCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/courseController.js',
-                                'scripts/services/FactoryService/courseFactory.js',
+                                'scripts/controllers/courseCtrl.js',
                             ]
                         })
                     }
@@ -166,14 +74,13 @@ angular
             .state('student', {
                 templateUrl: 'views/student.html',
                 url: '/student',
-                controller: 'studentController',
+                controller: 'studentCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/studentController.js',
-                                'scripts/services/FactoryService/studentFactory.js',
+                                'scripts/controllers/studentCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
                         })
@@ -182,15 +89,14 @@ angular
             })
             .state('addstudent', {
                 templateUrl: 'views/addstudent.html',
-                url: '/addstudent',
-                controller: 'studentController',
+                url: '/student/add',
+                controller: 'studentCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/studentController.js',
-                                'scripts/services/FactoryService/studentFactory.js',
+                                'scripts/controllers/studentCtrl.js',
                             ]
                         })
                     }
@@ -199,14 +105,13 @@ angular
             .state('programe', {
                 templateUrl: 'views/programe.html',
                 url: '/programe',
-                controller: 'programeController',
+                controller: 'programeCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/programeController.js',
-                                'scripts/services/FactoryService/programeFactory.js',
+                                'scripts/controllers/programeCtrl.js',
                             ]
                         })
                     }
@@ -215,14 +120,13 @@ angular
             .state('intake', {
                 templateUrl: 'views/intake.html',
                 url: '/intake',
-                controller: 'intakeController',
+                controller: 'intakeCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/intakeController.js',
-                                'scripts/services/FactoryService/intakeFactory.js',
+                                'scripts/controllers/intakeCtrl.js',
                             ]
                         })
                     }
@@ -231,25 +135,20 @@ angular
             .state('catalog', {
                 templateUrl: 'views/catalog.html',
                 url: '/catalog',
-                controller: 'catalogController',
+                controller: 'catalogCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/catalogController.js',
-                                'scripts/services/FactoryService/catalogFactory.js',
+                                'scripts/controllers/catalogCtrl.js',
                             ]
                         })
                     }
                 }
             })
-            .state('dashboard.table', {
-                templateUrl: 'views/table.html',
-                url: '/table'
-            })
 
     }])
     .controller('homeCtrl', function() {
-        console.log('in homecontrolller');
+        console.log('in homeCtrl');
     });

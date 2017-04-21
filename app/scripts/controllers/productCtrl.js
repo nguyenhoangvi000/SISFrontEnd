@@ -1,9 +1,8 @@
-
 'use strict';
 
 angular
-    .module('sbAdminApp')
-    .controller('productController', ['$scope', 'pizzaFactory', '$http',
+    .module('studentinfo')
+    .controller('productCtrl', ['$scope', 'pizzaFactory', '$http',
         function ProductController($scope, pizzaFactory, $http) {
 
             getAll();
@@ -11,9 +10,9 @@ angular
             function getAll() {
                 console.log('ok');
                 pizzaFactory.getAllPizzas()
-                    .then(function (response) {
+                    .then(function(response) {
                         $scope.products = response.data;
-                    }, function (error) {
+                    }, function(error) {
                         console.log(error);
                     })
             }
@@ -27,27 +26,27 @@ angular
             ];
 
 
-            $scope.editProduct = function (id) {
+            $scope.editProduct = function(id) {
                 console.log('ok');
             }
 
-            $scope.loadTags = function (query) {
+            $scope.loadTags = function(query) {
                 console.log(query);
                 // return $http.get('/tags?query=' + query);
                 return $scope.tags;
             };
 
 
-            $scope.deletePizza = function (id) {
-                pizzaFactory.deletePizza(id).then(function (response) {
+            $scope.deletePizza = function(id) {
+                pizzaFactory.deletePizza(id).then(function(response) {
                     console.log(response.data);
                     getAll();
-                }, function (error) {
+                }, function(error) {
                     console.log(error);
                 })
             }
 
-            $scope.insertPizza = function () {
+            $scope.insertPizza = function() {
                 var pizza = {
                     id: "23",
                     name: $scope.productName,
@@ -55,8 +54,7 @@ angular
                     quantity: $scope.quantity,
                     price: $scope.price,
                     category: $scope.category,
-                    recipe: [
-                        {
+                    recipe: [{
                             "id": 3,
                             "name": "Chili",
                             "price": 2
@@ -65,13 +63,14 @@ angular
                             "id": 4,
                             "name": "Pepper",
                             "price": 2.5
-                        }]
+                        }
+                    ]
                 }
-                $http.post('http://localhost:3000/products', pizza).then(function () {
+                $http.post('http://localhost:3000/products', pizza).then(function() {
                     $scope.products.push(pizza);
                     getAll();
                     console.log('ok');
-                }, function () {
+                }, function() {
 
                 });
 
