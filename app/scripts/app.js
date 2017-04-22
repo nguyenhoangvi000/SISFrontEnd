@@ -147,8 +147,7 @@ angular
                     }
                 }
             })
-<<<<<<< HEAD
-            
+
             /**
              *  Room Type Routing
              */
@@ -241,9 +240,6 @@ angular
                 templateUrl: 'views/table.html',
                 url: '/table'
             })
-=======
->>>>>>> 79b19d9da274d3fc2dd0f76101c597e99ab03572
-
     }])
     .controller('homeCtrl', function() {
         console.log('in homeCtrl');

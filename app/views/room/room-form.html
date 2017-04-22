@@ -1,0 +1,21 @@
+<form novalidate ng-model="form" ng-submit="submit(form)">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Name" ng-model="form.name"/>
+    </div>
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" id="location" placeholder="Location" ng-model="form.location"/>
+    </div>
+    <div class="form-group">
+        <label for="capacity">Capacity</label>
+        <input type="text" id="capacity" placeholder="Capacity" ng-model="form.capacity"/>
+    </div>
+    <div class="form-group">
+        <label for="room-type">Room type</label>
+        <select ng-options="roomType.name for roomType in roomTypes" ng-model="form.roomType"></select>
+    </div>
+    <div class="form-group">
+        <button type="submit">{{buttonName || 'Submit'}}</button>
+    </div>
+</form>
