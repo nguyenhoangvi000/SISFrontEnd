@@ -1,4 +1,4 @@
-## SB Admin v2.0 rewritten in AngularJS
+## Student Information in AngularJS
 
 
 ## Installation
