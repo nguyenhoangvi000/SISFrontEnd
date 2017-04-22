@@ -1,13 +1,13 @@
 (function() {
     'use strict';
     angular
-        .module('sbAdminApp')
-        .controller('studentController', ['$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
+        .module('studentinfo')
+        .controller('catalogCtrl', ['$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
             function($scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
                 init();
 
                 function init() {
-                    console.log('studentController');
+                    console.log('catalogCtrl');
                     getAllPosts();
                 }
                 $scope.someClickHandler = someClickHandler;
@@ -38,8 +38,8 @@
                         .withPaginationType('full_numbers')
                         .withOption('createdRow', $scope.createdRow)
                         .withOption('rowCallback', rowCallback)
-                        .withScroller()
-                        .withOption('scrollY', 500);
+                        // .withScroller()
+                        // .withOption('scrollY', 500);
 
                     $scope.dtColumnDefs = [
                         DTColumnDefBuilder.newColumnDef(0),
@@ -49,7 +49,7 @@
                     ];
 
                     function actionsHtml(data, type, full, meta) {
-                        return '<div ><button style="" class="btn" ng-click="editpost(' + full._id + ')">' +
+                        return '<div ><button class="btn" ng-click="editpost(' + full._id + ')">' +
                             '   <i class="fa fa-edit"></i>' +
                             '</button>&nbsp;' +
                             '<button class="btn " ng-click="deletepost(' + full._id + ')">' +
@@ -86,6 +86,7 @@
                         //                 return true; // not prevent close; / close box
                         //             }
                         //         },
+
                         //         close: {
                         //             text: 'Hoy',
                         //             action: function (scope, button) {
@@ -96,6 +97,7 @@
                         //     }
                         // });
                     }
+
                     $scope.dtColumns = [
                         DTColumnBuilder.newColumn('id').withTitle('Mã'),
                         DTColumnBuilder.newColumn('firstName').withTitle('Tiêu đề'),
