@@ -9,4 +9,4 @@
             let port='8080';
             this.baseUrl=`${protocol}://${host}:${port}` // http://localhost:8080  
         })
-}());
+}()); 
