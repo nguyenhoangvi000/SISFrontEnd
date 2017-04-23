@@ -13,10 +13,10 @@ angular
         'datatables.scroller',
         'cp.ngConfirm',
     ])
-    .run(function(DTDefaultOptions) {
+    .run(function (DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
     })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
         $ocLazyLoadProvider.config({
             debug: false,
             events: true,
@@ -28,7 +28,7 @@ angular
                 templateUrl: 'views/dashboard/home.html',
                 controller: 'homeCtrl',
                 resolve: {
-                    loadMyDirectives: function($ocLazyLoad) {
+                    loadMyDirectives: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -44,7 +44,7 @@ angular
                 url: '/product',
                 controller: 'productCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -61,7 +61,7 @@ angular
                 url: '/course',
                 controller: 'courseCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -76,7 +76,7 @@ angular
                 url: '/student',
                 controller: 'studentCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -92,7 +92,7 @@ angular
                 url: '/student/add',
                 controller: 'studentCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -102,12 +102,30 @@ angular
                     }
                 }
             })
+            .state('addcatalog', {
+                templateUrl: 'views/addCatalog.html',
+                url: '/catalog/add',
+                controller: 'addcatalogCtrl',
+                translations: 'appService',
+                resolve: {
+                    loadMyFile: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/services/appService.js',
+                                'scripts/controllers/addcatalogCtrl.js',
+                            ]
+                        })
+                    },
+                    
+                }
+            })
             .state('programe', {
                 templateUrl: 'views/programe.html',
                 url: '/programe',
                 controller: 'programeCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -122,7 +140,7 @@ angular
                 url: '/intake',
                 controller: 'intakeCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -137,7 +155,7 @@ angular
                 url: '/catalog',
                 controller: 'catalogCtrl',
                 resolve: {
-                    loadMyFile: function($ocLazyLoad) {
+                    loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -149,6 +167,6 @@ angular
             })
 
     }])
-    .controller('homeCtrl', function() {
+    .controller('homeCtrl', function () {
         console.log('in homeCtrl');
     });
