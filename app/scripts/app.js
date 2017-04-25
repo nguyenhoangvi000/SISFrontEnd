@@ -135,6 +135,24 @@ angular
                     }
                 }
             })
+             .state('addprograme', {
+                templateUrl: 'views/addprograme.html',
+                url: '/programe/add',
+                controller: 'addprogrameCtrl',
+                translations: 'appService',
+                resolve: {
+                    loadMyFile: function ($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/services/appService.js',
+                                'scripts/controllers/addprogrameCtrl.js',
+                            ]
+                        })
+                    },
+                    
+                }
+            })
             .state('intake', {
                 templateUrl: 'views/intake.html',
                 url: '/intake',
