@@ -4678,11 +4678,6 @@ i.fa.fa-picture-o {
     margin: 1em 0 2em 0;
 }
 
-th {
-    color: #00C6D7!important;
-    font-weight: 400;
-}
-
 .graph-visual.tables-main {
     margin-bottom: 3em;
 }
@@ -9153,12 +9148,25 @@ footer p a:hover,
 
 /*custom style*/
 
+.table>thead>tr>th {
+    color: #1f0f0f !important;
+}
+
+.table td,
+.table>tbody>tr>td,
+.table>tbody>tr>th,
+.table>tfoot>tr>td,
+.table>tfoot>tr>th,
+.table>thead>tr>td {
+    color: #331a1a !important;
+}
+
 .pl-50 {
     padding: 60px 50px;
 }
 
 
-/*add student*/
+/* student*/
 
 #addstudent {}
 
@@ -9168,7 +9176,7 @@ footer p a:hover,
 }
 
 
-/*add student*/
+/*student*/
 
 
 /*custom style*/
