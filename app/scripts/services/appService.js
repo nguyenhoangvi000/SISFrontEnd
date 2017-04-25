@@ -3,10 +3,10 @@
 
     angular
         .module('studentinfo')
-        .service('appService', () => {
-            let protocol = 'http';
-            let host = 'localhost';
-            let port = '8080';
-            this.baseUrl = `${protocol}://${host}:${port}` // http://localhost:8080  
+        .service('appService', function() {
+            var protocol = 'http';
+            var host = 'localhost';
+            var port = '8081';
+            this.baseUrl = `${protocol}://${host}:${port}/isc-stuinfo` // http://localhost:8080  
         })
 }());
