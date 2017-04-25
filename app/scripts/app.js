@@ -21,6 +21,7 @@ angular
             debug: false,
             events: true,
         });
+
         $urlRouterProvider.otherwise('dashboard');
         $stateProvider
             .state('dashboard', {
