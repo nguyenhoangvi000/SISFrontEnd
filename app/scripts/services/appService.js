@@ -9,4 +9,4 @@
             var port = '8081';
             this.baseUrl = `${protocol}://${host}:${port}/isc-stuinfo` // http://localhost:8080  
         })
-}());
+}()); 

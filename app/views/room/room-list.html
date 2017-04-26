@@ -1,0 +1,31 @@
+<a ui-sref="room.add" class="btn btn-primary">Add</a>
+<br>
+<br>
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Room type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{$index}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.capacity}}</td>
+            <td>{{item.roomType.name}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" ui-sref="room.detail({id: item.id})">View</button>
+                <button class="btn btn-sm btn-primary" ui-sref="room.edit({id: item.id})">Edit</button>
+                <button class="btn btn-sm btn-danger" ng-click="remove(item.id)">Remove</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

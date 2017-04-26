@@ -185,6 +185,99 @@ angular
                 }
             })
 
+            /**
+             *  Room Type Routing
+             */
+            .state('roomType', { // Main room state
+                templateUrl: 'views/room-type/room-type.html',
+                url: '/room-type',
+                controller: 'roomTypeCtrl',
+                abstract: true,
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/roomTypeCtrl.js',
+                                'scripts/services/FactoryService/roomTypeFactory.js'
+                            ]
+                        }) 
+                    }
+                }
+            })
+            .state('roomType.add', { // Add state
+                templateUrl: 'views/room-type/room-type-form.html',
+                url: '/add',
+                controller: 'addRoomTypeCtrl'
+            })
+            .state('roomType.edit', { // Edit state
+                templateUrl: 'views/room-type/room-type-form.html',
+                url: '/edit/:id',
+                controller: 'editRoomTypeCtrl'
+            })
+            .state('roomType.list', { // View all state
+                templateUrl: 'views/room-type/room-type-list.html',
+                url: '/list',
+                controller: 'listRoomTypeCtrl'
+            })
+            .state('roomType.detail', { // Detail state
+                templateUrl: 'views/room-type/room-type-detail.html',
+                url: '/detail/{id}',
+                controller: 'detailRoomTypeCtrl'
+            })
+            /**
+             * End of Room Type routing
+             */
+
+             /**
+             *  Room Routing
+             */
+            .state('room', { // Main room state
+                templateUrl: 'views/room/room.html',
+                url: '/room',
+                controller: 'roomCtrl',
+                abstract: true,
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/roomCtrl.js',
+                                'scripts/services/FactoryService/roomFactory.js',
+                                'scripts/services/FactoryService/roomTypeFactory.js'
+                            ]
+                        }) 
+                    }
+                }
+            })
+            .state('room.add', { // Add state
+                templateUrl: 'views/room/room-form.html',
+                url: '/add',
+                controller: 'addRoomCtrl'
+            })
+            .state('room.edit', { // Edit state
+                templateUrl: 'views/room/room-form.html',
+                url: '/edit/:id',
+                controller: 'editRoomCtrl'
+            })
+            .state('room.list', { // View all state
+                templateUrl: 'views/room/room-list.html',
+                url: '/list',
+                controller: 'listRoomCtrl'
+            })
+            .state('room.detail', { // Detail state
+                templateUrl: 'views/room/room-detail.html',
+                url: '/detail/{id}',
+                controller: 'detailRoomCtrl'
+            })
+            /**
+             * End of Room routing
+             */
+            
+            .state('dashboard.table', {
+                templateUrl: 'views/table.html',
+                url: '/table'
+            })
     }])
     .controller('homeCtrl', function () {
         console.log('in homeCtrl');
