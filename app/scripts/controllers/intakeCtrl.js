@@ -49,7 +49,7 @@
                 ];
 
                 function actionsHtml(data, type, full, meta) {
-                    return `<div ><button style="" class="btn btn-xs" ng-click="deleteIntake('${full.id}')">
+                    return `<div ><button style="" class="btn btn-xs" ng-click="updateIntake('${full.id}')">
                          <i class="fa fa-edit"></i>
                         </button>&nbsp;
                         <button class="btn btn-xs" ng-click="deleteIntake('${full.id}')">
@@ -105,7 +105,7 @@
                         }
                     });
                 }
-                $scope.deleteIntake = function(intakeId) {
+                $scope.updateIntake = function(intakeId) {
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
@@ -128,6 +128,39 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
+                                btnClass: 'btn-success',
+                                action: function(scope, button) {
+                                    console.log('handler create here');
+                                    $http.post(baseUrl + '/intakes', { code: scope.code, name: scope.name })
+                                        .then(function(res) {
+                                            console.log(res);
+                                            load();
+                                        }, function(res) {
+                                            console.log(res);
+                                        })
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.deleteIntake = function(intakeId) {
+                    $ngConfirm({
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Remove Intake!',
+                        content: `Are you sure to delete this Intake ?`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Yes',
                                 btnClass: 'btn-danger',
                                 action: function(scope, button) {
                                     console.log('handler create here');
