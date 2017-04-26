@@ -1,1 +1,31 @@
-<h1>This is programe page</h1>
+<div>
+    <div class="row">
+
+        <button ui-sref="addprograme" type="button" class="btn btn-primary btn-xs">Add New Programe</button>
+
+    </div>
+    <div>
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="row-border hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Spec Code</th>
+                    <th>Spec Name</th>
+                    <th>R.Credits</th>
+                    <th>E.Credits</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="post in posts">
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.speccode}}</td>
+                    <td>{{ post.specname}}</td>
+                    <td>{{ post.rcredits}}</td>
+                    <td>{{ post.ecredits}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
