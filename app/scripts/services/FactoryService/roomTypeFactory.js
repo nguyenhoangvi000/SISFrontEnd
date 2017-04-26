@@ -1,5 +1,5 @@
 (function() {
-    angular.module('sbAdminApp')
+    angular.module('studentinfo')
     .constant('serverUri', 'http://localhost:8080/stuinfo')
     .factory('roomTypeFactory', function($resource, serverUri) {
         return $resource(serverUri + '/room-types/:id', {id: '@id'}, {

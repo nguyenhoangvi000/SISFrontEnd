@@ -2762,7 +2762,7 @@ td.table-img img {
 .btn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;
@@ -2779,6 +2779,11 @@ td.table-img img {
     background-image: none;
     border: 1px solid #ddd;
     border-radius: 0;
+}
+
+.btn-sm {
+    font-size: 13px !important;
+    padding: 5px !important;
 }
 
 .content-box ul li a i {
@@ -4721,7 +4726,7 @@ th {
 
 .btn {
     cursor: pointer;
-    margin: 10px;
+    margin: 0px !important;
     border-radius: 5px;
     text-decoration: none;
     padding: 10px;

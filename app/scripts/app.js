@@ -159,9 +159,9 @@ angular
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/roomTypeController.js',
+                                'scripts/controllers/roomTypeCtrl.js',
                                 'scripts/services/FactoryService/roomTypeFactory.js'
                             ]
                         }) 
@@ -169,14 +169,14 @@ angular
                 }
             })
             .state('roomType.add', { // Add state
-                templateUrl: 'views/room-type/room-type-add.html',
+                templateUrl: 'views/room-type/room-type-form.html',
                 url: '/add',
                 controller: 'addRoomTypeCtrl'
             })
             .state('roomType.edit', { // Edit state
-                templateUrl: 'views/room-type/room-type-edit.html',
+                templateUrl: 'views/room-type/room-type-form.html',
                 url: '/edit/:id',
-                controller: 'editTypeCtrl'
+                controller: 'editRoomTypeCtrl'
             })
             .state('roomType.list', { // View all state
                 templateUrl: 'views/room-type/room-type-list.html',
@@ -203,22 +203,23 @@ angular
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: 'sbAdminApp',
+                            name: 'studentinfo',
                             files: [
-                                'scripts/controllers/roomController.js',
-                                'scripts/services/FactoryService/roomFactory.js'
+                                'scripts/controllers/roomCtrl.js',
+                                'scripts/services/FactoryService/roomFactory.js',
+                                'scripts/services/FactoryService/roomTypeFactory.js'
                             ]
                         }) 
                     }
                 }
             })
             .state('room.add', { // Add state
-                templateUrl: 'views/room/room-add.html',
+                templateUrl: 'views/room/room-form.html',
                 url: '/add',
                 controller: 'addRoomCtrl'
             })
             .state('room.edit', { // Edit state
-                templateUrl: 'views/room/room-edit.html',
+                templateUrl: 'views/room/room-form.html',
                 url: '/edit/:id',
                 controller: 'editRoomCtrl'
             })

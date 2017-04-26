@@ -1,21 +1,27 @@
-<form novalidate ng-model="form" ng-submit="submit(form)">
+<form novalidate ng-model="form" name="room" ng-submit="submit(form)">
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Name" ng-model="form.name"/>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Name" ng-model="form.name" required ng-trim="true"/>
+        <div ng-show="room.name.$touched && room.name.$error.required" class="alert alert-danger">Name is required</div>
     </div>
     <div class="form-group">
         <label for="location">Location</label>
-        <input type="text" id="location" placeholder="Location" ng-model="form.location"/>
+        <input type="text" class="form-control" name="location" id="location" placeholder="Location" ng-model="form.location" required ng-trim="true"/>
+        <div ng-show="room.location.$touched && room.location.$error.required" class="alert alert-danger">Location is required</div>
     </div>
     <div class="form-group">
         <label for="capacity">Capacity</label>
-        <input type="text" id="capacity" placeholder="Capacity" ng-model="form.capacity"/>
+        <input type="number" class="form-control" name="capacity" id="capacity" placeholder="Capacity" ng-model="form.capacity" ng-min="1" required ng-trim="true"/>
+        <div ng-show="room.capacity.$touched && room.capacity.$error.min" class="alert alert-danger">Capacity must be larger than zero</div>
+        <div ng-show="room.capacity.$touched && room.capacity.$error.required" class="alert alert-danger">Capacity is required</div>
     </div>
     <div class="form-group">
         <label for="room-type">Room type</label>
-        <select ng-options="roomType.name for roomType in roomTypes" ng-model="form.roomType"></select>
+        <select class="form-control" name="roomType" ng-options="item.id as item.name for item in roomTypes" ng-model="form.roomType" required></select>
+        <div ng-show="room.roomType.$touched && room.roomType.$error.required" class="alert alert-danger">Room type is required</div>
     </div>
     <div class="form-group">
-        <button type="submit">{{buttonName || 'Submit'}}</button>
+        <br>
+        <button type="submit" class="btn btn-primary">{{buttonName || 'Submit'}}</button>
     </div>
 </form>
