@@ -13,10 +13,10 @@ angular
         'datatables.scroller',
         'cp.ngConfirm',
     ])
-    .run(function (DTDefaultOptions) {
+    .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
     })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
         $ocLazyLoadProvider.config({
             debug: false,
             events: true,
@@ -28,7 +28,7 @@ angular
                 templateUrl: 'views/dashboard/home.html',
                 controller: 'homeCtrl',
                 resolve: {
-                    loadMyDirectives: function ($ocLazyLoad) {
+                    loadMyDirectives: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -44,7 +44,7 @@ angular
                 url: '/product',
                 controller: 'productCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -61,7 +61,7 @@ angular
                 url: '/course',
                 controller: 'courseCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -71,12 +71,45 @@ angular
                     }
                 }
             })
-            .state('student', {
+            .state('addcourse', {
+                templateUrl: 'views/addCourse.html',
+                url: '/addcourse',
+                controller: 'addCourseCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/addCourseCtrl.js',
+                                'styles/scroller.dataTables.min.css'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('addcoursetype', {
+                templateUrl: 'views/addcoursetype.html',
+                url: '/addcoursetype',
+                controller: 'addcoursetypeCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/addcoursetypeCtrl.js',
+                                'styles/scroller.dataTables.min.css'
+                            ]
+                        })
+                    }
+                }
+            })
+
+        .state('student', {
                 templateUrl: 'views/student.html',
                 url: '/student',
                 controller: 'studentCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -92,7 +125,7 @@ angular
                 url: '/student/add',
                 controller: 'studentCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -108,7 +141,7 @@ angular
                 controller: 'addcatalogCtrl',
                 translations: 'appService',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -117,7 +150,7 @@ angular
                             ]
                         })
                     },
-                    
+
                 }
             })
             .state('programe', {
@@ -125,7 +158,7 @@ angular
                 url: '/programe',
                 controller: 'programeCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -140,7 +173,7 @@ angular
                 url: '/intake',
                 controller: 'intakeCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -155,7 +188,7 @@ angular
                 url: '/catalog',
                 controller: 'catalogCtrl',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -167,6 +200,6 @@ angular
             })
 
     }])
-    .controller('homeCtrl', function () {
+    .controller('homeCtrl', function() {
         console.log('in homeCtrl');
     });
