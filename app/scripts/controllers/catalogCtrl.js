@@ -98,112 +98,112 @@
                         // });
                     }
 
-                    $scope.dtColumns = [
-                        DTColumnBuilder.newColumn('id').withTitle('Mã'),
-                        DTColumnBuilder.newColumn('firstName').withTitle('Tiêu đề'),
-                        DTColumnBuilder.newColumn('lastName').withTitle('Nội dung'),
-                        DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
-                        .renderWith(actionsHtml),
-                    ];
+                    // $scope.dtColumns = [
+                    //     DTColumnBuilder.newColumn('id').withTitle('Mã'),
+                    //     DTColumnBuilder.newColumn('firstName').withTitle('Tiêu đề'),
+                    //     DTColumnBuilder.newColumn('lastName').withTitle('Nội dung'),
+                    //     DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
+                    //     .renderWith(actionsHtml),
+                    // ];
 
 
-                    $scope.posts = [{
-                        "id": 860,
-                        "firstName": "Superman",
-                        "lastName": "Yoda"
-                    }, {
-                        "id": 870,
-                        "firstName": "Foo",
-                        "lastName": "Whateveryournameis"
-                    }, {
-                        "id": 590,
-                        "firstName": "Toto",
-                        "lastName": "Titi"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }, {
-                        "id": 803,
-                        "firstName": "Luke",
-                        "lastName": "Kyle"
-                    }];
+                    // $scope.posts = [{
+                    //     "id": 860,
+                    //     "firstName": "Superman",
+                    //     "lastName": "Yoda"
+                    // }, {
+                    //     "id": 870,
+                    //     "firstName": "Foo",
+                    //     "lastName": "Whateveryournameis"
+                    // }, {
+                    //     "id": 590,
+                    //     "firstName": "Toto",
+                    //     "lastName": "Titi"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }, {
+                    //     "id": 803,
+                    //     "firstName": "Luke",
+                    //     "lastName": "Kyle"
+                    // }];
                     // var url = adminService.baseUrl + '/posts';
                     // postsFactory.query().$promise.then(function(posts){
                     //     $scope.posts = posts;

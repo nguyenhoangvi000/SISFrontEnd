@@ -133,7 +133,7 @@
                 $scope.updatePrograme = function(programeId) {
                     $scope.programe = programeService.get({ id: programeId }, function(data) {});
                     $ngConfirm({
-                        icon: 'fa fa-plus-circle',
+                        icon: 'fa fa-pencil-square',
                         theme: 'material',
                         columnClass: 'col-md-6 col-md-offset-3',
                         animation: 'rotateYR',
@@ -168,7 +168,7 @@
                         scope: $scope,
                         buttons: {
                             sayBoo: {
-                                text: 'Create',
+                                text: 'Update',
                                 btnClass: 'btn-success',
                                 action: function(scope, button) {
                                     console.log('handler create here');

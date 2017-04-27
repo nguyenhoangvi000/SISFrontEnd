@@ -43,25 +43,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="header-section">
                     <!--menu-right-->
                     <div class="top_menu">
-                        <div class="main-search">
-                            <form>
-                                <input type="text" value="Search" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Search';}" class="text"
-                                />
-                                <input type="submit" value="">
-                            </form>
-                            <div class="close"><img src="images/cross.png" /></div>
-                        </div>
-                        <div class="srch"><button></button></div>
-                        <script type="text/javascript">
-                            $('.main-search').hide();
-                            $('button').click(function () {
-                                $('.main-search').show();
-                                $('.main-search text').focus();
-                            });
-                            $('.close').click(function () {
-                                $('.main-search').hide();
-                            });
-                        </script>
+
+
                         <!--/profile_details-->
                         <div class="profile_details_left">
                             <ul class="nofitications-dropdown">
@@ -86,34 +69,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             this.initEvents();
                                         }
                                         DropDown.prototype = {
-                                            initEvents: function () {
+                                            initEvents: function() {
                                                 var obj = this;
 
-                                                obj.dd.on('click', function (event) {
+                                                obj.dd.on('click', function(event) {
                                                     $(this).toggleClass('active');
                                                     return false;
                                                 });
 
-                                                obj.opts.on('click', function () {
+                                                obj.opts.on('click', function() {
                                                     var opt = $(this);
                                                     obj.val = opt.text();
                                                     obj.index = opt.index();
                                                     obj.placeholder.text(obj.val);
                                                 });
                                             },
-                                            getValue: function () {
+                                            getValue: function() {
                                                 return this.val;
                                             },
-                                            getIndex: function () {
+                                            getIndex: function() {
                                                 return this.index;
                                             }
                                         }
 
-                                        $(function () {
+                                        $(function() {
 
                                             var dd = new DropDown($('#dd'));
 
-                                            $(document).click(function () {
+                                            $(document).click(function() {
                                                 // all dropdowns
                                                 $('.wrapper-dropdown-3').removeClass('active');
                                             });
@@ -380,25 +363,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
     <script>
-                                        var toggle = true;
+        var toggle = true;
 
-                                        $(".sidebar-icon").click(function () {
-                                            if (toggle) {
-                                                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-                                                $("#menu span").css({
-                                                    "position": "absolute"
-                                                });
-                                            } else {
-                                                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-                                                setTimeout(function () {
-                                                    $("#menu span").css({
-                                                        "position": "relative"
-                                                    });
-                                                }, 400);
-                                            }
+        $(".sidebar-icon").click(function() {
+            if (toggle) {
+                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                $("#menu span").css({
+                    "position": "absolute"
+                });
+            } else {
+                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                setTimeout(function() {
+                    $("#menu span").css({
+                        "position": "relative"
+                    });
+                }, 400);
+            }
 
-                                            toggle = !toggle;
-                                        });
+            toggle = !toggle;
+        });
     </script>
 
 
