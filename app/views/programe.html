@@ -1,11 +1,11 @@
 <div>
     <div class="row">
 
-        <button ui-sref="addprograme" type="button" class="btn btn-primary btn-xs">Add New Programe</button>
+        <button ng-click="createPrograme()" type="button" class="btn btn-primary btn-sm">Add</button>
 
     </div>
     <div>
-        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="row-border hover">
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -17,15 +17,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="post in posts">
-                    <td>{{ post.id }}</td>
-                    <td>{{ post.speccode}}</td>
-                    <td>{{ post.specname}}</td>
-                    <td>{{ post.rcredits}}</td>
-                    <td>{{ post.ecredits}}</td>
+                <tr ng-repeat="p in programes">
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.specCode}}</td>
+                    <td>{{ p.specName}}</td>
+                    <td>{{ p.rCredit}}</td>
+                    <td>{{ p.eCredit}}</td>
                     <td>#</td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+
+
 </div>

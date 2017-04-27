@@ -164,6 +164,7 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
+                                'scripts/services/FactoryService/programeService.js',
                                 'scripts/controllers/programeCtrl.js',
                             ]
                         })

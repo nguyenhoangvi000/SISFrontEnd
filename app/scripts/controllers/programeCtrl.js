@@ -2,210 +2,236 @@
     'use strict';
     angular
         .module('studentinfo')
-        .controller('programeCtrl', ['$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
-            function($scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
-                init();
+        .controller('programeCtrl', ['appService', 'programeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, programeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+            init();
 
-                function init() {
-                    console.log('programeCtrl');
-                    getAllPosts();
-                }
-                $scope.someClickHandler = someClickHandler;
-
-                function someClickHandler(info) {
-                    var message = info._id + ' - ' + info.title;
-                }
-
-                function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
-                    $('td', nRow).unbind('click');
-                    $('td', nRow).bind('click', function() {
-                        $scope.$apply(function() {
-                            $scope.someClickHandler(aData);
-                        });
-                    });
-                    return nRow;
-                }
-
-                // function
-
-                function getAllPosts() {
-                    $scope.createdRow = function(row, data, dataIndex) {
-                        $compile(angular.element(row).contents())($scope);
-                    }
-                    $scope.posts = [];
-                    $scope.dtOptions = DTOptionsBuilder.newOptions()
-                        .withPaginationType('full_numbers')
-                        .withOption('createdRow', $scope.createdRow)
-                        .withOption('rowCallback', rowCallback)
-                        // .withScroller()
-                        // .withOption('scrollY', 500);
-
-                    $scope.dtColumnDefs = [
-                        DTColumnDefBuilder.newColumnDef(0),
-                        DTColumnDefBuilder.newColumnDef(1),
-                        DTColumnDefBuilder.newColumnDef(2),
-                        DTColumnDefBuilder.newColumnDef(3),
-                        DTColumnDefBuilder.newColumnDef(4),
-                        DTColumnDefBuilder.newColumnDef(5).withTitle('action'),
-                    ];
-
-                    function actionsHtml(data, type, full, meta) {
-                        return '<div ><button style="" class="btn" ng-click="editpost(' + full._id + ')">' +
-                            '   <i class="fa fa-edit"></i>' +
-                            '</button>&nbsp;' +
-                            '<button class="btn " ng-click="deletepost(' + full._id + ')">' +
-                            '   <i class="fa fa-trash-o"></i>' +
-                            '</button> </div>';
-                    }
-                    $scope.editpost = function(post) {
-                        $state.go('postedit', { "id": post });
-                    }
-                    $scope.deletepost = function(post) {
-                        console.log(post);
-                        $scope.name = 'Sia: cheap thrills';
-                    }
-                    $scope.dtColumns = [
-                        DTColumnBuilder.newColumn('id').withTitle('ID'),
-                        DTColumnBuilder.newColumn('speccode').withTitle('Spec Code'),
-                        DTColumnBuilder.newColumn('specname').withTitle('Spec Name'),
-                        DTColumnBuilder.newColumn('rcredits').withTitle('Rcredits'),
-                        DTColumnBuilder.newColumn('ecredits').withTitle('Ecredits'),
-                        DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
-                        .renderWith(actionsHtml),
-                    ];
-
-
-                    $scope.posts = [{
-                        "id": 1,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 2,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 3,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 4,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 5,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 6,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                       "id": 7,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 8,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 9,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 10,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 11,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 12,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 13,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 14,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 15,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                       "id": 16,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 17,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 18,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                       "id": 19,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }, {
-                        "id": 20,
-                        "speccode": "Management",
-                        "specname": "Management IT",
-                        "rcredits" : "65",
-                        "ecredits" : "0"
-                    }];
-                    // var url = adminService.baseUrl + '/posts';
-                    // postsFactory.query().$promise.then(function(posts){
-                    //     $scope.posts = posts;
-                    // })
-                    // postsFactory.query(function(posts){
-                    //     console.log(posts);
-                    // })
-                }
+            function init() {
+                console.log('programeCtrl');
+                getAllPosts();
             }
-        ]);
+
+            load();
+
+            function load() {
+                $scope.programes = programeService.query(function(data) {
+                    console.log(data);
+                    // something
+                }); //query() trả về một mảng words
+            }
+            $scope.someClickHandler = someClickHandler;
+
+            function someClickHandler(info) {
+                var message = info._id + ' - ' + info.title;
+            }
+
+            function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
+                $('td', nRow).unbind('click');
+                $('td', nRow).bind('click', function() {
+                    $scope.$apply(function() {
+                        $scope.someClickHandler(aData);
+                    });
+                });
+                return nRow;
+            }
+
+            // function
+
+            function getAllPosts() {
+                $scope.createdRow = function(row, data, dataIndex) {
+                    $compile(angular.element(row).contents())($scope);
+                }
+                $scope.posts = [];
+                $scope.dtOptions = DTOptionsBuilder.newOptions()
+                    .withPaginationType('full_numbers')
+                    .withOption('createdRow', $scope.createdRow)
+                    .withOption('rowCallback', rowCallback)
+                    // .withScroller()
+                    // .withOption('scrollY', 500);
+
+                $scope.dtColumnDefs = [
+                    DTColumnDefBuilder.newColumnDef(0),
+                    DTColumnDefBuilder.newColumnDef(1),
+                    DTColumnDefBuilder.newColumnDef(2),
+                    DTColumnDefBuilder.newColumnDef(3),
+                    DTColumnDefBuilder.newColumnDef(4),
+                    DTColumnDefBuilder.newColumnDef(5).withTitle('action'),
+                ];
+
+                function actionsHtml(data, type, full, meta) {
+                    return `<div ><button style="" class="btn btn-xs" ng-click="updatePrograme('${full.id}')">
+                         <i class="fa fa-edit"></i>
+                        </button>&nbsp;
+                        <button class="btn btn-xs" ng-click="deletePrograme('${full.id}')">
+                          <i class="fa fa-trash-o"></i>
+                        </button> </div>`;
+                }
+                $scope.createPrograme = function() {
+                    $scope.programe = new programeService();
+                    $ngConfirm({
+                        icon: 'fa fa-plus-circle',
+                        theme: 'material',
+                        columnClass: 'col-md-6 col-md-offset-3',
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Create Intake!',
+                        content: `<form action="" class="form-horizontal" role="form">
+                         
+                            <div class="form-group">
+                                <label for="speccode" class="col-sm-2 control-label">speccode</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specCode" type="text" name="" id="speccode" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="specname" class="col-sm-2 control-label">specname</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specName" type="text" name="" id="specname" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rCredit" class="col-sm-2 control-label">rcredits</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.rCredit" type="text" name="" id="rCredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eCredit" class="col-sm-2 control-label">eCredit</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.eCredit" type="text" name="" id="ecredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                        </form>`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Create',
+                                btnClass: 'btn-success',
+                                action: function(scope, button) {
+                                    console.log('handler create here');
+                                    console.log(scope.programe);
+                                    $scope.programe.$save(function() {
+                                        programeService.query(function(data) {
+                                            // something
+                                            scope.programes = data;
+                                            console.log();
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.updatePrograme = function(programeId) {
+                    $scope.programe = programeService.get({ id: programeId }, function(data) {});
+                    $ngConfirm({
+                        icon: 'fa fa-plus-circle',
+                        theme: 'material',
+                        columnClass: 'col-md-6 col-md-offset-3',
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Update Programe!',
+                        content: `<form action="" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="speccode" class="col-sm-2 control-label">speccode</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specCode" type="text" name="" id="speccode" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="specname" class="col-sm-2 control-label">specname</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specName" type="text" name="" id="specname" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rCredit" class="col-sm-2 control-label">rcredits</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.rCredit" type="text" name="" id="rCredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eCredit" class="col-sm-2 control-label">eCredit</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.eCredit" type="text" name="" id="ecredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                        </form>`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Create',
+                                btnClass: 'btn-success',
+                                action: function(scope, button) {
+                                    console.log('handler create here');
+                                    console.log(scope.programe);
+                                    $scope.programe.$update(function() {
+                                        programeService.query(function(data) {
+                                            // something
+                                            scope.programes = data;
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.deletePrograme = function(programeId) {
+                    $ngConfirm({
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Remove Programe!',
+                        content: `Are you sure to delete this Programe ?`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Yes',
+                                btnClass: 'btn-danger',
+                                action: function(scope, button) {
+                                    programeService.delete({ id: programeId }, function() {
+                                        programeService.query(function(data) {
+                                            scope.programes = data;
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.dtColumns = [
+                    DTColumnBuilder.newColumn('id').withTitle('ID'),
+                    DTColumnBuilder.newColumn('specCode').withTitle('Spec Code'),
+                    DTColumnBuilder.newColumn('specName').withTitle('Spec Name'),
+                    DTColumnBuilder.newColumn('rCredit').withTitle('Rcredits'),
+                    DTColumnBuilder.newColumn('eCredit').withTitle('Ecredits'),
+                    DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
+                    .renderWith(actionsHtml),
+                ];
+            }
+        }]);
     /** @ngInject */
 }());

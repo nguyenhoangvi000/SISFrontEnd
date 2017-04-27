@@ -71,7 +71,7 @@
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
                         title: 'Create Intake!',
-                        content: `<form action="" method="POST" class="form-horizontal" role="form">
+                        content: `<form action="" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputCode" class="col-sm-2 control-label">Code:</label>
                                 <div class="col-sm-10">
