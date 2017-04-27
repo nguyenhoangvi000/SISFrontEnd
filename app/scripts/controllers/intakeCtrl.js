@@ -55,10 +55,10 @@
                 ];
 
                 function actionsHtml(data, type, full, meta) {
-                    return `<div ><button style="" class="btn btn-xs" ng-click="updateIntake('${full.id}')">
+                    return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updateIntake('${full.id}')">
                          <i class="fa fa-edit"></i>
                         </button>&nbsp;
-                        <button class="btn btn-xs" ng-click="deleteIntake('${full.id}')">
+                        <button class="btn btn-danger btn-xs" ng-click="deleteIntake('${full.id}')">
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }
@@ -117,7 +117,7 @@
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
                             title: 'Update Intake!',
-                            content: `<form action="" method="POST" class="form-horizontal" role="form">
+                            content: `<form action="" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputCode" class="col-sm-2 control-label">Code:</label>
                                 <div class="col-sm-10">
