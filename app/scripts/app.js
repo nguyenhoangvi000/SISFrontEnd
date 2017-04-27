@@ -147,6 +147,7 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/services/appService.js',
+                                'scripts/services/catalogService.js',
                                 'scripts/controllers/addcatalogCtrl.js',
                             ]
                         })
