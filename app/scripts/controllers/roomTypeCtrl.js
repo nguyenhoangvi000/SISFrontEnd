@@ -6,20 +6,23 @@
 
     // Add Room Type Controller - new room type
     function addRoomTypeCtrl($scope, roomTypeFactory) {
-        this.scope = $scope;        
-
         $scope.buttonName = 'Add';
+        $scope.isProcess = false;
+
+        // Submit data
         $scope.submit = function(form) {
-            console.log($scope.roomType.name);
             if($scope.roomType.$valid) {
+                $scope.isProcess = true;
                 roomTypeFactory.save(form, function() {
                     $scope.form = {};
                     $scope.roomType.$setPristine();
                     $scope.roomType.$setUntouched();
+                    $scope.isProcess = false;
                 });
             }
         }
 
+        // Change url
         $scope.$on('$stateChangeSuccess', function() {
             $scope.path.value = 'Add';
         })
@@ -27,20 +30,26 @@
 
     // Edit Room Type Controller - edit existed room type
     function editRoomTypeCtrl($scope, $stateParams, roomTypeFactory) {
-        this.scope = $scope;
-
         $scope.buttonName = 'Edit';
+        $scope.isProcess = true;
+
+        // Edit
         $scope.submit = function(form) {
             if($scope.roomType.$valid) {
+                $scope.isProcess = true;
                 form.id = $stateParams.id;
-                roomTypeFactory.update(form);
+                roomTypeFactory.update(form, function() {
+                    $scope.isProcess = false;
+                });
             }
         }
 
         roomTypeFactory.get({id: $stateParams.id}, function(data) {
             $scope.form = data;
+            $scope.isProcess = false;
         })
 
+        // Change url
         $scope.$on('$stateChangeSuccess', function() {
             $scope.path.value = 'Edit';
         })
@@ -52,6 +61,7 @@
             $scope.path.value = 'Data';
         })
 
+        // Query data
         roomTypeFactory.query(function(data) {
             $scope.items = data;
         })
@@ -66,6 +76,8 @@
                             deletedIndx = index;
                     });
                     if(deletedIndx != null)$scope.items.splice(deletedIndx,1);
+                }, function(data) {
+                    alert('Can\'t renmove this instance!');
                 });
             }
         }
