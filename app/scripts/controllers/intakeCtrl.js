@@ -3,9 +3,8 @@
 
     angular
         .module('studentinfo')
-        .controller('intakeCtrl', ['appService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('intakeCtrl', ['appService', 'intakeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, intakeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
             var baseUrl = appService.baseUrl
-
             init();
 
             function init() {
@@ -27,6 +26,13 @@
                     });
                 });
                 return nRow;
+            }
+            load();
+
+            function load() {
+                $scope.posts = intakeService.query(function() {
+                    // something
+                }); //query() trả về một mảng words
             }
 
             function getAllPosts() {
@@ -60,6 +66,7 @@
                     $state.go('postedit', { "id": post });
                 }
                 $scope.createIntake = function() {
+                    $scope.intake = new intakeService();
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
@@ -68,13 +75,13 @@
                             <div class="form-group">
                                 <label for="inputCode" class="col-sm-2 control-label">Code:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="code" type="text" name="" id="inputCode" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="intake.code" type="text" name="" id="inputCode" class="form-control" value="" title="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="name" type="text" name="" id="inputName" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="intake.name" type="text" name="" id="inputName" class="form-control" value=""  title="">
                                 </div>
                             </div>
                         </form>`,
@@ -85,13 +92,12 @@
                                 btnClass: 'btn-success',
                                 action: function(scope, button) {
                                     console.log('handler create here');
-                                    $http.post(baseUrl + '/intakes', { code: scope.code, name: scope.name })
-                                        .then(function(res) {
-                                            console.log(res);
-                                            load();
-                                        }, function(res) {
-                                            console.log(res);
-                                        })
+                                    $scope.intake.$save(function() {
+                                        intakeService.query(function(data) {
+                                            // something
+                                            scope.posts = data;
+                                        });
+                                    });
                                     return true; // not prevent close; / close box
                                 }
                             },
@@ -106,50 +112,52 @@
                     });
                 }
                 $scope.updateIntake = function(intakeId) {
-                    $ngConfirm({
-                        animation: 'rotateYR',
-                        closeAnimation: 'rotateYR (reverse)',
-                        title: 'Create Intake!',
-                        content: `<form action="" method="POST" class="form-horizontal" role="form">
+                    $scope.intake = intakeService.get({ id: intakeId }, function(data) {
+                        $ngConfirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotateYR (reverse)',
+                            title: 'Create Intake!',
+                            content: `<form action="" method="POST" class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputCode" class="col-sm-2 control-label">Code:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="code" type="text" name="" id="inputCode" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="intake.code" type="text" name="" id="inputCode" class="form-control" value="" required="required" pattern="" title="">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="name" type="text" name="" id="inputName" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="intake.name" type="text" name="" id="inputName" class="form-control" value="" required="required" pattern="" title="">
                                 </div>
                             </div>
                         </form>`,
-                        scope: $scope,
-                        buttons: {
-                            sayBoo: {
-                                text: 'Create',
-                                btnClass: 'btn-success',
-                                action: function(scope, button) {
-                                    console.log('handler create here');
-                                    $http.post(baseUrl + '/intakes', { code: scope.code, name: scope.name })
-                                        .then(function(res) {
-                                            console.log(res);
-                                            load();
-                                        }, function(res) {
-                                            console.log(res);
+                            scope: $scope,
+                            buttons: {
+                                sayBoo: {
+                                    text: 'Update',
+                                    btnClass: 'btn-success',
+                                    action: function(scope, button) {
+                                        console.log('handler create here');
+                                        scope.intake.$update(function() {
+                                            intakeService.query(function(data) {
+                                                // something
+                                                scope.posts = data;
+                                            });
                                         })
-                                    return true; // not prevent close; / close box
-                                }
-                            },
-                            close: {
-                                text: 'Cancel',
-                                action: function(scope, button) {
-                                    // closes the modal
-                                    console.log('cancel xoá ở đây');
+                                        return true; // not prevent close; / close box
+                                    }
+                                },
+                                close: {
+                                    text: 'Cancel',
+                                    action: function(scope, button) {
+                                        // closes the modal
+                                        console.log('cancel xoá ở đây');
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }); // get() trả về một word
+
                 }
                 $scope.deleteIntake = function(intakeId) {
                     $ngConfirm({
@@ -164,13 +172,12 @@
                                 btnClass: 'btn-danger',
                                 action: function(scope, button) {
                                     console.log('handler create here');
-                                    $http.delete(baseUrl + '/intakes/' + intakeId)
-                                        .then(function(res) {
-                                            console.log(res);
-                                            load();
-                                        }, function(res) {
-                                            console.log(res);
-                                        })
+                                    intakeService.delete({ id: intakeId }, function() {
+                                        intakeService.query(function(data) {
+                                            // something
+                                            scope.posts = data;
+                                        });
+                                    });
                                     return true; // not prevent close; / close box
                                 }
                             },
@@ -191,17 +198,7 @@
                     DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
                     .renderWith(actionsHtml),
                 ];
-                load();
 
-                function load() {
-                    $http.get(baseUrl + '/intakes')
-                        .then(function(res) {
-                            console.log(res);
-                            $scope.posts = res.data;
-                        }, function(res) {
-                            console.log(res);
-                        })
-                }
             }
         }])
 
