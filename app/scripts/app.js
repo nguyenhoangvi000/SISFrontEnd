@@ -147,6 +147,7 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/services/appService.js',
+                                'scripts/services/catalogService.js',
                                 'scripts/controllers/addcatalogCtrl.js',
                             ]
                         })
@@ -163,19 +164,20 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
+                                'scripts/services/FactoryService/programeService.js',
                                 'scripts/controllers/programeCtrl.js',
                             ]
                         })
                     }
                 }
             })
-             .state('addprograme', {
+            .state('addprograme', {
                 templateUrl: 'views/addprograme.html',
                 url: '/programe/add',
                 controller: 'addprogrameCtrl',
                 translations: 'appService',
                 resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
+                    loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
@@ -184,7 +186,7 @@ angular
                             ]
                         })
                     },
-                    
+
                 }
             })
             .state('intake', {
@@ -196,6 +198,7 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
+                                'scripts/services/FactoryService/intakeService.js',
                                 'scripts/controllers/intakeCtrl.js',
                             ]
                         })
@@ -218,10 +221,10 @@ angular
                 }
             })
 
-            /**
-             *  Room Type Routing
-             */
-            .state('roomType', { // Main room state
+        /**
+         *  Room Type Routing
+         */
+        .state('roomType', { // Main room state
                 templateUrl: 'views/room-type/room-type.html',
                 url: '/room-type',
                 controller: 'roomTypeCtrl',
@@ -234,7 +237,7 @@ angular
                                 'scripts/controllers/roomTypeCtrl.js',
                                 'scripts/services/FactoryService/roomTypeFactory.js'
                             ]
-                        }) 
+                        })
                     }
                 }
             })
@@ -262,10 +265,10 @@ angular
              * End of Room Type routing
              */
 
-             /**
-             *  Room Routing
-             */
-            .state('room', { // Main room state
+        /**
+         *  Room Routing
+         */
+        .state('room', { // Main room state
                 templateUrl: 'views/room/room.html',
                 url: '/room',
                 controller: 'roomCtrl',
@@ -279,7 +282,7 @@ angular
                                 'scripts/services/FactoryService/roomFactory.js',
                                 'scripts/services/FactoryService/roomTypeFactory.js'
                             ]
-                        }) 
+                        })
                     }
                 }
             })
@@ -306,11 +309,11 @@ angular
             /**
              * End of Room routing
              */
-            
-            .state('dashboard.table', {
-                templateUrl: 'views/table.html',
-                url: '/table'
-            })
+
+        .state('dashboard.table', {
+            templateUrl: 'views/table.html',
+            url: '/table'
+        })
     }])
     .controller('homeCtrl', function() {
         console.log('in homeCtrl');
