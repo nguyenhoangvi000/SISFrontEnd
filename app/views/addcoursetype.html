@@ -1,7 +1,7 @@
 <div class="container">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a ui-self="course">Course</a></li>
-        <li class="breadcrumb-item "><a ui-self="addcourse">Add Course</a></li>
+        <li class="breadcrumb-item"><a ui-self="course" href="#/course">Course</a></li>
+        <li class="breadcrumb-item "><a ui-self="addcourse" href="#/addcourse">Add Course</a></li>
         <li class="breadcrumb-item active">add courseType</li>
     </ol>
     <div class="">
@@ -9,14 +9,15 @@
         <div class="col-sm-offset-3">
             <h1>add new courseType </h1>
         </div>
-        <form class="form-horizontal">
+        <form class="form-horizontal" ng-submit="addcoursetype()" name="addcourstypeform">
 
             <!--course name-->
             <div class="form-group">
                 <label class="control-label col-sm-3" for="coursetypename">CourseType Name</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="coursetypename">
+                    <input type="text" ng-pattern="/^[A-Za-z0-9]*$/" class="form-control" id="coursetypename" name="coursetypename">
                 </div>
+
             </div>
 
             <div class="form-group">
