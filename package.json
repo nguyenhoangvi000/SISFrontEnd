@@ -12,7 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "angular-confirm": "^2.0.0-alpha.2"
+    "angular-confirm": "^2.0.0-alpha.2",
+    "grunt": "^0.4.5"
   },
   "devDependencies": {
     "grunt": "^0.4.1",
