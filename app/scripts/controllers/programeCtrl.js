@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('studentinfo')
-        .controller('programeCtrl', ['appService', 'programeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, programeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('programeCtrl', ['appService', 'programeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function (appService, programeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
             init();
 
             function init() {
@@ -13,7 +13,7 @@
             load();
 
             function load() {
-                $scope.programes = programeService.query(function(data) {
+                $scope.programes = programeService.query(function (data) {
                     console.log(data);
                     // something
                 }); //query() trả về một mảng words
@@ -24,11 +24,15 @@
                 var message = info._id + ' - ' + info.title;
             }
 
+            $scope.editpost = function (post) {
+                $state.go('postedit', { "id": post });
+            }
+
             function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
                 $('td', nRow).unbind('click');
-                $('td', nRow).bind('click', function() {
-                    $scope.$apply(function() {
+                $('td', nRow).bind('click', function () {
+                    $scope.$apply(function () {
                         $scope.someClickHandler(aData);
                     });
                 });
@@ -38,7 +42,7 @@
             // function
 
             function getAllPosts() {
-                $scope.createdRow = function(row, data, dataIndex) {
+                $scope.createdRow = function (row, data, dataIndex) {
                     $compile(angular.element(row).contents())($scope);
                 }
                 $scope.posts = [];
@@ -46,8 +50,8 @@
                     .withPaginationType('full_numbers')
                     .withOption('createdRow', $scope.createdRow)
                     .withOption('rowCallback', rowCallback)
-                    // .withScroller()
-                    // .withOption('scrollY', 500);
+                // .withScroller()
+                // .withOption('scrollY', 500);
 
                 $scope.dtColumnDefs = [
                     DTColumnDefBuilder.newColumnDef(0),
@@ -66,7 +70,7 @@
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }
-                $scope.createPrograme = function() {
+                $scope.createPrograme = function () {
                     $scope.programe = new programeService();
                     $ngConfirm({
                         icon: 'fa fa-plus-circle',
@@ -107,11 +111,11 @@
                             sayBoo: {
                                 text: 'Create',
                                 btnClass: 'btn-success',
-                                action: function(scope, button) {
+                                action: function (scope, button) {
                                     console.log('handler create here');
                                     console.log(scope.programe);
-                                    $scope.programe.$save(function() {
-                                        programeService.query(function(data) {
+                                    $scope.programe.$save(function () {
+                                        programeService.query(function (data) {
                                             // something
                                             scope.programes = data;
                                             console.log();
@@ -122,7 +126,7 @@
                             },
                             close: {
                                 text: 'Cancel',
-                                action: function(scope, button) {
+                                action: function (scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
                                 }
@@ -130,8 +134,8 @@
                         }
                     });
                 }
-                $scope.updatePrograme = function(programeId) {
-                    $scope.programe = programeService.get({ id: programeId }, function(data) {});
+                $scope.updatePrograme = function (programeId) {
+                    $scope.programe = programeService.get({ id: programeId }, function (data) { });
                     $ngConfirm({
                         icon: 'fa fa-pencil-square',
                         theme: 'material',
@@ -170,11 +174,11 @@
                             sayBoo: {
                                 text: 'Update',
                                 btnClass: 'btn-success',
-                                action: function(scope, button) {
+                                action: function (scope, button) {
                                     console.log('handler create here');
                                     console.log(scope.programe);
-                                    $scope.programe.$update(function() {
-                                        programeService.query(function(data) {
+                                    $scope.programe.$update(function () {
+                                        programeService.query(function (data) {
                                             // something
                                             scope.programes = data;
                                         });
@@ -184,7 +188,7 @@
                             },
                             close: {
                                 text: 'Cancel',
-                                action: function(scope, button) {
+                                action: function (scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
                                 }
@@ -192,7 +196,7 @@
                         }
                     });
                 }
-                $scope.deletePrograme = function(programeId) {
+                $scope.deletePrograme = function (programeId) {
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
@@ -203,9 +207,9 @@
                             sayBoo: {
                                 text: 'Yes',
                                 btnClass: 'btn-danger',
-                                action: function(scope, button) {
-                                    programeService.delete({ id: programeId }, function() {
-                                        programeService.query(function(data) {
+                                action: function (scope, button) {
+                                    programeService.delete({ id: programeId }, function () {
+                                        programeService.query(function (data) {
                                             scope.programes = data;
                                         });
                                     });
@@ -214,7 +218,7 @@
                             },
                             close: {
                                 text: 'Cancel',
-                                action: function(scope, button) {
+                                action: function (scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
                                 }
@@ -229,7 +233,7 @@
                     DTColumnBuilder.newColumn('rCredit').withTitle('Rcredits'),
                     DTColumnBuilder.newColumn('eCredit').withTitle('Ecredits'),
                     DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
-                    .renderWith(actionsHtml),
+                        .renderWith(actionsHtml),
                 ];
             }
         }]);

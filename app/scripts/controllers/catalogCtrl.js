@@ -1,14 +1,19 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('studentinfo')
-        .controller('catalogCtrl', ['$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
-            function($scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('catalogCtrl', ['$scope', '$ngConfirm', 'catalogService', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
+            function ($scope, $ngConfirm, catalogService, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
                 init();
 
                 function init() {
                     console.log('catalogCtrl');
-                    getAllPosts();
+                    catalogService.query(function (data) {
+                        // something
+                        $scope.catalogs = data;
+                        $scope.catalog = {};
+                        console.log();
+                    });
                 }
                 $scope.someClickHandler = someClickHandler;
 
@@ -19,8 +24,8 @@
                 function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
                     $('td', nRow).unbind('click');
-                    $('td', nRow).bind('click', function() {
-                        $scope.$apply(function() {
+                    $('td', nRow).bind('click', function () {
+                        $scope.$apply(function () {
                             $scope.someClickHandler(aData);
                         });
                     });
@@ -29,8 +34,125 @@
 
                 // function
 
+                $scope.updatePrograme = function (catalogId) {
+                    $scope.catalog = catalogService.get({ id: catalogId }, function (data) { });
+                    $ngConfirm({
+                        icon: 'fa fa-pencil-square',
+                        theme: 'material',
+                        columnClass: 'col-md-6 col-md-offset-3',
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Update Programe!',
+                        content: `<form action="" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="speccode" class="col-sm-2 control-label">speccode</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specCode" type="text" name="" id="speccode" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="specname" class="col-sm-2 control-label">specname</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.specName" type="text" name="" id="specname" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="rCredit" class="col-sm-2 control-label">rcredits</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.rCredit" type="text" name="" id="rCredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eCredit" class="col-sm-2 control-label">eCredit</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="programe.eCredit" type="text" name="" id="ecredit" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                        </form>`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Update',
+                                btnClass: 'btn-success',
+                                action: function (scope, button) {
+                                    console.log('handler create here');
+                                    console.log(scope.programe);
+                                    $scope.catalog.$update(function () {
+                                        catalogService.query(function (data) {
+                                            // something
+                                            scope.catalogs = data;
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function (scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+
+                $scope.createCatalog = function () {
+                    $ngConfirm({
+                        icon: 'fa fa-plus-circle',
+                        theme: 'material',
+                        columnClass: 'col-md-6 col-md-offset-3',
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Create Catalog!',
+                        content: `<form ng-model="catalog" class="form-horizontal" role="form">
+                         
+                            <div class="form-group">
+                                <label for="catalogname" class="col-sm-2 control-label">Catalog Name</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="catalog.name" type="text" name="" id="catalogname" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="catalognote" class="col-sm-2 control-label">Catalog Note</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="catalog.note" type="text" name="" id="catalognote" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                        </form>`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Create',
+                                btnClass: 'btn-success',
+                                action: function (scope, button) {
+                                    console.log('handler create here');
+                                    // console.log(scope.catalog);
+                                    console.log(scope.catalog);
+                                    catalogService.save(scope.catalog, function () {
+                                        catalogService.query(function (data) {
+                                            // something
+                                            scope.catalogs = data;
+                                            scope.catalog = {};
+                                            console.log();
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                action: function (scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+
                 function getAllPosts() {
-                    $scope.createdRow = function(row, data, dataIndex) {
+                    $scope.createdRow = function (row, data, dataIndex) {
                         $compile(angular.element(row).contents())($scope);
                     }
                     $scope.posts = [];
@@ -38,179 +160,64 @@
                         .withPaginationType('full_numbers')
                         .withOption('createdRow', $scope.createdRow)
                         .withOption('rowCallback', rowCallback)
-                        // .withScroller()
-                        // .withOption('scrollY', 500);
+                    // .withScroller()
+                    // .withOption('scrollY', 500);
 
-                    $scope.dtColumnDefs = [
-                        DTColumnDefBuilder.newColumnDef(0),
-                        DTColumnDefBuilder.newColumnDef(1),
-                        DTColumnDefBuilder.newColumnDef(2),
-                        DTColumnDefBuilder.newColumnDef(3).withTitle('action'),
-                    ];
-
-                    function actionsHtml(data, type, full, meta) {
-                        return '<div ><button class="btn" ng-click="editpost(' + full._id + ')">' +
-                            '   <i class="fa fa-edit"></i>' +
-                            '</button>&nbsp;' +
-                            '<button class="btn " ng-click="deletepost(' + full._id + ')">' +
-                            '   <i class="fa fa-trash-o"></i>' +
-                            '</button> </div>';
-                    }
-                    $scope.editpost = function(post) {
-                        $state.go('postedit', { "id": post });
-                    }
-                    $scope.deletepost = function(post) {
-                        console.log(post);
-                        $scope.name = 'Sia: cheap thrills';
-                        // $ngConfirm({
-                        //     animation: 'rotateYR',
-                        //     closeAnimation: 'rotateYR (reverse)',
-                        //     title: 'Confirm!',
-                        //     content: '<strong>Bài viết</strong> sẽ bị xoá khỏi database',
-                        //     scope: $scope,
-                        //     buttons: {
-                        //         sayBoo: {
-                        //             text: 'Đồng ý',
-                        //             btnClass: 'btn-danger',
-                        //             action: function (scope, button) {
-                        //                 scope.name = 'Booo!!';
-                        //                 console.log('handler xoá ở đây');
-                        //                 //delete post with $resource
-                        //                 postsFactory.delete({ id: post }, function (data) {
-                        //                     console.log(data);
-                        //                 })
-                        //                 //reload , get all posts
-                        //                 postsFactory.query().$promise.then(function (posts) {
-                        //                     $scope.posts = posts;
-                        //                 })
-                        //                 return true; // not prevent close; / close box
-                        //             }
-                        //         },
-
-                        //         close: {
-                        //             text: 'Hoy',
-                        //             action: function (scope, button) {
-                        //                 // closes the modal
-                        //                 console.log('cancel xoá ở đây');
-                        //             }
-                        //         }
-                        //     }
-                        // });
-                    }
-
-                    // $scope.dtColumns = [
-                    //     DTColumnBuilder.newColumn('id').withTitle('Mã'),
-                    //     DTColumnBuilder.newColumn('firstName').withTitle('Tiêu đề'),
-                    //     DTColumnBuilder.newColumn('lastName').withTitle('Nội dung'),
-                    //     DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
-                    //     .renderWith(actionsHtml),
+                    // $scope.dtColumnDefs = [
+                    //     DTColumnDefBuilder.newColumnDef(0),
+                    //     DTColumnDefBuilder.newColumnDef(1),
+                    //     DTColumnDefBuilder.newColumnDef(2),
+                    //     DTColumnDefBuilder.newColumnDef(3).withTitle('action'),
                     // ];
 
-
-                    // $scope.posts = [{
-                    //     "id": 860,
-                    //     "firstName": "Superman",
-                    //     "lastName": "Yoda"
-                    // }, {
-                    //     "id": 870,
-                    //     "firstName": "Foo",
-                    //     "lastName": "Whateveryournameis"
-                    // }, {
-                    //     "id": 590,
-                    //     "firstName": "Toto",
-                    //     "lastName": "Titi"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }, {
-                    //     "id": 803,
-                    //     "firstName": "Luke",
-                    //     "lastName": "Kyle"
-                    // }];
-                    // var url = adminService.baseUrl + '/posts';
-                    // postsFactory.query().$promise.then(function(posts){
-                    //     $scope.posts = posts;
-                    // })
-                    // postsFactory.query(function(posts){
-                    //     console.log(posts);
-                    // })
+                    function actionsHtml(data, type, full, meta) {
+                        return `<div ><button style="" class="btn btn-xs" ng-click="editCatalog('${full.id}')">
+                         <i class="fa fa-edit"></i>
+                        </button>&nbsp;
+                        <button class="btn btn-xs" ng-click="deleteCatalog('${full.id}')">
+                          <i class="fa fa-trash-o"></i>
+                        </button> </div>`;
+                    }
+                    $scope.editCatalog = function (catalog) {
+                        $state.go('postedit', { "id": catalog });
+                    }
+                    $scope.deleteCatalog = function (catalog) {
+                        $ngConfirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotateYR (reverse)',
+                            title: 'Remove Catalog!',
+                            content: `Are you sure to delete this Catalog ?`,
+                            scope: $scope,
+                            buttons: {
+                                sayBoo: {
+                                    text: 'Yes',
+                                    btnClass: 'btn-danger',
+                                    action: function (scope, button) {
+                                        catalogService.delete({ id: catalogId }, function () {
+                                            catalogService.query(function (data) {
+                                                scope.catalogs = data;
+                                            });
+                                        });
+                                        return true; // not prevent close; / close box
+                                    }
+                                },
+                                close: {
+                                    text: 'Cancel',
+                                    action: function (scope, button) {
+                                        // closes the modal
+                                        console.log('cancel xoá ở đây');
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    $scope.dtColumns = [
+                        DTColumnBuilder.newColumn('id').withTitle('No'),
+                        DTColumnBuilder.newColumn('code').withTitle('Catalog Code'),
+                        DTColumnBuilder.newColumn('name').withTitle('Catalog Name'),
+                        DTColumnBuilder.newColumn('action').withTitle('action').notSortable()
+                            .renderWith(actionsHtml),
+                    ];
                 }
             }
         ]);
