@@ -7,7 +7,8 @@
             return $resource(appService.baseUrl + '/catalogs/:id', { id: '@id' }, {
                 update: {
                     method: 'PUT'
-                }, remove: {
+                },
+                remove: {
                     method: 'DETELE'
                 },
             });

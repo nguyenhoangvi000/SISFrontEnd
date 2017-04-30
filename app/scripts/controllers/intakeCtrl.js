@@ -62,9 +62,10 @@
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }
-                $scope.editpost = function(post) {
-                    $state.go('postedit', { "id": post });
-                }
+                
+                // $scope.editpost = function(post) {
+                //     $state.go('postedit', { "id": post });
+                // }
                 $scope.createIntake = function() {
                     $scope.intake = new intakeService();
                     $ngConfirm({
@@ -105,7 +106,7 @@
                                 text: 'Cancel',
                                 action: function(scope, button) {
                                     // closes the modal
-                                    console.log('cancel xoá ở đây');
+                                    
                                 }
                             }
                         }
