@@ -63,10 +63,10 @@
                 ];
 
                 function actionsHtml(data, type, full, meta) {
-                    return `<div ><button style="" class="btn btn-xs" ng-click="updatePrograme('${full.id}')">
+                    return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updatePrograme('${full.id}')">
                          <i class="fa fa-edit"></i>
                         </button>&nbsp;
-                        <button class="btn btn-xs" ng-click="deletePrograme('${full.id}')">
+                        <button class="btn btn-danger btn-xs" ng-click="deletePrograme('${full.id}')">
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }

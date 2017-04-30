@@ -88,16 +88,17 @@ angular
                     }
                 }
             })
-            .state('addcoursetype', {
-                templateUrl: 'views/addcoursetype.html',
-                url: '/addcoursetype',
-                controller: 'addcoursetypeCtrl',
+            .state('coursetype', {
+                templateUrl: 'views/coursetype.html',
+                url: '/coursetype',
+                controller: 'coursetypeCtrl',
                 resolve: {
                     loadMyFile: function ($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/controllers/addcoursetypeCtrl.js',
+                                'scripts/services/FactoryService/courseTypeService.js',
+                                'scripts/controllers/coursetypeCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
                         })
