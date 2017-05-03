@@ -114,6 +114,7 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
+                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/studentCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
@@ -124,13 +125,33 @@ angular
             .state('addstudent', {
                 templateUrl: 'views/addstudent.html',
                 url: '/student/add',
-                controller: 'studentCtrl',
+                controller: 'addstudentCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/controllers/studentCtrl.js',
+                                'scripts/services/FactoryService/objectService.js',
+                                'scripts/controllers/addstudentCtrl.js',
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('updatestudent', {
+                templateUrl: 'views/updatestudent.html',
+                url: '/student/update/{id}',
+                controller: 'addstudentCtrl',
+                params: {
+                    "id": null
+                },
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/services/FactoryService/objectService.js',
+                                'scripts/controllers/addstudentCtrl.js',
                             ]
                         })
                     }
@@ -164,7 +185,7 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/programeService.js',
+                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/programeCtrl.js',
                             ]
                         })
@@ -198,7 +219,7 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/intakeService.js',
+                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/intakeCtrl.js',
                             ]
                         })

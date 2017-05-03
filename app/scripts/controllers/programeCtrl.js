@@ -2,7 +2,7 @@
     'use strict';
     angular
         .module('studentinfo')
-        .controller('programeCtrl', ['appService', 'programeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, programeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('programeCtrl', ['appService', 'objectService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, objectService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
             init();
 
             function init() {
@@ -13,7 +13,7 @@
             load();
 
             function load() {
-                $scope.programes = programeService.query(function(data) {
+                $scope.programes = objectService.Programe.query(function(data) {
                     console.log(data);
                     // something
                 }); //query() trả về một mảng words
@@ -67,7 +67,7 @@
                         </button> </div>`;
                 }
                 $scope.createPrograme = function() {
-                    $scope.programe = new programeService();
+                    $scope.programe = new objectService.Programe();
                     $ngConfirm({
                         icon: 'fa fa-plus-circle',
                         theme: 'material',
@@ -111,7 +111,7 @@
                                     console.log('handler create here');
                                     console.log(scope.programe);
                                     $scope.programe.$save(function() {
-                                        programeService.query(function(data) {
+                                        objectService.Programe.query(function(data) {
                                             // something
                                             scope.programes = data;
                                             console.log();
@@ -131,7 +131,7 @@
                     });
                 }
                 $scope.updatePrograme = function(programeId) {
-                    $scope.programe = programeService.get({ id: programeId }, function(data) {});
+                    $scope.programe = objectService.Programe.get({ id: programeId }, function(data) {});
                     $ngConfirm({
                         icon: 'fa fa-pencil-square',
                         theme: 'material',
@@ -174,7 +174,7 @@
                                     console.log('handler create here');
                                     console.log(scope.programe);
                                     $scope.programe.$update(function() {
-                                        programeService.query(function(data) {
+                                        objectService.Programe.query(function(data) {
                                             // something
                                             scope.programes = data;
                                         });
@@ -204,8 +204,8 @@
                                 text: 'Yes',
                                 btnClass: 'btn-danger',
                                 action: function(scope, button) {
-                                    programeService.delete({ id: programeId }, function() {
-                                        programeService.query(function(data) {
+                                    objectService.Programe.delete({ id: programeId }, function() {
+                                        objectService.Programe.query(function(data) {
                                             scope.programes = data;
                                         });
                                     });

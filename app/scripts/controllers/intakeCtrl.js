@@ -3,7 +3,7 @@
 
     angular
         .module('studentinfo')
-        .controller('intakeCtrl', ['appService', 'intakeService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, intakeService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('intakeCtrl', ['appService', 'objectService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, objectService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
             var baseUrl = appService.baseUrl
             init();
 
@@ -30,7 +30,7 @@
             load();
 
             function load() {
-                $scope.posts = intakeService.query(function() {
+                $scope.posts = objectService.Intake.query(function() {
                     // something
                 }); //query() trả về một mảng words
             }
@@ -62,26 +62,29 @@
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }
-                $scope.editpost = function(post) {
-                    $state.go('postedit', { "id": post });
-                }
                 $scope.createIntake = function() {
-                    $scope.intake = new intakeService();
+                    $scope.intake = new objectService.Intake();
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
                         title: 'Create Intake!',
-                        content: `<form action="" class="form-horizontal" role="form">
+                        content: `<form name="intakeFromCreate" novalidate class="form-horizontal" role="form">
                             <div class="form-group">
                                 <label for="inputCode" class="col-sm-2 control-label">Code:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="intake.code" type="text" name="" id="inputCode" class="form-control" value="" title="">
+                                    <input ng-model="intake.code" type="text" name="code" required id="inputCode" class="form-control" value="" title="">
+                                     <div ng-show="intakeFromCreate.code.$touched">
+                                    <div style="color: red" ng-show="intakeFromCreate.code.$error.required">This field can not be null.</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="intake.name" type="text" name="" id="inputName" class="form-control" value=""  title="">
+                                    <input ng-model="intake.name" type="text" name="name"required id="inputName" class="form-control" value=""  title="">
+                                    <div ng-show="intakeFromCreate.name.$touched">
+                                    <div style="color: red" ng-show="intakeFromCreate.name.$error.required">This field can not be null.</div>
+                                    </div>
                                 </div>
                             </div>
                         </form>`,
@@ -93,7 +96,7 @@
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     $scope.intake.$save(function() {
-                                        intakeService.query(function(data) {
+                                        objectService.Intake.query(function(data) {
                                             // something
                                             scope.posts = data;
                                         });
@@ -112,7 +115,7 @@
                     });
                 }
                 $scope.updateIntake = function(intakeId) {
-                    $scope.intake = intakeService.get({ id: intakeId }, function(data) {
+                    $scope.intake = objectService.Intake.get({ id: intakeId }, function(data) {
                         $ngConfirm({
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
@@ -139,7 +142,7 @@
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         scope.intake.$update(function() {
-                                            intakeService.query(function(data) {
+                                            objectService.Intake.query(function(data) {
                                                 // something
                                                 scope.posts = data;
                                             });
@@ -172,8 +175,8 @@
                                 btnClass: 'btn-danger',
                                 action: function(scope, button) {
                                     console.log('handler create here');
-                                    intakeService.delete({ id: intakeId }, function() {
-                                        intakeService.query(function(data) {
+                                    objectService.Intake.delete({ id: intakeId }, function() {
+                                        objectService.Intake.query(function(data) {
                                             // something
                                             scope.posts = data;
                                         });
