@@ -108,7 +108,7 @@
                                 text: 'Cancel',
                                 action: function(scope, button) {
                                     // closes the modal
-                                    console.log('cancel xoá ở đây');
+
                                 }
                             }
                         }
