@@ -1,15 +1,15 @@
 <div id="addstudent">
     <div class="row">
-        <form name="studentForm" ng-submit="submit(studentForm.$valid)" novalidate class="form-horizontal">
+        <form name="studentForm" ng-submit="update(studentForm.$valid)" novalidate class="form-horizontal">
             <div class="form-group">
-                <legend>Thêm Sinh viên</legend>
+                <legend>Chỉnh sửa Sinh viên</legend>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="hccsPid" class="col-sm-2 control-label">HCCS PID</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.hccsPid" type="text" name="hccsPid" id="hccsPid" class="form-control" required=""="" value="" title="">
+                            <input ng-model="student2.hccsPid" type="text" name="hccsPid" id="hccsPid" class="form-control" required="" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.hccsPid.$touched">
                                 <div style="color: red" ng-show="studentForm.hccsPid.$error.required">This field can not be null.</div>
                             </div>
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="hccsEmpid" class="col-sm-2 control-label">HCCS EMID</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.hccsEmpid" type="text" name="hccsEmpid" id="hccsEmpid" required=""="" class="form-control" value="" title="">
+                            <input ng-model="student2.hccsEmpid" type="text" name="hccsEmpid" id="hccsEmpid" required="" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.hccsEmpid.$touched">
                                 <div style="color: red" ng-show="studentForm.hccsEmpid.$error.required">This field can not be null.</div>
                             </div>
@@ -30,7 +30,7 @@
                         <div class="col-sm-10">
                             <select name="catalog" id="catalog" ng-options="option.name for option in catalogs.availableOptions track by option.id" ng-model="catalogs.selectedOption" required="" class="form-control">
                             </select>
-                            <div style="color: red" ng-show="(studentForm.catalog.$invalid && studentForm.catalog.$touched) || (studentForm.catalog.$invalid && studentForm.$submitted)">Catalog is required</div>
+                            <div style="color: red" ng-show="(studentForm.catalog.$invalid && studentForm.catalog.$touched) || (studentForm.catalog.$invalid && studentForm.$submitted)">Catalog required=""</div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.name" type="text" name="name" id="name" class="form-control" required="" value="" title="">
+                            <input ng-model="student2.name" type="text" name="name" id="name" class="form-control" required="" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.name.$touched">
                                 <div style="color: red" ng-show="studentForm.name.$error.required">This field can not be null.</div>
                             </div>
@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label for="placeOfBirth" class="col-sm-2 control-label">Place of Birth</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.placeOfBirth" type="text" name="placeOfBirth" id="placeOfBirth" required="" class="form-control" value="" title="">
+                            <input ng-model="student2.placeOfBirth" type="text" name="placeOfBirth" id="placeOfBirth" required="" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.placeOfBirth.$touched">
                                 <div style="color: red" ng-show="studentForm.placeOfBirth.$error.required">This field can not be null.</div>
                             </div>
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="birthday" class="col-sm-2 control-label">Birthday</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.birthday" type="date" name="" id="birthday" class="form-control" value="" title="">
+                            <input ng-model="student2.birthday" type="date" name="" id="birthday" class="form-control" value="" title="">
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                         <div class="col-sm-10">
                             <select id="gender" ng-options="option.name for option in genders.availableOptions track by option.id" ng-model="genders.selectedOption" required="" class="form-control">
                                         
-                            <div style="color: red" ng-show="(studentForm.gender.$invalid && studentForm.gender.$touched) || (studentForm.gender.$invalid && studentForm.$submitted)">Gender is required</div>
+                            <div style="color: red" ng-show="(studentForm.gender.$invalid && studentForm.gender.$touched) || (studentForm.gender.$invalid && studentForm.$submitted)">Gender required=""</div>
                                         
                             </select>
                         </div>
@@ -90,7 +90,7 @@
                             <select name="intake" id="intake" required="" ng-options="option.name for option in intakes.availableOptions track by option.id" ng-model="intakes.selectedOption" class="form-control">
                             
                             </select>
-                            <div style="color: red" ng-show="(studentForm.intake.$invalid && studentForm.intake.$touched) || (studentForm.intake.$invalid && studentForm.$submitted)">Intake is required</div>
+                            <div style="color: red" ng-show="(studentForm.intake.$invalid && studentForm.intake.$touched) || (studentForm.intake.$invalid && studentForm.$submitted)">Intake required=""</div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                         <div class="col-sm-10">
                             <select name="programe" id="programe" ng-options="option.specName for option in programes.availableOptions track by option.id" ng-model="programes.selectedOption" required="" class="form-control">
                             </select>
-                            <div style="color: red" ng-show="(studentForm.programe.$invalid && studentForm.programe.$touched) || (studentForm.programe.$invalid && studentForm.$submitted)">Programe is required</div>
+                            <div style="color: red" ng-show="(studentForm.programe.$invalid && studentForm.programe.$touched) || (studentForm.programe.$invalid && studentForm.$submitted)">Programe required=""</div>
                         </div>
 
                     </div>
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label for="contactPerson" class="col-sm-2 control-label">Contact</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.contactPerson" type="text" name="contactPerson" required="" id="contactPerson" class="form-control" value="" title="">
+                            <input ng-model="student2.contactPerson" type="text" name="contactPerson" required="" id="contactPerson" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.contactPerson.$touched">
                                 <div style="color: red" ng-show="studentForm.contactPerson.$error.required">This field can not be null.</div>
                             </div>
@@ -120,7 +120,7 @@
                     <div class="form-group">
                         <label for="phone" class="col-sm-2 control-label">Phone</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.phone" type="text" name="phone" id="phone" required="" class="form-control" value="" title="">
+                            <input ng-model="student2.phone" type="text" name="phone" id="phone" required="" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.phone.$touched">
                                 <div style="color: red" ng-show="studentForm.phone.$error.required">This field can not be null.</div>
                             </div>
@@ -131,7 +131,7 @@
                     <div class="form-group">
                         <label for="email" class="col-sm-2 control-label">Email</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.email" type="email" name="email" required="" id="email" class="form-control" value="" title="">
+                            <input ng-model="student2.email" type="email" name="email" required="" id="email" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.email.$touched">
                                 <span style="color: red" ng-show="studentForm.email.$error.required">Tell us your email.</span>
                                 <span style="color: red" ng-show="studentForm.email.$error.email">This is not a valid email.</span>
@@ -143,10 +143,10 @@
                     <div class="form-group">
                         <label for="personalId" class="col-sm-2 control-label">Personal ID</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.personalId" type="number" name="personalId" required="" id="personalId" class="form-control" value="" title="">
+                            <input ng-model="student2.personalId" type="text" name="personalId" required="" id="personalId" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.personalId.$touched">
                                 <span style="color: red" ng-show="studentForm.personalId.$error.required">Tell us your Personal ID.</span>
-                                <span style="color: red" ng-show="studentForm.personalId.$error.number">This is not a valid email.</span>
+                                <span style="color: red" ng-show="studentForm.personalId.$error.text">This is not a valid.</span>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                     <div class="form-group">
                         <label for="hoppy" class="col-sm-2 control-label">Hobby</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.hobby" type="text" name="" id="bobby" class="form-control" value="" title="">
+                            <input ng-model="student2.hobby" type="text" name="" id="bobby" class="form-control" value="" title="">
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@
             </div>
             <div class="row text-right">
                 <input ui-sref='student' type="submit" class="text-right btn btn-primary" value="Back" />
-                <input type="submit" ng-disabled="studentForm.$invalid" class="text-right btn btn-primary" value="Submit" />
+                <input type="submit" ng-disabled="studentForm.$invalid" class="text-right btn btn-primary" value="Save" />
             </div>
 
         </form>

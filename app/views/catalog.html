@@ -1,27 +1,26 @@
 <div>
     <div class="row">
-        <div>
-            <div>
-                <button ui-sref="addcatalog" type="button" class="btn btn-primary btn-sm">Add</button>
-                <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Catalog</th>
-                            <th>Note</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="post in posts">
-                            <td>{{ post.id }}</td>
-                            <td>{{ post.name}}</td>
-                            <td>{{ post.note}}</td>
-                            <td>#</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <button ng-click="createCatalog()" type="button" class="btn btn-primary btn-sm">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+    </div>
+
+    <div>
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Catalog</th>
+                    <th>Note</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="catalog in catalogs">
+                    <td>{{ catalog.id }}</td>
+                    <td>{{ catalog.name}}</td>
+                    <td>{{ catalog.note}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
