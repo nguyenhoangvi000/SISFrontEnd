@@ -24,7 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href='styles/angular-datatables.min.css'></link>
     <link rel="stylesheet" href='styles/datatables.bootstrap.min.css'></link>
     <link rel="stylesheet" href='bower_components/angular-confirm/dist/angular-confirm.min.css'></link>
-    <!--<link rel="stylesheet" href='styles/jquery.dataTables.min.css'></link>-->
+    <link rel="stylesheet" href='styles/jquery.dataTables.min.css'></link>
     <!--end datatable-->
     <script src="js/jquery.min.js"></script>
 
@@ -279,7 +279,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="sidebar-menu">
             <header class="logo">
                 <a href="" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
-                <a href="index.html"> <span id="logo"> <h1>Augment</h1></span>
+                <a href="index.html"> <span id="logo"> <h1>StuInfo</h1></span>
                     <!--<img id="logo" src="" alt="Logo"/>-->
                 </a>
             </header>
@@ -300,9 +300,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul id="menu">
 
                     <li ui-sref-active="active"><a href="" ui-sref="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+<<<<<<< HEAD
                     <li ui-sref-active="active"><a href="" ui-sref="room.list">Room</a></li>
                     <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><span>Room type</span></a></li>
                     <li ui-sref-active="active"><a href="" ui-sref="academicYear.list">Academic year</a></li>
+=======
+                    <li ui-sref-active="active"><a href="" ui-sref="room.list"><i class="fa fa-home"></i><span>Room</span></a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><i class="fa fa-angle-double-right"></i> <span>Room type</span></a></li>
+>>>>>>> b87dfb70d058f17922207d77764fc8295eaa426b
                     <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="student"><i class="fa fa-table"></i> <span> Student</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="" ui-sref="addstudent()"> Add Student</a></li>
@@ -326,7 +331,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li id="menu-academico-boletim"><a href="register.html">Programe List</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" ui-sref="course"><i class="lnr lnr-envelope"></i> <span>Course</span><span class="fa fa-angle-right" style="float: right"></span></a>
+                    <li>
+                        <a href="#" ui-sref="coursetype">
+                            <i class="lnr lnr-envelope">
+                        </i> <span>Course Type</span><span class="fa fa-angle-right" style="float: right"></span>
+                        </a>
+                        <!--<ul>
+							<li><a href="inbox.html"><i class="fa fa-inbox"></i> Inbox</a></li>
+							<li><a href="compose.html"><i class="fa fa-pencil-square-o"></i> Compose Mail</a></li>
+							<li><a href="editor.html"><span class="lnr lnr-highlight"></span> Editors Page</a></li>
+
+						</ul>-->
+                    </li>
+                    <li>
+                        <a href="#" ui-sref="course">
+                            <i class="lnr lnr-envelope">
+                        </i> <span>Course</span><span class="fa fa-angle-right" style="float: right"></span>
+                        </a>
                         <!--<ul>
 							<li><a href="inbox.html"><i class="fa fa-inbox"></i> Inbox</a></li>
 							<li><a href="compose.html"><i class="fa fa-pencil-square-o"></i> Compose Mail</a></li>
