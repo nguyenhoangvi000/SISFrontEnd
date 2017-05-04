@@ -5,20 +5,12 @@
         .module('studentinfo')
         .service('objectService', ['appService', '$resource', function(appService, $resource) {
             this.Intake = $resource(appService.baseUrl + '/intakes/:id', { id: '@id' }, {
-                update: {
-                    method: 'PUT'
-                },
-                remove: {
-                    method: 'DETELE'
-                },
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
             });
             this.Programe = $resource(appService.baseUrl + '/programes/:id', { id: '@id' }, {
-                update: {
-                    method: 'PUT'
-                },
-                remove: {
-                    method: 'DETELE'
-                },
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
             });
             this.Student = $resource(appService.baseUrl + '/students/:id', { id: '@id' }, {
                 update: { method: 'PUT' },
@@ -28,6 +20,14 @@
                 update: { method: 'PUT' },
                 remove: { method: 'DELETE' },
             })
+            this.CourseType = $resource(appService.baseUrl + '/course-types/:id', { id: '@id' }, {
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
+            });
+            this.Course = $resource(appService.baseUrl + '/courses/:id', { id: '@id' }, {
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
+            });
         }]);
 
 }());

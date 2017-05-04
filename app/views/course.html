@@ -1,11 +1,26 @@
-<h1>This is course Page!!!</h1>
-<button ui-sref="addcourse" class="btn btn-default">Add new course</button>
-<button ui-sref="addcoursetype" class="btn btn-default">Add new course type</button>
-<hr>
-<table id="courseList">
-    <thead>
-        <tr>
-            <td></td>
-        </tr>
-    </thead>
-</table>
+<div>
+    <div class="row">
+        <button ng-click="createCourse()" type="button" class="btn btn-primary btn-sm">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+    </div>
+
+    <div>
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Catalog</th>
+                    <th>Note</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="course in courses">
+                    <td>{{ course.id }}</td>
+                    <td>{{ course.codeName}}</td>
+                    <td>{{ course.codeNumber}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
