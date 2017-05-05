@@ -75,10 +75,10 @@
                 ];
 
                 function actionsHtml(data, type, full, meta) {
-                    return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updateIntake('${full.id}')">
+                    return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updateCourse('${full.id}')">
                          <i class="fa fa-edit"></i>
                         </button>&nbsp;
-                        <button class="btn btn-danger btn-xs" ng-click="deleteIntake('${full.id}')">
+                        <button class="btn btn-danger btn-xs" ng-click="deleteCourse('${full.id}')">
                           <i class="fa fa-trash-o"></i>
                         </button> </div>`;
                 }
@@ -178,7 +178,7 @@
                         }
                     });
                 }
-                $scope.updateIntake = function(courseId) {
+                $scope.updateCourse = function(courseId) {
                     $scope.courseTypes = {
                         selectedOption: null,
                         availableOptions: [
@@ -279,7 +279,7 @@
                     }); // get() trả về một word
 
                 }
-                $scope.deleteIntake = function(intakeId) {
+                $scope.deleteCourse = function(courseId) {
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
@@ -292,11 +292,8 @@
                                 btnClass: 'btn-danger',
                                 action: function(scope, button) {
                                     console.log('handler create here');
-                                    objectService.Intake.delete({ id: intakeId }, function() {
-                                        objectService.Intake.query(function(data) {
-                                            // something
-                                            scope.posts = data;
-                                        });
+                                    objectService.Course.delete({ id: courseId }, function() {
+                                        load();
                                     });
                                     return true; // not prevent close; / close box
                                 }

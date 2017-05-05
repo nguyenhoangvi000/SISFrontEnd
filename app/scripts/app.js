@@ -67,7 +67,6 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/controllers/courseCtrl.js',
-                                'scripts/services/FactoryService/objectService.js',
                             ]
                         })
                     }
@@ -99,7 +98,6 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/services/FactoryService/courseTypeService.js',
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/coursetypeCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
@@ -117,7 +115,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/studentCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
@@ -134,7 +131,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/addstudentCtrl.js',
                             ]
                         })
@@ -153,7 +149,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/addstudentCtrl.js',
                             ]
                         })
@@ -188,17 +183,16 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/programeCtrl.js',
                             ]
                         })
                     }
                 }
             })
-            .state('addprograme', {
-                templateUrl: 'views/addprograme.html',
-                url: '/programe/add',
-                controller: 'addprogrameCtrl',
+            .state('addMajor', {
+                templateUrl: 'views/addMajor.html',
+                url: '/Major/add',
+                controller: 'addmajorCtrl',
                 translations: 'appService',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
@@ -206,7 +200,7 @@ angular
                             name: 'studentinfo',
                             files: [
 
-                                'scripts/controllers/addprogrameCtrl.js',
+                                'scripts/controllers/addmajorCtrl.js',
                             ]
                         })
                     },
@@ -222,7 +216,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/intakeCtrl.js',
                             ]
                         })
@@ -349,6 +342,21 @@ angular
                                 'scripts/controllers/roomCtrl.js',
                                 'scripts/services/FactoryService/roomFactory.js',
                                 'scripts/services/FactoryService/roomTypeFactory.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('major', {
+                templateUrl: 'views/major.html',
+                url: '/major',
+                controller: 'majorCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/majorCtrl.js',
                             ]
                         })
                     }
