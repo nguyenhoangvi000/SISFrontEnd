@@ -31,9 +31,10 @@
             load();
 
             function load() {
-                objectService.CourseType.query(function(data) {
-                    return data;
-                }); //query() trả về một mảng words
+                objectService.Course.query(function(data) {
+                    // something
+                    $scope.courses = data;
+                });
             }
 
             function loadCourseType() {
@@ -57,7 +58,20 @@
                     DTColumnDefBuilder.newColumnDef(0),
                     DTColumnDefBuilder.newColumnDef(1),
                     DTColumnDefBuilder.newColumnDef(2),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('action'),
+                    DTColumnDefBuilder.newColumnDef(3),
+                    DTColumnDefBuilder.newColumnDef(4),
+                    DTColumnDefBuilder.newColumnDef(5),
+                    DTColumnDefBuilder.newColumnDef(6).withTitle('action'),
+                ];
+                $scope.dtColumns = [
+                    DTColumnBuilder.newColumn('id').withTitle('No'),
+                    DTColumnBuilder.newColumn('codeName').withTitle('codeName'),
+                    DTColumnBuilder.newColumn('codeNumber').withTitle('codeNumber'),
+                    DTColumnBuilder.newColumn('cost').withTitle('cost'),
+                    DTColumnBuilder.newColumn('credits').withTitle('credits'),
+                    DTColumnBuilder.newColumn('name').withTitle('name'),
+                    DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
+                    .renderWith(actionsHtml),
                 ];
 
                 function actionsHtml(data, type, full, meta) {
@@ -87,8 +101,8 @@
                                 <label for="inputCode" class="col-sm-2 control-label">CodeName:</label>
                                 <div class="col-sm-10">
                                     <input ng-model="course.codeName" type="text" name="codeName" required id="codeName" class="form-control" value="" title="">
-                                     <div ng-show="courseFromCreate.code.$touched">
-                                    <div style="color: red" ng-show="courseFromCreate.code.$error.required">This field can not be null.</div>
+                                     <div ng-show="courseFromCreate.codeName.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.codeName.$error.required">This field can not be null.</div>
                                     </div>
                                 </div>
                             </div>
@@ -96,8 +110,8 @@
                                 <label for="codeNumber" class="col-sm-2 control-label">CodeNumber:</label>
                                 <div class="col-sm-10">
                                     <input ng-model="course.codeNumber" type="text" name="codeNumber"required id="codeNumber" class="form-control" value=""  title="">
-                                    <div ng-show="courseFromCreate.name.$touched">
-                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    <div ng-show="courseFromCreate.codeNumber.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.codeNumber.$error.required">This field can not be null.</div>
                                     </div>
                                 </div>
                             </div>
@@ -145,10 +159,9 @@
                                 text: 'Create',
                                 btnClass: 'btn-success',
                                 action: function(scope, button) {
-                                    $scope.course.CourseType = $scope.courseTypes.selectedOption;
+                                    $scope.course.courseType = $scope.courseTypes.selectedOption;
                                     $scope.course.$save(function() {
                                         objectService.Course.query(function(data) {
-                                            // something
                                             scope.courses = data;
                                         });
                                     });
@@ -165,23 +178,76 @@
                         }
                     });
                 }
-                $scope.updateIntake = function(intakeId) {
-                    $scope.intake = objectService.Intake.get({ id: intakeId }, function(data) {
+                $scope.updateIntake = function(courseId) {
+                    $scope.courseTypes = {
+                        selectedOption: null,
+                        availableOptions: [
+
+                        ]
+                    };
+                    loadCourseType();
+                    $scope.course = objectService.Course.get({ id: courseId }, function(data) {
+                        $scope.courseTypes.selectedOption = data.courseType;
+                        console.log(data);
                         $ngConfirm({
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
-                            title: 'Update Intake!',
-                            content: `<form action="" class="form-horizontal" role="form">
+                            columnClass: 'col-md-6 col-md-offset-3',
+                            title: 'Update Course!',
+                            content: `<form name="courseFromCreate" novalidate class="form-horizontal" role="form">
                             <div class="form-group">
-                                <label for="inputCode" class="col-sm-2 control-label">Code:</label>
+                                <label for="inputCode" class="col-sm-2 control-label">CodeName:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="intake.code" type="text" name="" id="inputCode" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="course.codeName" type="text" name="codeName" required id="codeName" class="form-control" value="" title="">
+                                     <div ng-show="courseFromCreate.codeName.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.codeName.$error.required">This field can not be null.</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name:</label>
+                                <label for="codeNumber" class="col-sm-2 control-label">CodeNumber:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="intake.name" type="text" name="" id="inputName" class="form-control" value="" required="required" pattern="" title="">
+                                    <input ng-model="course.codeNumber" type="text" name="codeNumber"required id="codeNumber" class="form-control" value=""  title="">
+                                    <div ng-show="courseFromCreate.codeNumber.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.codeNumber.$error.required">This field can not be null.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="course.name" type="text" name="name"required id="name" class="form-control" value=""  title="">
+                                    <div ng-show="courseFromCreate.name.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="credits" class="col-sm-2 control-label">Credits:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="course.credits" type="text" name="credits"required id="credits" class="form-control" value=""  title="">
+                                    <div ng-show="courseFromCreate.name.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="course" class="col-sm-2 control-label">Cost:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="course.cost" type="text" name="cost"required id="cost" class="form-control" value=""  title="">
+                                    <div ng-show="courseFromCreate.cost.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.cost.$error.required">This field can not be null.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="courseType" class="col-sm-2 control-label">CourseType:</label>
+                                <div class="col-sm-10">
+                                     <select name="courseType" id="courseType" ng-options="option.name for option in courseTypes.availableOptions track by option.id" ng-model="courseTypes.selectedOption" required="" class="form-control">
+                            </select>
+                                    <div ng-show="courseFromCreate.name.$touched">
+                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    </div>
                                 </div>
                             </div>
                         </form>`,
@@ -192,10 +258,10 @@
                                     btnClass: 'btn-success',
                                     action: function(scope, button) {
                                         console.log('handler create here');
-                                        scope.intake.$update(function() {
-                                            objectService.Intake.query(function(data) {
-                                                // something
-                                                scope.posts = data;
+                                        $scope.course.courseType = $scope.courseTypes.selectedOption;
+                                        scope.course.$update(function() {
+                                            objectService.Course.query(function(data) {
+                                                load();
                                             });
                                         })
                                         return true; // not prevent close; / close box
@@ -245,13 +311,6 @@
                         }
                     });
                 }
-                $scope.dtColumns = [
-                    DTColumnBuilder.newColumn('id').withTitle('No'),
-                    DTColumnBuilder.newColumn('codeName').withTitle('codeName'),
-                    DTColumnBuilder.newColumn('codeNumber').withTitle('codeNumber'),
-                    DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
-                    .renderWith(actionsHtml),
-                ];
 
             }
         }])

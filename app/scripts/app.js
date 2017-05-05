@@ -247,6 +247,48 @@ angular
                 }
             })
 
+
+        .state('academicYear', { // Main room state
+                templateUrl: 'views/academic-year/academic-year.html',
+                url: '/academic-year',
+                controller: 'academicYearCtrl',
+                abstract: true,
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/academicYearCtrl.js',
+                                'scripts/services/FactoryService/academicYearService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('academicYear.add', { // Add state
+                templateUrl: 'views/academic-year/academic-year-form.html',
+                url: '/add',
+                controller: 'addAcademicYearCtrl'
+            })
+            .state('academicYear.edit', { // Edit state
+                templateUrl: 'views/academic-year/academic-year-form.html',
+                url: '/edit/:id',
+                controller: 'editAcademicYearCtrl'
+            })
+            .state('academicYear.list', { // View all state
+                templateUrl: 'views/academic-year/academic-year-list.html',
+                url: '/list',
+                controller: 'listAcademicYearCtrl'
+            })
+            .state('academicYear.detail', { // Detail state
+                templateUrl: 'views/academic-year/academic-year-detail.html',
+                url: '/detail/{id}',
+                controller: 'detailAcademicYearCtrl'
+            })
+            /**
+             * End of Room Type routing
+             */
+
         /**
          *  Room Type Routing
          */
