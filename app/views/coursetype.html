@@ -14,7 +14,7 @@
                     <h4 class="modal-title">Add new Course Type</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" ng-model="coursetype.name" class="form-control" name="coursetypename" id="coursetypename" ng-trim="true" ng-pattern="/^[A-Z a-z0-9]*$/" required>
+                    <input type="text" ng-model="coursetype.name" class="form-control" name="coursetypename" id="coursetypename" ng-trim="true" ng-pattern="/^[A-Z a-z0-9]*$/" required />
                     <p class="error" style="color:red"></p>
 
                 </div>
@@ -22,19 +22,10 @@
                     <button type="submit" class="btn btn-default">Create</button>
                 </div>
             </div>
-
         </div>
-<<<<<<< Updated upstream
-
-        <div>
-
-</form>
-
-=======
     </div>
 </form>
 
->>>>>>> Stashed changes
 <!--update form-->
 <form class="form-horizontal" ng-submit="Updatecoursetype(coursetype.name)" name="updatecourstypeform">
     <div class="modal fade" id="updateCourseTypeModal" role="dialog">
