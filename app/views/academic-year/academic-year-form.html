@@ -1,0 +1,11 @@
+<form novalidate ng-model="form" name="academicYear" ng-submit="submit(form)">
+    <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" class="form-control" name="year" id="year" placeholder="Year" ng-model="form.year" ng-trim="true" ng-min="1970" required/>
+        <div ng-show="academicYear.year.$touched && academicYear.year.$error.required" class="alert alert-danger">Year is required</div>
+        <div ng-show="academicYear.year.$touched && academicYear.year.$error.min" class="alert alert-danger">Year must be bigger than 1970</div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" ng-disabled="isProcess">{{buttonName || 'Submit'}}</button>
+    </div>
+</form>

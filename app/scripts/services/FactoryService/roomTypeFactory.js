@@ -1,8 +1,7 @@
 (function() {
     angular.module('studentinfo')
-        .constant('serverUri', 'http://localhost:8080/stuinfo')
-        .factory('roomTypeFactory', function($resource, serverUri) {
-            return $resource(serverUri + '/room-types/:id', { id: '@id' }, {
+        .factory('roomTypeFactory', function($resource, appService) {
+            return $resource(appService.baseUrl + '/room-types/:id', {id: '@id'}, {
                 update: {
                     method: 'PUT'
                 }

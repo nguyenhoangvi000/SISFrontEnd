@@ -69,34 +69,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             this.initEvents();
                                         }
                                         DropDown.prototype = {
-                                            initEvents: function() {
+                                            initEvents: function () {
                                                 var obj = this;
 
-                                                obj.dd.on('click', function(event) {
+                                                obj.dd.on('click', function (event) {
                                                     $(this).toggleClass('active');
                                                     return false;
                                                 });
 
-                                                obj.opts.on('click', function() {
+                                                obj.opts.on('click', function () {
                                                     var opt = $(this);
                                                     obj.val = opt.text();
                                                     obj.index = opt.index();
                                                     obj.placeholder.text(obj.val);
                                                 });
                                             },
-                                            getValue: function() {
+                                            getValue: function () {
                                                 return this.val;
                                             },
-                                            getIndex: function() {
+                                            getIndex: function () {
                                                 return this.index;
                                             }
                                         }
 
-                                        $(function() {
+                                        $(function () {
 
                                             var dd = new DropDown($('#dd'));
 
-                                            $(document).click(function() {
+                                            $(document).click(function () {
                                                 // all dropdowns
                                                 $('.wrapper-dropdown-3').removeClass('active');
                                             });
@@ -300,8 +300,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul id="menu">
 
                     <li ui-sref-active="active"><a href="" ui-sref="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-                    <li ui-sref-active="active"><a href="" ui-sref="room.list"><i class="fa fa-home"></i><span>Room</span></a></li>
-                    <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><i class="fa fa-angle-double-right"></i> <span>Room type</span></a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="room.list">Room</a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><span>Room type</span></a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="academicYear.list">Academic year</a></li>
                     <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="student"><i class="fa fa-table"></i> <span> Student</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="" ui-sref="addstudent()"> Add Student</a></li>
@@ -325,7 +326,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li id="menu-academico-boletim"><a href="register.html">Programe List</a></li>
                         </ul>
                     </li>
-                    <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="major"><i class="lnr lnr-apartment"></i> <span>Major</span> <span class="fa fa-angle-right" style="float: right"></span></a>                    
+                    <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="major"><i class="lnr lnr-apartment"></i> <span>Major</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                     </li>
                     <li>
                         <a href="#" ui-sref="coursetype">
@@ -381,25 +382,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
     <script>
-        var toggle = true;
+                                        var toggle = true;
 
-        $(".sidebar-icon").click(function() {
-            if (toggle) {
-                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-                $("#menu span").css({
-                    "position": "absolute"
-                });
-            } else {
-                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-                setTimeout(function() {
-                    $("#menu span").css({
-                        "position": "relative"
-                    });
-                }, 400);
-            }
+                                        $(".sidebar-icon").click(function () {
+                                            if (toggle) {
+                                                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                                                $("#menu span").css({
+                                                    "position": "absolute"
+                                                });
+                                            } else {
+                                                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                                                setTimeout(function () {
+                                                    $("#menu span").css({
+                                                        "position": "relative"
+                                                    });
+                                                }, 400);
+                                            }
 
-            toggle = !toggle;
-        });
+                                            toggle = !toggle;
+                                        });
     </script>
 
 
