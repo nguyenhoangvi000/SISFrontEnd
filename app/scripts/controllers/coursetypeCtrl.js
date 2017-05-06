@@ -3,24 +3,60 @@
 
     angular
         .module('studentinfo')
-        //   .service('courseTypeService', function() { /* ... */ })
-        .controller('coursetypeCtrl', function($scope, $http, appService) {
+        // .service('objectService', 'appService', function() { /* ... */ })
+        .controller('coursetypeCtrl', function($scope, $http, appService, objectService) {
             var UrlcourseType = appService.baseUrl + '/course-types';
+            console.log("load course Type");
+            loadCourseType();
+            //Update CourseType
+            $scope.showFormUpdate = function(coursetypeID) {
 
-            $scope.addcoursetype = function(addcourstypeform) {
+                    $scope.coursetype = objectService.CourseType.get({ id: coursetypeID }, function(data) {});
+                    //btn click update
+                    $scope.Updatecoursetype = function(coursetypeNameUpdate) {
+                            console.log("click update id : " + coursetypeID);
+                            console.log("Name : " + coursetypeNameUpdate);
+                            //  var id = $scope.coursetype.id;
 
-                    console.log("name course type : " + $scope.coursetypename);
-                    console.log("submit form ");
-                    $http.post(UrlcourseType, {
-                        name: $scope.coursetypename
-                    }).then(function(response) {
-                        console.log("data" + response);
-                    }, function(err) {
-                        console.log("error roi" + err);
+                            $scope.coursetype.$update();
+                            //  objectService.CourseType.update({ id: id }, $scope.coursetype);
+
+                        } //end click update
+                } //end showformUpdate
+
+
+
+            //Delete Course Type
+            $scope.deleteCoursetype = function(coursetypeID) {
+                    console.log("course type  id" + coursetypeID);
+                    //delete post with $resource
+                    objectService.CourseType.delete({ id: coursetypeID }, function() {
+                        objectService.CourseType.query(function(data) {
+                            $scope.coursetypes = data;
+                        });
                     });
 
                 }
-                //end function add courseType
-        }) // end .controller
+                //Load CourseType
+            function loadCourseType() {
+                $scope.coursetypes = objectService.CourseType.query(function(data) {
+                    // data.forEach(function(element) {
+                    //     console.log("course type:" + element.name);
+                    // }, this);
+                });
+            }
+
+
+            $scope.coursetype = new objectService.CourseType();
+            $scope.addcoursetype = function() {
+
+                $scope.coursetype.$save();
+                objectService.CourseType.query(function(data) {
+                    $scope.coursetypes = data;
+                });
+            }
+
+
+        }); // end .controller
 
 }());

@@ -28,6 +28,10 @@
                 update: { method: 'PUT' },
                 remove: { method: 'DELETE' },
             })
+            this.CourseType = $resource(appService.baseUrl + '/course-types/:id', { id: '@id' }, {
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
+            })
         }]);
 
 }());
