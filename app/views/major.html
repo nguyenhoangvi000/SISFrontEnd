@@ -1,0 +1,29 @@
+<div>
+    <div class="row">
+
+        <button ng-click="createMajor()" type="button" class="btn btn-primary btn-sm">Add <i class="fa fa-plus-circle"></i></button>
+
+    </div>
+    <div>
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Spec Code</th>
+                    <th>Spec Name</th>
+  
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="m in majors">
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.name}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>

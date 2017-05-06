@@ -2,8 +2,8 @@
     'use strict';
     angular
         .module('studentinfo')
-        .controller('catalogCtrl', ['$scope', '$ngConfirm', 'catalogService', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
-            function($scope, $ngConfirm, catalogService, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+        .controller('catalogCtrl', ['$scope', '$ngConfirm', 'objectService', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder',
+            function($scope, $ngConfirm, objectService, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
                 init();
 
                 function init() {
@@ -30,57 +30,6 @@
 
                 // function
 
-                $scope.updateCatalog = function(catalogId) {
-                    console.log(catalogId);
-                    $scope.catalog = catalogService.get({ id: catalogId }, function(data) {});
-                    $ngConfirm({
-                        icon: 'fa fa-pencil-square',
-                        theme: 'material',
-                        columnClass: 'col-md-6 col-md-offset-3',
-                        animation: 'rotateYR',
-                        closeAnimation: 'rotateYR (reverse)',
-                        title: 'Update Catalog!',
-                        content: `<form action="" class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="catalogname" class="col-sm-2 control-label">Catalog Name</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="catalog.name" type="text" name="" id="catalogname" class="form-control" value="" title="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="catalogcode" class="col-sm-2 control-label">Catalog Code</label>
-                                <div class="col-sm-10">
-                                    <input ng-model="catalog.note" type="text" name="" id="catalogcode" class="form-control" value="" title="">
-                                </div>
-                            </div>
-                        </form>`,
-                        scope: $scope,
-                        buttons: {
-                            sayBoo: {
-                                text: 'Update',
-                                btnClass: 'btn-success',
-                                action: function(scope, button) {
-                                    console.log('handler create here');
-                                    console.log(scope.catalog);
-                                    scope.catalog.$update(function() {
-                                        catalogService.query(function(data) {
-                                            // something
-                                            scope.catalogs = data;
-                                        });
-                                    });
-                                    return true; // not prevent close; / close box
-                                }
-                            },
-                            close: {
-                                text: 'Cancel',
-                                action: function(scope, button) {
-                                    // closes the modal
-
-                                }
-                            }
-                        }
-                    });
-                }
 
 
                 function getAllPosts() {
@@ -109,13 +58,13 @@
                         </button> </div>`;
                     }
 
-                    catalogService.query(function(data) {
-                        // something
-                        $scope.catalogs = data;
-                        $scope.catalog = {};
-                        console.log();
-                    });
+                    load();
 
+                    function load() {
+                        objectService.Catalog.query(function(data) {
+                            $scope.catalogs = data;
+                        });
+                    }
                     $scope.createCatalog = function() {
                         $ngConfirm({
                             icon: 'fa fa-plus-circle',
@@ -148,13 +97,56 @@
                                         console.log('handler create here');
                                         // console.log(scope.catalog);
                                         console.log(scope.catalog);
-                                        catalogService.save(scope.catalog, function() {
-                                            catalogService.query(function(data) {
-                                                // something
-                                                scope.catalogs = data;
-                                                scope.catalog = {};
-                                                console.log();
-                                            });
+                                        objectService.Catalog.save(scope.catalog, function() {
+                                            load();
+                                        });
+                                        return true; // not prevent close; / close box
+                                    }
+                                },
+                                close: {
+                                    text: 'Cancel',
+                                    action: function(scope, button) {
+                                        // closes the modal
+
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    $scope.updateCatalog = function(catalogId) {
+                        console.log(catalogId);
+                        $scope.catalog = objectService.Catalog.get({ id: catalogId }, function(data) {});
+                        $ngConfirm({
+                            icon: 'fa fa-pencil-square',
+                            theme: 'material',
+                            columnClass: 'col-md-6 col-md-offset-3',
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotateYR (reverse)',
+                            title: 'Update Catalog!',
+                            content: `<form action="" class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="catalogname" class="col-sm-2 control-label">Catalog Name</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="catalog.name" type="text" name="" id="catalogname" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="catalogcode" class="col-sm-2 control-label">Catalog Code</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="catalog.note" type="text" name="" id="catalogcode" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                        </form>`,
+                            scope: $scope,
+                            buttons: {
+                                sayBoo: {
+                                    text: 'Update',
+                                    btnClass: 'btn-success',
+                                    action: function(scope, button) {
+                                        console.log('handler create here');
+                                        console.log(scope.catalog);
+                                        scope.catalog.$update(function() {
+                                            load();
                                         });
                                         return true; // not prevent close; / close box
                                     }
@@ -184,10 +176,8 @@
                                     btnClass: 'btn-danger',
                                     action: function(scope, button) {
                                         console.log(catalogId);
-                                        catalogService.delete({ id: catalogId }, function() {
-                                            catalogService.query(function(data) {
-                                                scope.catalogs = data;
-                                            });
+                                        objectService.Catalog.delete({ id: catalogId }, function() {
+                                            load();
                                         });
                                         return true; // not prevent close; / close box
                                     }

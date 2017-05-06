@@ -1,45 +1,26 @@
-<!--<ol class="breadcrumb">
-        <li class="breadcrumb-item"><a ui-self="course" href="#/course">Course</a></li>
-        <li class="breadcrumb-item active">courseType</li>
-    </ol>-->
+<div>
+    <div class="row">
+        <button ng-click="createCatalog()" type="button" class="btn btn-primary btn-sm">Add <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+    </div>
 
-<div class="col-sm-offset-3">
-    <h1>add new courseType </h1>
+    <div>
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Catalog</th>
+                    <th>Note</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="catalog in catalogs">
+                    <td>{{ catalog.id }}</td>
+                    <td>{{ catalog.name}}</td>
+                    <td>{{ catalog.note}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<form class="form-horizontal" ng-submit="addcoursetype(addcourstypeform)" name="addcourstypeform">
-
-    <!--course name-->
-    <div class="form-group">
-        <label class="control-label col-sm-3" for="coursetypename">CourseType Name</label>
-        <div class="col-sm-5">
-            <input type="text" ng-model="coursetypename" class="form-control" name="coursetypename" id="coursetypename" ng-pattern="/^[A-Za-z0-9]*$/" ng-trim="true" required>
-        </div>
-        <div id="" style="color:red">
-            <div>
-                <span>{{errName}}</span>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-8">
-            <button type="submit" class="btn btn-default">Create</button>
-
-        </div>
-    </div>
-</form>
-
-<h1>list course type</h1>
-<table datatable="ng " class=" table-mc-light-blue table-striped table-bordered ">
-    <thead>
-        <tr class="success ">
-            <th>Course Type Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="type in lists ">
-            <td>{{type.name}}</td>
-        </tr>
-    </tbody>
-</table>
