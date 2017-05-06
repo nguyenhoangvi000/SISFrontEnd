@@ -15,14 +15,10 @@
                             console.log("click update id : " + coursetypeID);
                             console.log("Name : " + coursetypeNameUpdate);
                             //  var id = $scope.coursetype.id;
-
                             $scope.coursetype.$update();
                             //  objectService.CourseType.update({ id: id }, $scope.coursetype);
-
                         } //end click update
                 } //end showformUpdate
-
-
 
             //Delete Course Type
             $scope.deleteCoursetype = function(coursetypeID) {
@@ -32,8 +28,9 @@
                         objectService.CourseType.query(function(data) {
                             $scope.coursetypes = data;
                         });
-                    })
-                } //end deleteCoure type
+                    });
+
+                }
                 //Load CourseType
             function loadCourseType() {
                 $scope.coursetypes = objectService.CourseType.query(function(data) {
@@ -50,6 +47,5 @@
                     $scope.coursetypes = data;
                 });
             }
-
         }); // end .controller
-});
+}); // end .controller

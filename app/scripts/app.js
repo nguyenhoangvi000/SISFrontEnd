@@ -241,6 +241,7 @@ angular
                 }
             })
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 
@@ -286,6 +287,8 @@ angular
              */
 
 >>>>>>> 1c0d080377624f980ffbee76b5e9faf4c0fed71e
+=======
+>>>>>>> Stashed changes
         /**
          *  Room Type Routing
          */

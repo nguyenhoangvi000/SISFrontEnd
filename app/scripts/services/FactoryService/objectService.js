@@ -23,6 +23,7 @@
             this.CourseType = $resource(appService.baseUrl + '/course-types/:id', { id: '@id' }, {
                 update: { method: 'PUT' },
                 remove: { method: 'DELETE' },
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             })
 =======
@@ -36,6 +37,9 @@
                 remove: { method: 'DELETE' },
             });
 >>>>>>> 1c0d080377624f980ffbee76b5e9faf4c0fed71e
+=======
+            })
+>>>>>>> Stashed changes
         }]);
 
 }());
