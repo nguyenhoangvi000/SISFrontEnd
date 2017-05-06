@@ -116,7 +116,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/studentCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
@@ -133,7 +132,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/addstudentCtrl.js',
                             ]
                         })
@@ -152,7 +150,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/addstudentCtrl.js',
                             ]
                         })
@@ -187,17 +184,16 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/programeCtrl.js',
                             ]
                         })
                     }
                 }
             })
-            .state('addprograme', {
-                templateUrl: 'views/addprograme.html',
-                url: '/programe/add',
-                controller: 'addprogrameCtrl',
+            .state('addMajor', {
+                templateUrl: 'views/addMajor.html',
+                url: '/Major/add',
+                controller: 'addmajorCtrl',
                 translations: 'appService',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
@@ -205,7 +201,7 @@ angular
                             name: 'studentinfo',
                             files: [
 
-                                'scripts/controllers/addprogrameCtrl.js',
+                                'scripts/controllers/addmajorCtrl.js',
                             ]
                         })
                     },
@@ -221,7 +217,6 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/controllers/intakeCtrl.js',
                             ]
                         })
@@ -246,6 +241,51 @@ angular
                 }
             })
 
+<<<<<<< HEAD
+=======
+
+        .state('academicYear', { // Main room state
+                templateUrl: 'views/academic-year/academic-year.html',
+                url: '/academic-year',
+                controller: 'academicYearCtrl',
+                abstract: true,
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/academicYearCtrl.js',
+                                'scripts/services/FactoryService/academicYearService.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('academicYear.add', { // Add state
+                templateUrl: 'views/academic-year/academic-year-form.html',
+                url: '/add',
+                controller: 'addAcademicYearCtrl'
+            })
+            .state('academicYear.edit', { // Edit state
+                templateUrl: 'views/academic-year/academic-year-form.html',
+                url: '/edit/:id',
+                controller: 'editAcademicYearCtrl'
+            })
+            .state('academicYear.list', { // View all state
+                templateUrl: 'views/academic-year/academic-year-list.html',
+                url: '/list',
+                controller: 'listAcademicYearCtrl'
+            })
+            .state('academicYear.detail', { // Detail state
+                templateUrl: 'views/academic-year/academic-year-detail.html',
+                url: '/detail/{id}',
+                controller: 'detailAcademicYearCtrl'
+            })
+            /**
+             * End of Room Type routing
+             */
+
+>>>>>>> 1c0d080377624f980ffbee76b5e9faf4c0fed71e
         /**
          *  Room Type Routing
          */
@@ -306,6 +346,21 @@ angular
                                 'scripts/controllers/roomCtrl.js',
                                 'scripts/services/FactoryService/roomFactory.js',
                                 'scripts/services/FactoryService/roomTypeFactory.js'
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('major', {
+                templateUrl: 'views/major.html',
+                url: '/major',
+                controller: 'majorCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/majorCtrl.js',
                             ]
                         })
                     }

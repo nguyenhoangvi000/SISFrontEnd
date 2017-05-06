@@ -3,14 +3,12 @@
 
     angular
         .module('studentinfo')
-        // .service('objectService', 'appService', function() { /* ... */ })
         .controller('coursetypeCtrl', function($scope, $http, appService, objectService) {
             var UrlcourseType = appService.baseUrl + '/course-types';
             console.log("load course Type");
             loadCourseType();
             //Update CourseType
             $scope.showFormUpdate = function(coursetypeID) {
-
                     $scope.coursetype = objectService.CourseType.get({ id: coursetypeID }, function(data) {});
                     //btn click update
                     $scope.Updatecoursetype = function(coursetypeNameUpdate) {
@@ -34,9 +32,8 @@
                         objectService.CourseType.query(function(data) {
                             $scope.coursetypes = data;
                         });
-                    });
-
-                }
+                    })
+                } //end deleteCoure type
                 //Load CourseType
             function loadCourseType() {
                 $scope.coursetypes = objectService.CourseType.query(function(data) {
@@ -45,8 +42,6 @@
                     // }, this);
                 });
             }
-
-
             $scope.coursetype = new objectService.CourseType();
             $scope.addcoursetype = function() {
 
@@ -56,7 +51,5 @@
                 });
             }
 
-
         }); // end .controller
-
-}());
+});

@@ -65,6 +65,7 @@
                 $scope.createIntake = function() {
                     $scope.intake = new objectService.Intake();
                     $ngConfirm({
+                        useBootstrap: true,
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
                         title: 'Create Intake!',
@@ -101,7 +102,7 @@
                                             scope.posts = data;
                                         });
                                     });
-                                    return true; // not prevent close; / close box
+                                    return false; // not prevent close; / close box
                                 }
                             },
                             close: {

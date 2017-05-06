@@ -5,7 +5,7 @@
     <base href="/">
     <title>Student Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="keywords" content="Augment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 
@@ -300,14 +300,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul id="menu">
 
                     <li ui-sref-active="active"><a href="" ui-sref="dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
-                    <li ui-sref-active="active"><a href="" ui-sref="room.list"><i class="fa fa-home"></i><span>Room</span></a></li>
-                    <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><i class="fa fa-angle-double-right"></i> <span>Room type</span></a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="room.list">Room</a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="roomType.list"><span>Room type</span></a></li>
+                    <li ui-sref-active="active"><a href="" ui-sref="academicYear.list">Academic year</a></li>
                     <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="student"><i class="fa fa-table"></i> <span> Student</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                         <ul id="menu-academico-sub">
                             <li id="menu-academico-avaliacoes"><a href="" ui-sref="addstudent()"> Add Student</a></li>
                             <li id="menu-academico-boletim"><a href="widget.html">Student List</a></li>
                             <li id="menu-academico-avaliacoes"><a href="calender.html">More</a></li>
-
                         </ul>
                     </li>
                     <li ui-sref-active="active" id="menu-academico"><a href="#" ui-sref="catalog"><i class="fa fa-file-text-o"></i> <span>Catalog</span> <span class="fa fa-angle-right" style="float: right"></span></a>
@@ -324,6 +324,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li id="menu-academico-avaliacoes"><a href="" ui-sref="addprograme()">Add Programe</a></li>
                             <li id="menu-academico-boletim"><a href="register.html">Programe List</a></li>
                         </ul>
+                    </li>
+                    <li ui-sref-active="active" id="menu-academico"><a href="" ui-sref="major"><i class="lnr lnr-apartment"></i> <span>Major</span> <span class="fa fa-angle-right" style="float: right"></span></a>
                     </li>
                     <li>
                         <a href="#" ui-sref="coursetype">
@@ -425,6 +427,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/services/appService.js"></script>
+    <script src="scripts/services/FactoryService/objectService.js"></script>
     <script src="js/sb-admin-2.js"></script>
     <script src='js/jquery.dataTables.min.js'></script>
     <script src='js/angular-datatables.min.js'></script>

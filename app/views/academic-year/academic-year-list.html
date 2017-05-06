@@ -1,0 +1,25 @@
+<a ui-sref="academicYear.add" class="btn btn-primary">Add</a>
+<br>
+<br>
+<table datatable="ng" class="table table-responsive row-border hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Year</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{$index}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.year}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" ui-sref="academicYear.detail({id: item.id})">View</button>
+                <button class="btn btn-sm btn-primary" ui-sref="academicYear.edit({id: item.id})">Edit</button>
+                <button class="btn btn-sm btn-danger" ng-click="remove(item.id)">Remove</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

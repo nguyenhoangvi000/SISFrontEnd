@@ -63,6 +63,15 @@
                     DTColumnDefBuilder.newColumnDef(4),
                     DTColumnDefBuilder.newColumnDef(5).withTitle('action'),
                 ];
+                $scope.dtColumns = [
+                    DTColumnBuilder.newColumn('id').withTitle('ID'),
+                    DTColumnBuilder.newColumn('specCode').withTitle('Spec Code'),
+                    DTColumnBuilder.newColumn('specName').withTitle('Spec Name'),
+                    DTColumnBuilder.newColumn('rCredit').withTitle('Rcredits'),
+                    DTColumnBuilder.newColumn('eCredit').withTitle('Ecredits'),
+                    DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
+                    .renderWith(actionsHtml),
+                ];
 
                 function actionsHtml(data, type, full, meta) {
                     return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updatePrograme('${full.id}')">
@@ -234,15 +243,7 @@
                             }
                         });
                     }
-                    $scope.dtColumns = [
-                        DTColumnBuilder.newColumn('id').withTitle('ID'),
-                        DTColumnBuilder.newColumn('specCode').withTitle('Spec Code'),
-                        DTColumnBuilder.newColumn('specName').withTitle('Spec Name'),
-                        DTColumnBuilder.newColumn('rCredit').withTitle('Rcredits'),
-                        DTColumnBuilder.newColumn('eCredit').withTitle('Ecredits'),
-                        DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
-                        .renderWith(actionsHtml),
-                    ];
+
                 }
             }
         }]);
