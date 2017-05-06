@@ -28,6 +28,14 @@
                 update: { method: 'PUT' },
                 remove: { method: 'DELETE' },
             })
+             this.Major = $resource(appService.baseUrl + '/majors/:id', { id: '@id' }, {
+                update: {
+                    method: 'PUT'
+                },
+                remove: {
+                    method: 'DETELE'
+                },
+            });
         }]);
 
 }());

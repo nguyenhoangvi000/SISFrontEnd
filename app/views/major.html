@@ -9,14 +9,15 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Action</th>
+                    <th>Spec Code</th>
+                    <th>Spec Name</th>
+  
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="p in majors">
-                    <td>{{ p.id }}</td>
-                    <td>{{ p.name}}</td>
+                <tr ng-repeat="m in majors">
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.name}}</td>
                     <td>#</td>
                 </tr>
             </tbody>

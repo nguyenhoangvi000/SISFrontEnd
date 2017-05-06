@@ -60,7 +60,12 @@
                     DTColumnDefBuilder.newColumnDef(1),
                     DTColumnDefBuilder.newColumnDef(2).withTitle('action'),
                 ];
-
+                $scope.dtColumns = [
+                    DTColumnBuilder.newColumn('id').withTitle('ID'),
+                    DTColumnBuilder.newColumn('name').withTitle('Name'),
+                    DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
+                        .renderWith(actionsHtml),
+                ];
                 function actionsHtml(data, type, full, meta) {
                     return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updateMajor('${full.id}')">
                          <i class="fa fa-edit"></i>
@@ -119,7 +124,7 @@
                     });
                 }
                 $scope.updateMajor = function (MajorId) {
-                    $scope.Major = objectService.Major.get({ id: MajorId }, function (data) {
+                    $scope.major = objectService.Major.get({ id: MajorId }, function (data) {
 
 
                         $ngConfirm({
@@ -133,7 +138,7 @@
                             <div class="form-group">
                                 <label for="name" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="Major.name" type="text" name="" id="name" class="form-control" value="" title="">
+                                    <input ng-model="major.name" type="text" name="" id="name" class="form-control" value="" title="">
                                 </div>
                             </div>
                         </form>`,
@@ -144,10 +149,8 @@
                                     btnClass: 'btn-success',
                                     action: function (scope, button) {
                                         console.log('handler create here');
-                                        console.log(scope.Major);
-
-                                        $scope.Major.$update(function () {
-                                            majorservice.query(function (data) {
+                                        $scope.major.$update(function () {
+                                            objectService.Major.query(function (data) {
                                                 // something
                                                 scope.majors = data;
                                             });
@@ -196,12 +199,7 @@
                             }
                         });
                     }
-                    $scope.dtColumns = [
-                        DTColumnBuilder.newColumn('id').withTitle('ID'),
-                        DTColumnBuilder.newColumn('name').withTitle('Name'),
-                        DTColumnBuilder.newColumn('action').withTitle('Action').notSortable()
-                            .renderWith(actionsHtml),
-                    ];
+
                 }
             }
         }]);

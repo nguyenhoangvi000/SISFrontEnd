@@ -177,22 +177,7 @@ angular
 
                 }
             })
-            .state('Major', {
-                templateUrl: 'views/major.html',
-                url: '/Major',
-                controller: 'majorCtrl',
-                resolve: {
-                    loadMyFile: function ($ocLazyLoad) {
-                        return $ocLazyLoad.load({
-                            name: 'studentinfo',
-                            files: [
-                                'scripts/services/FactoryService/objectService.js',
-                                'scripts/controllers/majorCtrl.js',
-                            ]
-                        })
-                    }
-                }
-            })
+            
             .state('addMajor', {
                 templateUrl: 'views/addMajor.html',
                 url: '/Major/add',
