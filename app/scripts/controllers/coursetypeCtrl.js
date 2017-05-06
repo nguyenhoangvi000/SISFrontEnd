@@ -4,8 +4,10 @@
     angular
         .module('studentinfo')
         .controller('coursetypeCtrl', function($scope, $http, appService, objectService) {
+
             var UrlcourseType = appService.baseUrl + '/course-types';
             console.log("load course Type");
+
             loadCourseType();
             //Update CourseType
             $scope.showFormUpdate = function(coursetypeID) {
@@ -47,5 +49,6 @@
                     $scope.coursetypes = data;
                 });
             }
-        }); // end .controller
-}); // end .controller
+        }) //end controller
+
+}());
