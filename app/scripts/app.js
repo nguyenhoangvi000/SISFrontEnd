@@ -99,6 +99,7 @@ angular
                             files: [
                                 'scripts/services/FactoryService/objectService.js',
                                 'scripts/services/FactoryService/courseTypeService.js',
+                                'js/notify.min.js',
                                 'scripts/controllers/coursetypeCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
