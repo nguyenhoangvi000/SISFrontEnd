@@ -25,7 +25,6 @@
                             }, function() {
                                 $.notify("Update error", "error");
                             });
-
                             //  objectService.CourseType.update({ id: id }, $scope.coursetype);
                         } //end click update
                 } //end showformUpdate
@@ -45,7 +44,7 @@
             }
 
             $scope.closeModal = function() {
-
+                    $scope.coursetype = new objectService.CourseType();
                     // data-dismiss="modal"
                     $(document).ready(function() {
                         console.log("close modal");
@@ -70,10 +69,11 @@
                 // $scope.coursetype = new objectService.CourseType();
                 $scope.coursetype.$save(function() {
                     $scope.coursetype = new objectService.CourseType();
+                    $.notify("Add success", "success");
                     objectService.CourseType.query(function(data) {
                         $scope.coursetypes = data;
                     });
-                    $.notify("Add success", "success");
+
                 }, function() {
                     $scope.coursetype.$promise.catch(function(errorResponse) {
                         console.log(errorResponse);
