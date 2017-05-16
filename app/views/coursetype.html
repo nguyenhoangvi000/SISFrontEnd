@@ -1,6 +1,7 @@
 <!--<ol class="breadcrumb">
         <li class="breadcrumb-item"><a ui-self="course" href="#/course">Course</a></li>
         <li class="breadcrumb-item active">courseType</li>
+        data-dismiss="modal"
     </ol>-->
 <!--form add courseType-->
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addCourseTypeModal">Add <i class="fa fa-plus-circle"></i></button>
@@ -10,10 +11,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <button type="button" class="close danger" data-dismiss="modal" style="color:white;opacity: 1">&times;</button>
+                    <button type="button" class="close danger" id="xbtn" data-dismiss="modal" style="color:white;opacity: 1">&times;</button>
                     <h4 class="modal-title">Add new Course Type</h4>
                 </div>
                 <div class="modal-body">
+                    <label>CourseType Name</label>
                     <input type="text" ng-model="coursetype.name" class="form-control" name="coursetypename" id="coursetypename" ng-trim="true" ng-pattern="/^[A-Z a-z0-9]*$/" required />
                     <p class="error" style="color:red"></p>
 
@@ -32,14 +34,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
-                    <button type="button" class="close danger" data-dismiss="modal" style="color:white;opacity: 1">&times;</button>
+                    <button type="button" class="close danger" ng-click="closeModal()" data-dismiss="modal" style="color:white;opacity: 1">&times;</button>
                     <h4 class="modal-title">updateCourseType</h4>
                 </div>
                 <div class="modal-body">
-                    <input type="text" ng-model="coursetype.name" class="form-control" name="coursetypename" ng-trim="true" requiredng-pattern="/^[A-Z a-z0-9]*$/">
+                    <input type="text" ng-model="coursetype.name" class="form-control" name="coursetypename" ng-trim="true" required ng-pattern="/^[A-Z a-z0-9]*$/">
                     <p class="error" style="color:red"></p>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" ng-click="closeModal()" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-default">Update</button>
                 </div>
             </div>
