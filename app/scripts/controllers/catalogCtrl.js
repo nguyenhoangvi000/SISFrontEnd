@@ -50,7 +50,11 @@
                     ];
 
                     function actionsHtml(data, type, full, meta) {
-                        return `<div ><button class="btn btn-success btn-xs" ng-click="updateCatalog('${full.id}')">
+                        return `<div >
+                        <button class="btn btn-primary btn-xs" ng-click="catalogDetail('${full.id}')">
+                          <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-success btn-xs" ng-click="updateCatalog('${full.id}')">
                          <i class="fa fa-edit"></i>
                         </button>&nbsp;
                         <button class="btn btn-danger btn-xs" ng-click="deleteCatalog('${full.id}')">
@@ -69,7 +73,6 @@
                         $ngConfirm({
                             icon: 'fa fa-plus-circle',
                             theme: 'material',
-                            columnClass: 'col-md-6 col-md-offset-3',
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
                             title: 'Create Catalog!',
@@ -84,7 +87,7 @@
                             <div class="form-group">
                                 <label for="catalognote" class="col-sm-2 control-label">Catalog Note</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="catalog.note" type="text" name="" id="catalognote" class="form-control" value="" title="">
+                                    <textarea ng-model="catalog.note" type="text" name="" id="catalognote" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </form>`,
@@ -92,19 +95,21 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Create',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         // console.log(scope.catalog);
                                         console.log(scope.catalog);
                                         objectService.Catalog.save(scope.catalog, function() {
                                             load();
+                                            scope.catalog = null;
                                         });
                                         return true; // not prevent close; / close box
                                     }
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
 
@@ -113,13 +118,27 @@
                             }
                         });
                     }
+                    $scope.catalogDetail = function(id) {
+                        $scope.courses = objectService.Course.query(function(data) {
+                            // something
+                            $ngConfirm({
+                                icon: 'fa fa-plus-circle',
+                                theme: 'material',
+                                animation: 'rotateYR',
+                                closeAnimation: 'rotateYR (reverse)',
+                                title: 'Add Course!',
+                                contentUrl: 'views/catalog-course.html',
+                                scope: $scope,
+                            });
+                        });
+
+                    }
                     $scope.updateCatalog = function(catalogId) {
                         console.log(catalogId);
                         $scope.catalog = objectService.Catalog.get({ id: catalogId }, function(data) {});
                         $ngConfirm({
                             icon: 'fa fa-pencil-square',
                             theme: 'material',
-                            columnClass: 'col-md-6 col-md-offset-3',
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
                             title: 'Update Catalog!',
@@ -133,7 +152,7 @@
                             <div class="form-group">
                                 <label for="catalogcode" class="col-sm-2 control-label">Catalog Code</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="catalog.note" type="text" name="" id="catalogcode" class="form-control" value="" title="">
+                                    <textarea ng-model="catalog.note" type="text" name="" id="catalognote" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
                         </form>`,
@@ -141,18 +160,20 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         console.log(scope.catalog);
                                         scope.catalog.$update(function() {
                                             load();
+                                            scope.catalog = null;
                                         });
                                         return true; // not prevent close; / close box
                                     }
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
 
@@ -173,7 +194,7 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Yes',
-                                    btnClass: 'btn-danger',
+                                    btnClass: 'btn-danger btn-sm',
                                     action: function(scope, button) {
                                         console.log(catalogId);
                                         objectService.Catalog.delete({ id: catalogId }, function() {
@@ -184,6 +205,7 @@
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
                                         console.log('cancel xoá ở đây');

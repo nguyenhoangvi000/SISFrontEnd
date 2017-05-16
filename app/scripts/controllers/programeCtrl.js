@@ -87,10 +87,9 @@
                     $ngConfirm({
                         icon: 'fa fa-plus-circle',
                         theme: 'material',
-                        columnClass: 'col-md-6 col-md-offset-3',
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
-                        title: 'Create Intake!',
+                        title: 'Create Programe!',
                         content: `<form action="" class="form-horizontal" role="form">
                          
                             <div class="form-group">
@@ -122,7 +121,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
-                                btnClass: 'btn-success',
+                                btnClass: 'btn-success btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     console.log(scope.programe);
@@ -139,6 +138,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
@@ -149,12 +149,9 @@
                 }
                 $scope.updatePrograme = function(programeId) {
                     $scope.programe = objectService.Programe.get({ id: programeId }, function(data) {
-
-
                         $ngConfirm({
                             icon: 'fa fa-pencil-square',
                             theme: 'material',
-                            columnClass: 'col-md-6 col-md-offset-3',
                             animation: 'rotateYR',
                             closeAnimation: 'rotateYR (reverse)',
                             title: 'Update Programe!',
@@ -188,7 +185,7 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         console.log(scope.programe);
@@ -204,6 +201,7 @@
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
                                         console.log('cancel xoá ở đây');
@@ -212,38 +210,40 @@
                             }
                         });
                     })
-                    $scope.deletePrograme = function(programeId) {
-                        $ngConfirm({
-                            animation: 'rotateYR',
-                            closeAnimation: 'rotateYR (reverse)',
-                            title: 'Remove Programe!',
-                            content: `Are you sure to delete this Programe ?`,
-                            scope: $scope,
-                            buttons: {
-                                sayBoo: {
-                                    text: 'Yes',
-                                    btnClass: 'btn-danger',
-                                    action: function(scope, button) {
-                                        objectService.Programe.delete({ id: programeId }, function() {
-                                            objectService.Programe.query(function(data) {
 
-                                                scope.programes = data;
-                                            });
+
+                }
+                $scope.deletePrograme = function(programeId) {
+                    $ngConfirm({
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Remove Programe!',
+                        content: `Are you sure to delete this Programe ?`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Yes',
+                                btnClass: 'btn-danger btn-sm',
+                                action: function(scope, button) {
+                                    objectService.Programe.delete({ id: programeId }, function() {
+                                        objectService.Programe.query(function(data) {
+
+                                            scope.programes = data;
                                         });
-                                        return true; // not prevent close; / close box
-                                    }
-                                },
-                                close: {
-                                    text: 'Cancel',
-                                    action: function(scope, button) {
-                                        // closes the modal
-                                        console.log('cancel xoá ở đây');
-                                    }
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
                                 }
                             }
-                        });
-                    }
-
+                        }
+                    });
                 }
             }
         }]);
