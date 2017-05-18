@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 <label for="catalogname" class="col-sm-2 control-label">Catalog Name</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="catalog.name" type="text" name="" id="catalogname" class="form-control" value="" title="">
+                                    <input ng-model="catalog.name" ng-change="textChange()" type="text" name="" id="catalogname" class="form-control" value="" title="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -93,8 +93,9 @@
                         </form>`,
                             scope: $scope,
                             buttons: {
-                                sayBoo: {
-                                    text: 'Create',
+                                create: {
+                                    disabled: true,
+                                    text: 'Save',
                                     btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
@@ -114,6 +115,15 @@
                                         // closes the modal
 
                                     }
+                                }
+                            },
+                            onScopeReady: function(scope) {
+                                var self = this;
+                                scope.textChange = function() {
+                                    scope.catalog.name != null ?
+                                        self.buttons.create.setDisabled(false) :
+                                        self.buttons.create.setDisabled(true);
+
                                 }
                             }
                         });

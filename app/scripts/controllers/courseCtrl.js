@@ -180,7 +180,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
-                                btnClass: 'btn-success',
+                                btnClass: 'btn-success btn-sm',
                                 action: function(scope, button) {
                                     $scope.course.courseType = $scope.courseTypes.selectedOption.id;
                                     $scope.Prerequisites.model == null ? $scope.course.prerequisites = [] : $scope.course.prerequisites = $scope.Prerequisites.model;
@@ -195,6 +195,8 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
+
                                 action: function(scope, button) {
                                     // closes the modal
 
@@ -295,7 +297,7 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         $scope.course.courseType = $scope.courseTypes.selectedOption.id;
@@ -311,6 +313,7 @@
                                     }
                                 },
                                 close: {
+                                    btnClass: 'btn-default btn-sm',
                                     text: 'Cancel',
                                     action: function(scope, button) {
                                         // closes the modal
@@ -332,7 +335,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Yes',
-                                btnClass: 'btn-danger',
+                                btnClass: 'btn-danger btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     objectService.Course.delete({ id: courseId }, function() {
@@ -343,6 +346,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
