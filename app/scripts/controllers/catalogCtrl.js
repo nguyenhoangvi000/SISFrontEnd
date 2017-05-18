@@ -119,7 +119,12 @@
                         });
                     }
                     $scope.catalogDetail = function(id) {
-                        $scope.courses = objectService.Course.query(function(data) {
+                        $scope.courses = [];
+                        objectService.Course.query(function(data) {
+                            data.map(function(value, key) {
+                                $scope.courses.push({ course: value, checked: false })
+                            })
+
                             // something
                             $ngConfirm({
                                 icon: 'fa fa-plus-circle',
@@ -129,6 +134,28 @@
                                 title: 'Add Course!',
                                 contentUrl: 'views/catalog-course.html',
                                 scope: $scope,
+                                buttons: {
+                                    sayBoo: {
+                                        text: 'Save',
+                                        btnClass: 'btn-success btn-sm',
+                                        action: function(scope, button) {
+                                            $scope.courses.map(function(value, key) {
+                                                if (value.checked) {
+                                                    console.log(value); // lay dc gia tri da check
+                                                }
+                                            })
+                                            return true; // not prevent close; / close box
+                                        }
+                                    },
+                                    close: {
+                                        text: 'Cancel',
+                                        btnClass: 'btn-default btn-sm',
+                                        action: function(scope, button) {
+                                            // closes the modal
+
+                                        }
+                                    }
+                                }
                             });
                         });
 

@@ -1,11 +1,9 @@
 <div style="margin: -10px 0px;">
 
-    <div ng-repeat="course in courses" class="checkbox">
+    <div ng-repeat="c in courses" class="checkbox">
         <label>
-            <input  type="checkbox" value="">
-            {{course.codeName}}
+            <input  type="checkbox" ng-model="c.checked"  value="">
+            {{c.course.codeName}}
         </label>
     </div>
-
-
 </div>
