@@ -183,7 +183,7 @@
                                 btnClass: 'btn-success',
                                 action: function(scope, button) {
                                     $scope.course.courseType = $scope.courseTypes.selectedOption.id;
-                                    $scope.course.prerequisites = $scope.Prerequisites.model;
+                                    $scope.Prerequisites.model == null ? $scope.course.prerequisites = [] : $scope.course.prerequisites = $scope.Prerequisites.model;
                                     console.log($scope.course);
                                     $scope.course.$save(function() {
                                         objectService.Course.query(function(data) {
@@ -257,16 +257,16 @@
                             <div class="form-group">
                                 <label for="credits" class="col-sm-2 control-label">Credits:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.credits" type="text" name="credits"required id="credits" class="form-control" value=""  title="">
+                                    <input ng-model="course.credits" type="number" name="credits"required id="credits" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.name.$touched">
-                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    <div style="color: red" ng-show="courseFromCreate.credits.$error.required">This field can not be null.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="course" class="col-sm-2 control-label">Cost:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.cost" type="text" name="cost"required id="cost" class="form-control" value=""  title="">
+                                    <input ng-model="course.cost" type="number" name="cost"required id="cost" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.cost.$touched">
                                     <div style="color: red" ng-show="courseFromCreate.cost.$error.required">This field can not be null.</div>
                                     </div>
@@ -299,7 +299,9 @@
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         $scope.course.courseType = $scope.courseTypes.selectedOption.id;
-                                        $scope.course.prerequisites = $scope.Prerequisites.model;
+                                        $scope.Prerequisites.model == null ? $scope.course.prerequisites = [] : $scope.course.prerequisites = $scope.Prerequisites.model;
+
+                                        console.log($scope.course);
                                         scope.course.$update(function() {
                                             objectService.Course.query(function(data) {
                                                 load();
