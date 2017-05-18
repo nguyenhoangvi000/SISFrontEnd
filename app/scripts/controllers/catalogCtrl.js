@@ -101,6 +101,7 @@
                                         console.log('handler create here');
                                         // console.log(scope.catalog);
                                         console.log(scope.catalog);
+                                        scope.catalog.courses = [];
                                         objectService.Catalog.save(scope.catalog, function() {
                                             load();
                                             scope.catalog = null;
@@ -148,12 +149,23 @@
                                     sayBoo: {
                                         text: 'Save',
                                         btnClass: 'btn-success btn-sm',
-                                        action: function(scope, button) {
-                                            $scope.courses.map(function(value, key) {
+                                        action: function(scope, button) {  
+                                          $scope.catalog = objectService.Catalog.get({ id: id }, function(data) {
+                                              var courses =[];
+                                                $scope.courses.map(function(value, key) {
                                                 if (value.checked) {
-                                                    console.log(value); // lay dc gia tri da check
+                                                   //  scope.catalog.courses.push(value.course.id);
+                                                    courses.push(value.course.id); // lay dc gia tri da check
+                                                    $scope.catalog.courses=courses;
+                                                    $scope.catalog.$update(function() {
+                                                        load();
+                                                        scope.catalog = null;
+                                                    });
                                                 }
+                                                console.log(courses);
                                             })
+                                            });                                
+                                            
                                             return true; // not prevent close; / close box
                                         }
                                     },
