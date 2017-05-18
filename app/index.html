@@ -69,34 +69,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             this.initEvents();
                                         }
                                         DropDown.prototype = {
-                                            initEvents: function () {
+                                            initEvents: function() {
                                                 var obj = this;
 
-                                                obj.dd.on('click', function (event) {
+                                                obj.dd.on('click', function(event) {
                                                     $(this).toggleClass('active');
                                                     return false;
                                                 });
 
-                                                obj.opts.on('click', function () {
+                                                obj.opts.on('click', function() {
                                                     var opt = $(this);
                                                     obj.val = opt.text();
                                                     obj.index = opt.index();
                                                     obj.placeholder.text(obj.val);
                                                 });
                                             },
-                                            getValue: function () {
+                                            getValue: function() {
                                                 return this.val;
                                             },
-                                            getIndex: function () {
+                                            getIndex: function() {
                                                 return this.index;
                                             }
                                         }
 
-                                        $(function () {
+                                        $(function() {
 
                                             var dd = new DropDown($('#dd'));
 
-                                            $(document).click(function () {
+                                            $(document).click(function() {
                                                 // all dropdowns
                                                 $('.wrapper-dropdown-3').removeClass('active');
                                             });
@@ -308,7 +308,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li id="menu-academico-avaliacoes"><a href="" ui-sref="addstudent()"> Add Student</a></li>
                             <li id="menu-academico-boletim"><a href="widget.html">Student List</a></li>
                             <li id="menu-academico-avaliacoes"><a href="calender.html">More</a></li>
-
                         </ul>
                     </li>
                     <li ui-sref-active="active" id="menu-academico"><a href="#" ui-sref="catalog"><i class="fa fa-file-text-o"></i> <span>Catalog</span> <span class="fa fa-angle-right" style="float: right"></span></a>
@@ -382,25 +381,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="clearfix"></div>
     </div>
     <script>
-                                        var toggle = true;
+        var toggle = true;
 
-                                        $(".sidebar-icon").click(function () {
-                                            if (toggle) {
-                                                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
-                                                $("#menu span").css({
-                                                    "position": "absolute"
-                                                });
-                                            } else {
-                                                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
-                                                setTimeout(function () {
-                                                    $("#menu span").css({
-                                                        "position": "relative"
-                                                    });
-                                                }, 400);
-                                            }
+        $(".sidebar-icon").click(function() {
+            if (toggle) {
+                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                $("#menu span").css({
+                    "position": "absolute"
+                });
+            } else {
+                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                setTimeout(function() {
+                    $("#menu span").css({
+                        "position": "relative"
+                    });
+                }, 400);
+            }
 
-                                            toggle = !toggle;
-                                        });
+            toggle = !toggle;
+        });
     </script>
 
 
@@ -415,6 +414,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <script src="bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="js/angularjs-dropdown-multiselect.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <!-- endbower -->
@@ -428,6 +428,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/services/appService.js"></script>
+    <script src="scripts/services/FactoryService/objectService.js"></script>
     <script src="js/sb-admin-2.js"></script>
     <script src='js/jquery.dataTables.min.js'></script>
     <script src='js/angular-datatables.min.js'></script>

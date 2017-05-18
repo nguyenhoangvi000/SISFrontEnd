@@ -1,6 +1,6 @@
 <div id="addstudent">
     <div class="row">
-        <form name="studentForm" ng-submit="submit(studentForm.$valid)" novalidate class="form-horizontal">
+        <form name="studentForm" ng-submit="submit(studentForm.$valid)" enctype="multipart/form-data" novalidate class="form-horizontal">
             <div class="form-group">
                 <legend>Thêm Sinh viên</legend>
             </div>
@@ -35,8 +35,10 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <!--ng-model="student.image"-->
 
                     <img src="images/kt.jpg" class="upload img-responsive" alt="Image">
+                    <input type="file" name="avatar" />
 
                 </div>
             </div>

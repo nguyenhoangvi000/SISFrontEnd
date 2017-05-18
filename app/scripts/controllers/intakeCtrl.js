@@ -65,6 +65,7 @@
                 $scope.createIntake = function() {
                     $scope.intake = new objectService.Intake();
                     $ngConfirm({
+                        useBootstrap: true,
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
                         title: 'Create Intake!',
@@ -92,7 +93,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
-                                btnClass: 'btn-success',
+                                btnClass: 'btn-success btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     $scope.intake.$save(function() {
@@ -106,6 +107,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
 
@@ -138,7 +140,7 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         scope.intake.$update(function() {
@@ -152,6 +154,7 @@
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
                                         console.log('cancel xoá ở đây');
@@ -172,7 +175,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Yes',
-                                btnClass: 'btn-danger',
+                                btnClass: 'btn-danger btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     objectService.Intake.delete({ id: intakeId }, function() {
@@ -186,6 +189,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');
