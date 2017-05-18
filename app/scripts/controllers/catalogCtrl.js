@@ -131,53 +131,63 @@
                     }
                     $scope.catalogDetail = function(id) {
                         $scope.courses = [];
-                        objectService.Course.query(function(data) {
-                            data.map(function(value, key) {
-                                $scope.courses.push({ course: value, checked: false })
-                            })
-
-                            // something
-                            $ngConfirm({
-                                icon: 'fa fa-plus-circle',
-                                theme: 'material',
-                                animation: 'rotateYR',
-                                closeAnimation: 'rotateYR (reverse)',
-                                title: 'Add Course!',
-                                contentUrl: 'views/catalog-course.html',
-                                scope: $scope,
-                                buttons: {
-                                    sayBoo: {
-                                        text: 'Save',
-                                        btnClass: 'btn-success btn-sm',
-                                        action: function(scope, button) {  
-                                          $scope.catalog = objectService.Catalog.get({ id: id }, function(data) {
-                                              var courses =[];
+                        $scope.catalog = objectService.Catalog.get({ id: id }, function(data) {
+                            var coursesOld = data.courses;
+                            console.log(coursesOld);
+                            objectService.Course.query(function(data) {
+                                var courses = [];
+                                data.map(function(value, key) {
+                                    courses.push({ course: value, checked: false })
+                                })
+                                courses.map(function(value, key) {
+                                    //console.log(value.course.);
+                                    coursesOld.map(function(valueOld) {
+                                        if (value.course.id == valueOld.id)
+                                            courses[key].checked = true;
+                                    })
+                                })
+                                $scope.courses = courses;
+                                // something
+                                $ngConfirm({
+                                    icon: 'fa fa-plus-circle',
+                                    useBootstrap: true,
+                                    animation: 'rotateYR',
+                                    closeAnimation: 'rotateYR (reverse)',
+                                    title: 'Add Course!',
+                                    contentUrl: 'views/catalog-course.html',
+                                    scope: $scope,
+                                    buttons: {
+                                        sayBoo: {
+                                            text: 'Save',
+                                            btnClass: 'btn-success btn-sm',
+                                            action: function(scope, button) {
+                                                var courses = [];
                                                 $scope.courses.map(function(value, key) {
-                                                if (value.checked) {
-                                                   //  scope.catalog.courses.push(value.course.id);
-                                                    courses.push(value.course.id); // lay dc gia tri da check
-                                                    $scope.catalog.courses=courses;
-                                                    $scope.catalog.$update(function() {
-                                                        load();
-                                                        scope.catalog = null;
-                                                    });
-                                                }
-                                                console.log(courses);
-                                            })
-                                            });                                
-                                            
-                                            return true; // not prevent close; / close box
-                                        }
-                                    },
-                                    close: {
-                                        text: 'Cancel',
-                                        btnClass: 'btn-default btn-sm',
-                                        action: function(scope, button) {
-                                            // closes the modal
+                                                    if (value.checked) {
+                                                        //  scope.catalog.courses.push(value.course.id);
+                                                        courses.push(value.course.id); // lay dc gia tri da check
+                                                        scope.catalog.courses = courses;
+                                                        scope.catalog.$update(function() {
+                                                            //load();
+                                                            //scope.catalog = null;
+                                                        });
+                                                    }
 
+                                                })
+
+                                                return true; // not prevent close; / close box
+                                            }
+                                        },
+                                        close: {
+                                            text: 'Cancel',
+                                            btnClass: 'btn-default btn-sm',
+                                            action: function(scope, button) {
+                                                // closes the modal
+
+                                            }
                                         }
                                     }
-                                }
+                                });
                             });
                         });
 
