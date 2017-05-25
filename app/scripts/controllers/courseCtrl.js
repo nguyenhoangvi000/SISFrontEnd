@@ -277,6 +277,7 @@
                             <div class="form-group">
                                 <label for="courseType" class="col-sm-2 control-label">Prerequisite:</label>
                                 <div class="col-sm-10">
+                                    <input ng-model="pre" type="number" required  class="form-control" value=""  title="">                                        
                                      <select size="3"  name="ngvalueselect" class="form-control" ng-model="Prerequisites.model" multiple>
                                         <option ng-repeat="option in Prerequisites.availableOptions" ng-value="option.id">{{option.name}}</option>
                                         </select>

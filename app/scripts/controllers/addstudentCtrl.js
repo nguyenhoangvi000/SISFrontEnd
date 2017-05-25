@@ -2,7 +2,36 @@
     'use strict';
     angular
         .module('studentinfo')
-        .controller('addstudentCtrl', ['appService', 'objectService', '$scope', '$state', '$stateParams', function(appService, objectService, $scope, $state, $stateParams) {
+        .controller('addstudentCtrl', ['appService', 'objectService', '$scope', '$state', '$stateParams', 'Upload', '$timeout', function(appService, objectService, $scope, $state, $stateParams, Upload, $timeout) {
+            //upload image
+            $scope.files = "";
+            $scope.errFiles = "";
+
+            $scope.uploadFiles = function(files, errFiles) {
+                $scope.files = files;
+                $scope.errFiles = errFiles;
+
+            }
+            $scope.startUpload = function() {
+                angular.forEach($scope.files, function(file) {
+                    file.upload = Upload.upload({
+                        url: appService.baseUrl + '/students/1/avatar',
+                        data: { file: file }
+                    });
+
+                    file.upload.then(function(response) {
+                        $timeout(function() {
+                            file.result = response.data;
+                        });
+                    }, function(response) {
+                        if (response.status > 0)
+                            $scope.errorMsg = response.status + ': ' + response.data;
+                    }, function(evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                            evt.loaded / evt.total));
+                    });
+                });
+            }
             $scope.student = new objectService.Student();
             $scope.genders = {
                 selectedOption: { id: 0, name: "Male" },

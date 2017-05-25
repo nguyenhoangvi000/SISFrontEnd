@@ -37,8 +37,12 @@
                 <div class="col-md-6">
                     <!--ng-model="student.image"-->
 
-                    <img src="images/kt.jpg" class="upload img-responsive" alt="Image">
-                    <input type="file" name="avatar" />
+                    <!--<img src="images/kt.jpg" class="upload img-responsive" alt="Image">
+                    <input type="file" name="avatar" />-->
+                    <button ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+      Select Files</button>
+
+                    <button ng-click="startUpload()" type="button" class="btn btn-info">Start Upload</button>
 
                 </div>
             </div>

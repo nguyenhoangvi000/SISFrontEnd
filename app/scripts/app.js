@@ -12,7 +12,8 @@ angular
         'datatables',
         'datatables.scroller',
         'cp.ngConfirm',
-        'angularjs-dropdown-multiselect'
+        'angularjs-dropdown-multiselect',
+        'ngFileUpload',
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
