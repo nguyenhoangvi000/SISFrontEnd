@@ -43,6 +43,12 @@
                 }); //query() trả về một mảng words
             }
 
+            function loadPrerequisites() {
+                $scope.Prerequisites.availableOptions = objectService.Course.query(function(data) {
+                    console.log(data);
+                });
+            }
+
             function getAllPosts() {
                 $scope.createdRow = function(row, data, dataIndex) {
                     $compile(angular.element(row).contents())($scope);
@@ -90,7 +96,16 @@
 
                         ]
                     };
+
+                    $scope.Prerequisites = {
+                        model: null,
+                        availableOptions: [
+
+                        ]
+                    };
+
                     loadCourseType();
+                    loadPrerequisites();
                     $ngConfirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
@@ -127,7 +142,7 @@
                             <div class="form-group">
                                 <label for="credits" class="col-sm-2 control-label">Credits:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.credits" type="text" name="credits"required id="credits" class="form-control" value=""  title="">
+                                    <input ng-model="course.credits" type="number" name="credits"required id="credits" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.name.$touched">
                                     <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
                                     </div>
@@ -136,10 +151,18 @@
                             <div class="form-group">
                                 <label for="course" class="col-sm-2 control-label">Cost:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.course" type="text" name="course"required id="course" class="form-control" value=""  title="">
+                                    <input ng-model="course.cost" type="number" name="course"required id="course" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.name.$touched">
                                     <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
                                     </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="courseType" class="col-sm-2 control-label">Prerequisite:</label>
+                                <div class="col-sm-10">
+                                     <select name="ngvalueselect" class="form-control" ng-model="Prerequisites.model" multiple>
+                                        <option ng-repeat="option in Prerequisites.availableOptions" ng-value="option.id">{{option.name}}</option>
+                                        </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -157,9 +180,11 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
-                                btnClass: 'btn-success',
+                                btnClass: 'btn-success btn-sm',
                                 action: function(scope, button) {
-                                    $scope.course.courseType = $scope.courseTypes.selectedOption;
+                                    $scope.course.courseType = $scope.courseTypes.selectedOption.id;
+                                    $scope.Prerequisites.model == null ? $scope.course.prerequisites = [] : $scope.course.prerequisites = $scope.Prerequisites.model;
+                                    console.log($scope.course);
                                     $scope.course.$save(function() {
                                         objectService.Course.query(function(data) {
                                             scope.courses = data;
@@ -170,6 +195,8 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
+
                                 action: function(scope, button) {
                                     // closes the modal
 
@@ -185,6 +212,13 @@
 
                         ]
                     };
+                    $scope.Prerequisites = {
+                        model: null,
+                        availableOptions: [
+
+                        ]
+                    }
+                    loadPrerequisites();
                     loadCourseType();
                     $scope.course = objectService.Course.get({ id: courseId }, function(data) {
                         $scope.courseTypes.selectedOption = data.courseType;
@@ -225,19 +259,28 @@
                             <div class="form-group">
                                 <label for="credits" class="col-sm-2 control-label">Credits:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.credits" type="text" name="credits"required id="credits" class="form-control" value=""  title="">
+                                    <input ng-model="course.credits" type="number" name="credits"required id="credits" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.name.$touched">
-                                    <div style="color: red" ng-show="courseFromCreate.name.$error.required">This field can not be null.</div>
+                                    <div style="color: red" ng-show="courseFromCreate.credits.$error.required">This field can not be null.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="course" class="col-sm-2 control-label">Cost:</label>
                                 <div class="col-sm-10">
-                                    <input ng-model="course.cost" type="text" name="cost"required id="cost" class="form-control" value=""  title="">
+                                    <input ng-model="course.cost" type="number" name="cost"required id="cost" class="form-control" value=""  title="">
                                     <div ng-show="courseFromCreate.cost.$touched">
                                     <div style="color: red" ng-show="courseFromCreate.cost.$error.required">This field can not be null.</div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="courseType" class="col-sm-2 control-label">Prerequisite:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="pre" type="number" required  class="form-control" value=""  title="">                                        
+                                     <select size="3"  name="ngvalueselect" class="form-control" ng-model="Prerequisites.model" multiple>
+                                        <option ng-repeat="option in Prerequisites.availableOptions" ng-value="option.id">{{option.name}}</option>
+                                        </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -255,10 +298,13 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
-                                        $scope.course.courseType = $scope.courseTypes.selectedOption;
+                                        $scope.course.courseType = $scope.courseTypes.selectedOption.id;
+                                        $scope.Prerequisites.model == null ? $scope.course.prerequisites = [] : $scope.course.prerequisites = $scope.Prerequisites.model;
+
+                                        console.log($scope.course);
                                         scope.course.$update(function() {
                                             objectService.Course.query(function(data) {
                                                 load();
@@ -268,6 +314,7 @@
                                     }
                                 },
                                 close: {
+                                    btnClass: 'btn-default btn-sm',
                                     text: 'Cancel',
                                     action: function(scope, button) {
                                         // closes the modal
@@ -289,7 +336,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Yes',
-                                btnClass: 'btn-danger',
+                                btnClass: 'btn-danger btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     objectService.Course.delete({ id: courseId }, function() {
@@ -300,6 +347,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');

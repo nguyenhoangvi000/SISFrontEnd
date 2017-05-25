@@ -93,7 +93,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Create',
-                                btnClass: 'btn-success',
+                                btnClass: 'btn-success btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     $scope.intake.$save(function() {
@@ -102,11 +102,12 @@
                                             scope.posts = data;
                                         });
                                     });
-                                    return false; // not prevent close; / close box
+                                    return true; // not prevent close; / close box
                                 }
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
 
@@ -139,7 +140,7 @@
                             buttons: {
                                 sayBoo: {
                                     text: 'Update',
-                                    btnClass: 'btn-success',
+                                    btnClass: 'btn-success btn-sm',
                                     action: function(scope, button) {
                                         console.log('handler create here');
                                         scope.intake.$update(function() {
@@ -153,6 +154,7 @@
                                 },
                                 close: {
                                     text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
                                         console.log('cancel xoá ở đây');
@@ -173,7 +175,7 @@
                         buttons: {
                             sayBoo: {
                                 text: 'Yes',
-                                btnClass: 'btn-danger',
+                                btnClass: 'btn-danger btn-sm',
                                 action: function(scope, button) {
                                     console.log('handler create here');
                                     objectService.Intake.delete({ id: intakeId }, function() {
@@ -187,6 +189,7 @@
                             },
                             close: {
                                 text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
                                 action: function(scope, button) {
                                     // closes the modal
                                     console.log('cancel xoá ở đây');

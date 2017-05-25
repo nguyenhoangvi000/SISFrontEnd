@@ -12,6 +12,8 @@ angular
         'datatables',
         'datatables.scroller',
         'cp.ngConfirm',
+        'angularjs-dropdown-multiselect',
+        'ngFileUpload',
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
@@ -97,7 +99,9 @@ angular
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
+                                'scripts/services/FactoryService/objectService.js',
                                 'scripts/services/FactoryService/courseTypeService.js',
+                                'js/notify.min.js',
                                 'scripts/controllers/coursetypeCtrl.js',
                                 'styles/scroller.dataTables.min.css'
                             ]
@@ -239,9 +243,7 @@ angular
                     }
                 }
             })
-
-
-        .state('academicYear', { // Main room state
+            .state('academicYear', { // Main room state
                 templateUrl: 'views/academic-year/academic-year.html',
                 url: '/academic-year',
                 controller: 'academicYearCtrl',

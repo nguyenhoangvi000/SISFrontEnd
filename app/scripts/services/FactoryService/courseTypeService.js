@@ -8,7 +8,6 @@
                         name: coursetypename
                     };
                     var UrlcourseType = appService.baseUrl + '/course-types';
-
                     return $http.post(UrlcourseType, data);
                 }
             };
