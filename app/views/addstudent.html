@@ -1,6 +1,6 @@
 <div id="addstudent">
     <div class="row">
-        <form name="studentForm" ng-submit="submit(studentForm.$valid)" enctype="multipart/form-data" novalidate class="form-horizontal">
+        <form name="studentForm" ng-submit="submit(studentForm.$valid)" novalidate class="form-horizontal">
             <div class="form-group">
                 <legend>Thêm Sinh viên</legend>
             </div>
@@ -168,49 +168,61 @@
 
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
 
                     <div class="form-group">
                         <label for="address" class="col-sm-2 control-label">Pernament Address</label>
-                        <div class="col-sm-10">
-                            <select name="" id="address" class="form-control">
-                                    <option value="">AN GIANG</option>
-                                </select>
+                        <div class="col-sm-10" style="padding: 0px 0px">
+                            <div class="col-sm-2" style="padding-left: 0px"> <!-- Number address -->
+                                <input ng-model="student.address.number" class="form-control" id="number" type="text" placeholder="Number" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- Street -->
+                                <input ng-model="student.address.street" class="form-control" id="street" type="text" placeholder="Street" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- Ward -->
+                                <input ng-model="student.address.ward" class="form-control" id="ward" type="text" placeholder="Ward" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- District -->
+                                <input ng-model="student.address.district" class="form-control" id="district" type="text" placeholder="District" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- City -->
+                                <input ng-model="student.address.city" class="form-control" id="city" type="text" placeholder="City" required/>
+                            </div>
+                            <div class="col-sm-2">
+                                <input ng-model="student.address.nationality" class="form-control" id="nationality" type="text" placeholder="Nationality" required/>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <select name="" id="input1/(\w+)/\u\1/g" class="form-control">
-                                    <option value="">VIỆT NAM</option>
-                                </select>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
 
                     <div class="form-group">
-                        <label for="postalAddress" class="col-sm-2 control-label">Postal Address</label>
-                        <div class="col-sm-10">
-                            <select name="" id="postalAddress" class="form-control">
-                                    <option value="">AN GIANG</option>
-                                </select>
+                        <label for="address" class="col-sm-2 control-label">Postal Address</label>
+                        <div class="col-sm-10" style="padding: 0px 0px">
+                            <div class="col-sm-2" style="padding-left: 0px"> <!-- Number address -->
+                                <input ng-model="student.pAddress.number" class="form-control" id="pnumber" type="text" placeholder="Number" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- Street -->
+                                <input ng-model="student.pAddress.street" class="form-control" id="pstreet" type="text" placeholder="Street" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- Ward -->
+                                <input ng-model="student.pAddress.ward" class="form-control" id="pward" type="text" placeholder="Ward" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- District -->
+                                <input ng-model="student.pAddress.district" class="form-control" id="pdistrict" type="text" placeholder="District" required/>
+                            </div>
+                            <div class="col-sm-2"> <!-- City -->
+                                <input ng-model="student.pAddress.city" class="form-control" id="pcity" type="text" placeholder="City" required/>
+                            </div>
+                            <div class="col-sm-2">
+                                <input ng-model="student.pAddress.nationality" class="form-control" id="pnationality" type="text" placeholder="Nationality" required/>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="col-sm-10">
-                            <select name="" id="input1/(\w+)/\u\1/g" class="form-control">
-                                    <option value="">VIỆT NAM</option>
-                                </select>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row text-right">
