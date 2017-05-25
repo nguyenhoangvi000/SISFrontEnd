@@ -165,6 +165,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="homeCountry" class="col-sm-2 control-label">home Country</label>
+                        <div class="col-sm-10">
+                            <input ng-model="student.homeCountry" type="text" name="homeCountry" id="homeCountry" class="form-control" value="" title="">
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="row">
@@ -201,7 +209,6 @@
                                 </select>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -215,7 +222,7 @@
             </div>
             <div class="row text-right">
                 <input ui-sref='student' type="submit" class="text-right btn btn-primary" value="Back" />
-                <input type="submit" ng-disabled="studentForm.$invalid" class="text-right btn btn-primary" value="Submit" />
+                <input id="submit" type="submit" class="text-right btn btn-primary" value="Submit" />
             </div>
 
         </form>
