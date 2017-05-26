@@ -2,20 +2,21 @@
     'use strict';
     angular
         .module('studentinfo')
-        .controller('addstudentCtrl', ['appService', 'objectService', '$scope', '$state', '$stateParams', 'Upload', '$timeout', function(appService, objectService, $scope, $state, $stateParams, Upload, $timeout) {
+        .controller('addstudentCtrl', ['appService', 'objectService', '$scope', '$state', '$stateParams', 'Upload', '$timeout', '$http', function(appService, objectService, $scope, $state, $stateParams, Upload, $timeout, $http) {
             //upload image
             $scope.files = "";
             $scope.errFiles = "";
 
             $scope.uploadFiles = function(files, errFiles) {
+                console.log(files[0].$ngfBlobUrl);
+                $('#avatar').css('background-image', 'url(' + (files[0].$ngfBlobUrl) + ')');
                 $scope.files = files;
                 $scope.errFiles = errFiles;
-
             }
-            $scope.startUpload = function() {
+            var startUpload = function(id) {
                 angular.forEach($scope.files, function(file) {
                     file.upload = Upload.upload({
-                        url: appService.baseUrl + '/students/1/avatar',
+                        url: appService.baseUrl + '/students/' + id + '/avatar',
                         data: { file: file }
                     });
 
@@ -104,19 +105,44 @@
 
             }
 
+            function convertDate(date) {
+                var yyyy = date.getFullYear().toString();
+                var mm = (date.getMonth() + 1).toString();
+                var dd = date.getDate().toString();
+
+                var mmChars = mm.split('');
+                var ddChars = dd.split('');
+
+                return yyyy + '-' + (mmChars[1] ? mm : "0" + mmChars[0]) + '-' + (ddChars[1] ? dd : "0" + ddChars[0]);
+            }
 
             $scope.submit = function(valid) {
+                ///console.log(valid);
+                // console.log();
                 if (valid) {
-                    $scope.student.intake = $scope.intakes.selectedOption;
-                    $scope.student.catalog = $scope.catalogs.selectedOption;
-                    $scope.student.programe = $scope.programes.selectedOption;
-                    $scope.student.birthday = new Date($scope.student.birthday);
-                    $scope.student.$save(function() {
-                        objectService.Student.query(function(data) {
-                            console.log(data);
-                            $state.go('student');
-                        });
-                    });
+                    $scope.student.intake = $scope.intakes.selectedOption.id;
+                    $scope.student.catalog = $scope.catalogs.selectedOption.id;
+                    $scope.student.programe = $scope.programes.selectedOption.id;
+                    $scope.student.gender = $scope.genders.selectedOption.id;
+                    // $scope.student.$save(function(a1, a2, a3) {
+                    //     console.log(arguments)
+                    // });
+                    $http.post(appService.baseUrl + '/students', $scope.student)
+                        .then(function(res) {
+                                var location = res.headers().location + '';
+                                var url = location.split('/');
+                                var id = url[url.length - 1];
+                                if (id) {
+                                    try {
+                                        startUpload(id);
+                                    } catch (error) {
+                                        console.log(error);
+                                    }
+                                }
+                            },
+                            function(res) {
+                                console.log(res);
+                            })
                 }
 
             }

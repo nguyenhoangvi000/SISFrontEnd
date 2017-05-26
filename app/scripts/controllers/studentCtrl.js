@@ -56,7 +56,7 @@
                         DTColumnDefBuilder.newColumnDef(4).withTitle('action'),
                     ];
                     $scope.dtColumns = [
-                        DTColumnBuilder.newColumn('id').withTitle('code'),
+                        DTColumnBuilder.newColumn('id').withTitle('Id'),
                         DTColumnBuilder.newColumn('name').withTitle('name'),
                         DTColumnBuilder.newColumn('gender').withTitle('gender'),
                         DTColumnBuilder.newColumn('email').withTitle('email'),

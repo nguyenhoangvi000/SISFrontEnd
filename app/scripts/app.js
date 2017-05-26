@@ -4,7 +4,6 @@ angular
     .module('studentinfo', [
         'oc.lazyLoad',
         'ui.router',
-        'ui.bootstrap',
         'angular-loading-bar',
         'ngAnimate',
         'ngTagsInput',
@@ -14,6 +13,7 @@ angular
         'cp.ngConfirm',
         'angularjs-dropdown-multiselect',
         'ngFileUpload',
+        '720kb.datepicker'
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');

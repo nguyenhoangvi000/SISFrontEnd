@@ -39,10 +39,9 @@
 
                     <!--<img src="images/kt.jpg" class="upload img-responsive" alt="Image">
                     <input type="file" name="avatar" />-->
-                    <button ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-      Select Files</button>
+                    <button id="avatar" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+      Browse Photo</button>
 
-                    <button ng-click="startUpload()" type="button" class="btn btn-info">Start Upload</button>
 
                 </div>
             </div>
@@ -73,7 +72,10 @@
                     <div class="form-group">
                         <label for="birthday" class="col-sm-2 control-label">Birthday</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.birthday" type="date" name="" id="birthday" class="form-control" value="" title="">
+                            <!--<input ng-model="student.birthday" type="date" name="" id="birthday" class="form-control" value="" title="">-->
+                            <datepicker date-format="yyyy-M-d">
+                                <input ng-model="student.birthday" type="text" id="birthday" class="form-control" />
+                            </datepicker>
                         </div>
                     </div>
                 </div>
@@ -149,7 +151,7 @@
                     <div class="form-group">
                         <label for="personalId" class="col-sm-2 control-label">Personal ID</label>
                         <div class="col-sm-10">
-                            <input ng-model="student.personalId" type="number" name="personalId" required="" id="personalId" class="form-control" value="" title="">
+                            <input ng-model="student.personalId" type="text" name="personalId" required="" id="personalId" class="form-control" value="" title="">
                             <div ng-show="studentForm.$submitted || studentForm.personalId.$touched">
                                 <span style="color: red" ng-show="studentForm.personalId.$error.required">Tell us your Personal ID.</span>
                                 <span style="color: red" ng-show="studentForm.personalId.$error.number">This is not a valid email.</span>
@@ -181,19 +183,24 @@
                     <div class="form-group">
                         <label for="address" class="col-sm-2 control-label">Pernament Address</label>
                         <div class="col-sm-10" style="padding: 0px 0px">
-                            <div class="col-sm-2" style="padding-left: 0px"> <!-- Number address -->
+                            <div class="col-sm-2" style="padding-left: 0px">
+                                <!-- Number address -->
                                 <input ng-model="student.address.number" class="form-control" id="number" type="text" placeholder="Number" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- Street -->
+                            <div class="col-sm-2">
+                                <!-- Street -->
                                 <input ng-model="student.address.street" class="form-control" id="street" type="text" placeholder="Street" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- Ward -->
+                            <div class="col-sm-2">
+                                <!-- Ward -->
                                 <input ng-model="student.address.ward" class="form-control" id="ward" type="text" placeholder="Ward" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- District -->
+                            <div class="col-sm-2">
+                                <!-- District -->
                                 <input ng-model="student.address.district" class="form-control" id="district" type="text" placeholder="District" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- City -->
+                            <div class="col-sm-2">
+                                <!-- City -->
                                 <input ng-model="student.address.city" class="form-control" id="city" type="text" placeholder="City" required/>
                             </div>
                             <div class="col-sm-2">
@@ -210,19 +217,24 @@
                     <div class="form-group">
                         <label for="address" class="col-sm-2 control-label">Postal Address</label>
                         <div class="col-sm-10" style="padding: 0px 0px">
-                            <div class="col-sm-2" style="padding-left: 0px"> <!-- Number address -->
+                            <div class="col-sm-2" style="padding-left: 0px">
+                                <!-- Number address -->
                                 <input ng-model="student.pAddress.number" class="form-control" id="pnumber" type="text" placeholder="Number" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- Street -->
+                            <div class="col-sm-2">
+                                <!-- Street -->
                                 <input ng-model="student.pAddress.street" class="form-control" id="pstreet" type="text" placeholder="Street" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- Ward -->
+                            <div class="col-sm-2">
+                                <!-- Ward -->
                                 <input ng-model="student.pAddress.ward" class="form-control" id="pward" type="text" placeholder="Ward" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- District -->
+                            <div class="col-sm-2">
+                                <!-- District -->
                                 <input ng-model="student.pAddress.district" class="form-control" id="pdistrict" type="text" placeholder="District" required/>
                             </div>
-                            <div class="col-sm-2"> <!-- City -->
+                            <div class="col-sm-2">
+                                <!-- City -->
                                 <input ng-model="student.pAddress.city" class="form-control" id="pcity" type="text" placeholder="City" required/>
                             </div>
                             <div class="col-sm-2">
