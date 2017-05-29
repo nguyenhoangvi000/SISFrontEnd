@@ -1,0 +1,27 @@
+<div>
+    <div class="row">
+
+        <button ng-click="createSemester()" type="button" class="btn btn-primary btn-sm">Add <i class="fa fa-plus-circle"></i></button>
+
+    </div>
+    <div>
+
+
+        <table datatable="ng" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" class="table table-responsive row-border hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Semester Name</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="post in posts">
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.name}}</td>
+                    <td>#</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -14,6 +14,7 @@ angular
         'cp.ngConfirm',
         'angularjs-dropdown-multiselect',
         'ngFileUpload',
+        'fxpicklist'
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
@@ -221,6 +222,37 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/controllers/intakeCtrl.js',
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('semester', {
+                templateUrl: 'views/semester.html',
+                url: '/semester',
+                controller: 'semesterCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/semesterCtrl.js',
+                            ]
+                        })
+                    }
+                }
+            })
+            .state('opencourse', {
+                templateUrl: 'views/opencourse.html',
+                url: '/opencourse',
+                controller: 'opencourseCtrl',
+                resolve: {
+                    loadMyFile: function($ocLazyLoad) {
+                        return $ocLazyLoad.load({
+                            name: 'studentinfo',
+                            files: [
+                                'scripts/controllers/opencourseCtrl.js',
+                                // 'js/picklist.js',
                             ]
                         })
                     }
