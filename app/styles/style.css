@@ -9192,5 +9192,15 @@ footer p a:hover,
     width: 12em;
 }
 
+.prerequisites {
+    width: 80% !important;
+}
+
+#selectAll,
+#deselectAll,
+.option {
+    cursor: pointer;
+}
+
 
 /*custom style*/
