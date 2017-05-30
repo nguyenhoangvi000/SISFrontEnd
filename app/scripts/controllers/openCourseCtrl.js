@@ -88,7 +88,7 @@
                 $scope.dtColumns = [
                     DTColumnBuilder.newColumn('id').withTitle('No'),
                     // DTColumnBuilder.newColumn('codeName').withTitle('codeName'),
-                    DTColumnBuilder.newColumn('name').withTitle('codeNumber'),
+                    DTColumnBuilder.newColumn('name').withTitle('CourseName'),
                     // DTColumnBuilder.newColumn('cost').withTitle('cost'),
                     // DTColumnBuilder.newColumn('credits').withTitle('credits'),
                     // DTColumnBuilder.newColumn('name').withTitle('name'),
@@ -146,7 +146,7 @@
                         animation: 'rotateYR',
                         closeAnimation: 'rotateYR (reverse)',
                         title: 'Create Course!',
-                        content: `<div class="panel panel-primary">
+                        content: `<div name="OpenCourseFromCreate" class="panel panel-primary">
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -168,6 +168,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                           
                                             <br/>
                                             <div class="row">
                                                 <div class="col-md-12">

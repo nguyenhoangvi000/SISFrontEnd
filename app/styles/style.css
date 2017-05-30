@@ -9178,5 +9178,19 @@ footer p a:hover,
 
 /*student*/
 
+.form-control {
+    border-radius: 1px !important;
+}
+
+#avatar {
+    background-image: url(/images/kt.jpg);
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    background-size: 100%;
+    height: 12em;
+    width: 12em;
+}
+
 
 /*custom style*/
