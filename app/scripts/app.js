@@ -13,17 +13,31 @@ angular
         'cp.ngConfirm',
         'angularjs-dropdown-multiselect',
         'ngFileUpload',
-        '720kb.datepicker'
+        '720kb.datepicker',
+        'toastr'
     ])
     .run(function(DTDefaultOptions) {
         DTDefaultOptions.setLoadingTemplate('<img src="images/gears.gif">');
     })
-    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$locationProvider', 'toastrConfig', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $locationProvider, toastrConfig) {
         $ocLazyLoadProvider.config({
             debug: false,
             events: true,
         });
-
+        angular.extend(toastrConfig, {
+            autoDismiss: false,
+            containerId: 'toast-container',
+            maxOpened: 0,
+            newestOnTop: true,
+            positionClass: 'toast-bottom-right',
+            preventDuplicates: false,
+            preventOpenDuplicates: false,
+            target: 'body',
+            progressBar: true,
+            timeout: 2500,
+            extendedTimeout: '1000',
+            closeHtml: '<button>&times;</button>',
+        });
         $urlRouterProvider.otherwise('dashboard');
         $stateProvider
             .state('dashboard', {
@@ -76,7 +90,7 @@ angular
             })
             .state('addcourse', {
                 templateUrl: 'views/addCourse.html',
-                url: '/addcourse',
+                url: '/course/add',
                 controller: 'addCourseCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
@@ -84,31 +98,49 @@ angular
                             name: 'studentinfo',
                             files: [
                                 'scripts/controllers/addCourseCtrl.js',
-                                'styles/scroller.dataTables.min.css'
                             ]
                         })
                     }
                 }
             })
-            .state('coursetype', {
-                templateUrl: 'views/coursetype.html',
-                url: '/coursetype',
-                controller: 'coursetypeCtrl',
+            .state('updatecourse', {
+                templateUrl: 'views/updateCourse.html',
+                url: '/course/update/{update}',
+                params: {
+                    "update": null
+                },
+                controller: 'courseCtrl',
                 resolve: {
                     loadMyFile: function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: 'studentinfo',
                             files: [
-                                'scripts/services/FactoryService/objectService.js',
-                                'scripts/services/FactoryService/courseTypeService.js',
-                                'js/notify.min.js',
-                                'scripts/controllers/coursetypeCtrl.js',
-                                'styles/scroller.dataTables.min.css'
+                                'scripts/controllers/courseCtrl.js',
                             ]
                         })
                     }
                 }
             })
+
+        .state('coursetype', {
+            templateUrl: 'views/coursetype.html',
+            url: '/coursetype',
+            controller: 'coursetypeCtrl',
+            resolve: {
+                loadMyFile: function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'studentinfo',
+                        files: [
+                            'scripts/services/FactoryService/objectService.js',
+                            'scripts/services/FactoryService/courseTypeService.js',
+                            'js/notify.min.js',
+                            'scripts/controllers/coursetypeCtrl.js',
+                            'styles/scroller.dataTables.min.css'
+                        ]
+                    })
+                }
+            }
+        })
 
         .state('student', {
                 templateUrl: 'views/student.html',
