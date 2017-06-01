@@ -1,107 +1,251 @@
 (function() {
-    // Room Type Controller - list all room type
-    function roomCtrl($scope) {
-        $scope.path = {value: ''};
-    }
+    'use strict';
 
-    // Add Room Type Controller - new room type
-    function addRoomCtrl($scope, roomFactory, roomTypeFactory) {
-        $scope.buttonName = 'Add';
-        $scope.isProcess = true;
+    angular
+        .module('studentinfo')
+        .controller('roomCtrl', ['appService', 'objectService', '$ngConfirm', '$scope', '$state', '$compile', '$timeout', '$http', '$resource', 'DTOptionsBuilder', 'DTColumnBuilder', 'DTColumnDefBuilder', function(appService, objectService, $ngConfirm, $scope, $state, $compile, $timeout, $http, $resource, DTOptionsBuilder, DTColumnBuilder, DTColumnDefBuilder) {
+            var baseUrl = appService.baseUrl
+            init();
 
-        // Submit data
-        $scope.submit = function(form) {
-            if($scope.room.$valid) {
-                $scope.isProcess = true;
-                roomFactory.save(form, function() {
-                    $scope.form = {};
-                    $scope.room.$setPristine();
-                    $scope.room.$setUntouched();
-                    $scope.isProcess = false;
-                });
+            function init() {
+                getAllPosts();
             }
-        }
+            $scope.someClickHandler = someClickHandler;
 
-        roomTypeFactory.query(function(data) {
-            $scope.roomTypes = data;
-            $scope.isProcess = false;
-        })
+            function someClickHandler(info) {
+                var message = info._id + ' - ' + info.title;
+            }
 
-        $scope.$on('$stateChangeSuccess', function() {
-             $scope.path.value = 'Add';
-        })
-    }
-
-    // Edit Room Type Controller - edit existed room type
-    function editRoomCtrl($scope, $stateParams, roomFactory, roomTypeFactory) {
-        $scope.buttonName = 'Edit'; 
-        $scope.isProcess = true;
-
-        // Edit
-        $scope.submit = function(form) {
-            $scope.isProcess = true;
-            if($scope.room.$valid)
-                roomFactory.update(form, function() {
-                    $scope.isProcess = false;
-                });
-        }
-
-        $scope.$on('$stateChangeSuccess', function() {
-            $scope.path.value = 'Edit';
-        })
-
-        // Load data
-        roomFactory.get({id: $stateParams.id}, function(data) {
-            $scope.form = data;
-            $scope.form.roomType = data.roomType.id;
-            $scope.isProcess = false;
-        })
-
-        roomTypeFactory.query(function(data) {
-            $scope.roomTypes = data;
-        })
-    }
-
-    // List Room Type Controller 
-    function listRoomCtrl($scope, roomFactory) {
-        $scope.$on('$stateChangeSuccess', function() {
-            $scope.path.value = 'Data';
-        })
-
-        roomFactory.query(function(data) {
-            $scope.items = data;
-        })
-
-        $scope.remove = function(id) {
-            var isOk = confirm('Do you want to remove this item?');
-            if(isOk) {
-                roomFactory.delete({id: id}, function() {
-                    var deletedIndx = null;
-                    $scope.items.forEach(function(element, index) {
-                        if(element.id == id) 
-                            deletedIndx = index;
+            function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                // Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
+                $('td', nRow).unbind('click');
+                $('td', nRow).bind('click', function() {
+                    $scope.$apply(function() {
+                        $scope.someClickHandler(aData);
                     });
-                    if(deletedIndx != null)$scope.items.splice(deletedIndx,1);
-                }, function() {
-                    alert('Can\'t delete this instance!');
                 });
+                return nRow;
             }
-        }
-    }
+            load();
 
-    // Detail Room Type Controller
-    function detailRoomCtrl($scope, $stateParams, roomFactory) {
-        $scope.path.value = 'Detail';
+            function load() {
+                $scope.posts = objectService.Room.query(function(data) {
+                    console.log(data);
+                    // something
+                }); //query() trả về một mảng words
+            }
 
-        roomFactory.get({id: $stateParams.id}, function(data) {
-            $scope.item = data;
-        })
-    }
+            function getAllPosts() {
+                $scope.createdRow = function(row, data, dataIndex) {
+                    $compile(angular.element(row).contents())($scope);
+                }
+                $scope.posts = [];
+                $scope.dtOptions = DTOptionsBuilder.newOptions()
+                    .withPaginationType('full_numbers')
+                    .withOption('createdRow', $scope.createdRow)
+                    .withOption('rowCallback', rowCallback)
+                    // .withScroller()
+                    // .withOption('scrollY', 500);
 
-    angular.module('studentinfo')
-    .controller('roomCtrl', roomCtrl)
-    .controller('detailRoomCtrl', detailRoomCtrl)
-    .controller('listRoomCtrl', listRoomCtrl)
-    .controller('addRoomCtrl', addRoomCtrl)
-    .controller('editRoomCtrl', editRoomCtrl)
+                $scope.dtColumnDefs = [
+                    DTColumnDefBuilder.newColumnDef(0),
+                    DTColumnDefBuilder.newColumnDef(1),
+                    DTColumnDefBuilder.newColumnDef(2),
+                    DTColumnDefBuilder.newColumnDef(3),
+                    DTColumnDefBuilder.newColumnDef(4).withTitle('action'),
+                ];
+
+                function actionsHtml(data, type, full, meta) {
+                    return `<div ><button style="" class="btn btn-success btn-xs" ng-click="updateRoom('${full.id}')">
+                         <i class="fa fa-edit"></i>
+                        </button>&nbsp;
+                        <button class="btn btn-danger btn-xs" ng-click="deleteRoom('${full.id}')">
+                          <i class="fa fa-trash-o"></i>
+                        </button> </div>`;
+                }
+                $scope.roomTypes = {
+                    availableOptions: [
+
+                    ],
+                    selectedOption: null
+                };
+
+                function loadRoomType() {
+                    $scope.roomTypes.availableOptions = objectService.RoomType.query(function(data) {
+                        console.log(data);
+                    })
+                }
+                $scope.createRoom = function() {
+                    $scope.room = new objectService.Room();
+                    loadRoomType();
+                    $ngConfirm({
+                        useBootstrap: true,
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Create Room Type!',
+                        content: `<form name="intakeFromCreate" novalidate class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.name" type="text" name="name"id="name" class="form-control" value="" title="">
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                        <label for="catalog" class="col-sm-2 control-label">Room Type</label>
+                        <div class="col-sm-10">
+                            <select name="roomType" id="roomType" ng-options="option.name for option in roomTypes.availableOptions track by option.id" ng-model="roomTypes.selectedOption" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Location:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.location" type="text" name="location" id="location" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Capacity:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.capacity" type="number" name="capacity id="capacity" class="form-control" value=""  title="">
+                                </div>
+                            </div>
+                        </form>`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Create Room',
+                                btnClass: 'btn-success btn-sm',
+                                action: function(scope, button) {
+                                    $scope.room.roomType = $scope.roomTypes.selectedOption.id;
+                                    //console.log($scope.roomTypes.selectedOption.id);
+                                    $scope.room.$save(function() {
+                                        objectService.Room.query(function(data) {
+                                            // something
+                                            scope.posts = data;
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
+                                action: function(scope, button) {
+                                    // closes the modal
+
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.updateRoom = function(id) {
+                    loadRoomType();
+                    $scope.room = objectService.Room.get({ id: id }, function(data) {
+                        $scope.roomTypes.selectedOption = data.roomType;
+                        $ngConfirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotateYR (reverse)',
+                            title: 'Update Room Type!',
+                            content: `<form name="intakeFromCreate" novalidate class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.name" type="text" name="name"id="name" class="form-control" value="" title="">
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                        <label for="catalog" class="col-sm-2 control-label">Room Type</label>
+                        <div class="col-sm-10">
+                            <select name="roomType" id="roomType" ng-options="option.name for option in roomTypes.availableOptions track by option.id" ng-model="roomTypes.selectedOption" class="form-control">
+                            </select>
+                        </div>
+                    </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Location:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.location" type="text" name="location" id="location" class="form-control" value="" title="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Capacity:</label>
+                                <div class="col-sm-10">
+                                    <input ng-model="room.capacity" type="number" name="capacity id="capacity" class="form-control" value=""  title="">
+                                </div>
+                            </div>
+                        </form>`,
+                            scope: $scope,
+                            buttons: {
+                                sayBoo: {
+                                    text: 'Update',
+                                    btnClass: 'btn-success btn-sm',
+                                    action: function(scope, button) {
+                                        $scope.room.roomType = $scope.roomTypes.selectedOption.id;
+                                        scope.room.$update(function() {
+                                            objectService.Room.query(function(data) {
+                                                // something
+                                                scope.posts = data;
+                                            });
+                                        })
+                                        return true; // not prevent close; / close box
+                                    }
+                                },
+                                close: {
+                                    text: 'Cancel',
+                                    btnClass: 'btn-default btn-sm',
+                                    action: function(scope, button) {
+                                        // closes the modal
+                                        console.log('cancel xoá ở đây');
+                                    }
+                                }
+                            }
+                        });
+                    }); // get() trả về một word
+
+                }
+                $scope.deleteRoom = function(id) {
+                    $ngConfirm({
+                        animation: 'rotateYR',
+                        closeAnimation: 'rotateYR (reverse)',
+                        title: 'Remove Room!',
+                        content: `Are you sure to delete this Room ?`,
+                        scope: $scope,
+                        buttons: {
+                            sayBoo: {
+                                text: 'Yes',
+                                btnClass: 'btn-danger btn-sm',
+                                action: function(scope, button) {
+                                    objectService.Room.delete({ id: id }, function() {
+                                        objectService.Room.query(function(data) {
+                                            // something
+                                            scope.posts = data;
+                                        });
+                                    });
+                                    return true; // not prevent close; / close box
+                                }
+                            },
+                            close: {
+                                text: 'Cancel',
+                                btnClass: 'btn-default btn-sm',
+                                action: function(scope, button) {
+                                    // closes the modal
+                                    console.log('cancel xoá ở đây');
+                                }
+                            }
+                        }
+                    });
+                }
+                $scope.dtColumns = [
+                    DTColumnBuilder.newColumn('id').withTitle('No'),
+                    DTColumnBuilder.newColumn('name').withTitle('Name'),
+                    DTColumnBuilder.newColumn('location').withTitle('Location'),
+                    DTColumnBuilder.newColumn('capacity').withTitle('Capacity'),
+                    DTColumnBuilder.newColumn('action').withTitle('Hành động').notSortable()
+                    .renderWith(actionsHtml),
+                ];
+
+            }
+        }])
+
 }());

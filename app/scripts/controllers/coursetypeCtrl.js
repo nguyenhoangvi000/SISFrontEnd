@@ -92,7 +92,6 @@
                                     btnClass: 'btn-default btn-sm',
                                     action: function(scope, button) {
                                         // closes the modal
-
                                     }
                                 }
                             },

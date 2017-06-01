@@ -1,11 +1,19 @@
-(function () {
+(function() {
     'use strict';
 
     angular
         .module('studentinfo')
-        .service('objectService', ['appService', '$resource', function (appService, $resource) {
+        .service('objectService', ['appService', '$resource', function(appService, $resource) {
 
             this.OpenCourse = $resource(appService.baseUrl + '/open-courses/:id', { id: '@id' }, {
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
+            })
+            this.RoomType = $resource(appService.baseUrl + '/room-types/:id', { id: '@id' }, {
+                update: { method: 'PUT' },
+                remove: { method: 'DELETE' },
+            })
+            this.Room = $resource(appService.baseUrl + '/rooms/:id', { id: '@id' }, {
                 update: { method: 'PUT' },
                 remove: { method: 'DELETE' },
             })
